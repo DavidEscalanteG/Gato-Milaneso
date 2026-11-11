@@ -5,6 +5,7 @@
 # Local reports, test output, and temporary files.
 /output/
 /tmp/
+*.[tT][mM][pP]
 /respuestas.pdf
 /*-respuestas.pdf
 
