@@ -1,5 +1,11 @@
 extends Node2D
 
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_E and event.ctrl_pressed and event.shift_pressed:
+			get_viewport().set_input_as_handled()
+			get_tree().change_scene_to_file("res://Escenas/Admin/amindExportar.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

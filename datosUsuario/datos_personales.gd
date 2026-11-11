@@ -57,15 +57,13 @@ func _on_save_button_pressed() -> void:
 	)
 	db.query("SELECT * FROM DatosPersonales;")
 	
-	# Intento de extraer el nombre.
-	var nombre_completo_texto = nombre_completo.text
-	var primer_nombre = nombre_completo_texto.strip_edges().split(" ")[0]
-	Global.nombre_jugador = primer_nombre
+	Global.registrar_nombre_completo(nombre_completo.text)
+	Global.reiniciar_test()
 	
 	get_tree().change_scene_to_file("res://Escenas/EscenasDialogos/dialogo_inicial.tscn")
 
 func validar_campos() -> bool:
-	if nombre_completo.text.strip_edges().is_empty() and (edad_jugador.text.strip_edges().is_empty() or not edad_jugador.text.is_valid_int()):
+	if nombre_completo.text.strip_edges().is_empty() or edad_jugador.text.strip_edges().is_empty() or not edad_jugador.text.is_valid_int():
 		return false
 	if genero_jugador.selected == -1:  # -1 indica que no se seleccionó ninguna opción
 		return false

@@ -13,7 +13,7 @@ func _ready() -> void:
 		get_tree().quit(1)
 		return
 	var anterior = [Global.nombre_jugador, Global.username, Global.respuestas_test.duplicate(),
-		Global.total_test, Global.severidad_depresion, Global.ultimo_pdf_path]
+		Global.total_test, Global.severidad_depresion, Global.ultimo_pdf_path, Global.nombre_completo_jugador]
 	var fuente = FileAccess.get_file_as_string("res://Dialogos/test.dialogue")
 	for pregunta in Cuestionario.PREGUNTAS:
 		_comprobar(fuente.contains(pregunta), "El texto del reporte no coincide con el diálogo: " + pregunta)
@@ -33,7 +33,9 @@ func _ready() -> void:
 	for numero in range(1, 11):
 		Global.set_respuesta(numero, 3)
 	_comprobar(Global.total_test == 27, "El puntaje máximo debe seguir siendo 27 al responder las diez preguntas.")
-	Global.nombre_jugador = "José Muñoz (PRUEBA) \\ áéíóú ü ¡¿"
+	Global.registrar_nombre_completo("  José   Muñoz (PRUEBA) \\ áéíóú ü ¡¿  ")
+	_comprobar(Global.nombre_jugador == "José", "Los diálogos deben conservar solo el primer nombre.")
+	_comprobar(Global.nombre_completo_jugador == "José Muñoz (PRUEBA) \\ áéíóú ü ¡¿", "El reporte debe conservar el nombre completo.")
 	Global.username = "niño_prueba"
 	var valores = [1, 2, 3, 0, 1, 2, 3, 1, 2, 2]
 	var manifiesto = FileAccess.open(salida.path_join("esperado.json"), FileAccess.WRITE)
@@ -48,9 +50,9 @@ func _ready() -> void:
 	for valor in 4:
 		Global.set_respuesta(10, valor)
 		_comprobar(Global.respuestas_a_pdf("", salida.path_join("pregunta10-%d.pdf" % valor)), "Falló la exportación de una opción 10.")
-	Global.nombre_jugador = "W".repeat(1600) + " FIN_NOMBRE"
+	Global.registrar_nombre_completo("W".repeat(1600) + " FIN_NOMBRE")
 	_comprobar(Global.respuestas_a_pdf("", salida.path_join("exportacion-larga.pdf")), "Falló el reporte con nombre largo.")
-	Global.nombre_jugador = "PRUEBA SIN RESPUESTA 10"
+	Global.registrar_nombre_completo("PRUEBA SIN RESPUESTA 10")
 	Global.reiniciar_test()
 	_comprobar(Global.respuestas_test["p10"] == -1, "Reiniciar debe dejar la pregunta 10 sin responder.")
 	_comprobar(Global.respuestas_a_pdf("", salida.path_join("exportacion-incompleta.pdf")), "Falló el reporte sin respuesta 10.")
@@ -60,6 +62,7 @@ func _ready() -> void:
 	Global.total_test = anterior[3]
 	Global.severidad_depresion = anterior[4]
 	Global.ultimo_pdf_path = anterior[5]
+	Global.nombre_completo_jugador = anterior[6]
 	if _fallos.is_empty():
 		print("PRUEBA PDF OK: diez preguntas, opciones del diálogo, puntaje y paginación. Archivos en: ", ProjectSettings.globalize_path(salida))
 		get_tree().quit(0)

@@ -1,6 +1,7 @@
 extends Node
 
 const ReportePDF = preload("res://Scripts/reportes/resultados_pdf.gd")
+const ArchivoResultados = preload("res://Scripts/reportes/archivo_resultados.gd")
 
 var username = "username"
 ### Usado para controlar el nivel actual (base 0)
@@ -11,6 +12,7 @@ var salud = 0
 var ronda_local = 0
 var derrotas_perros: int = 0
 var nombre_jugador: String = " "
+var nombre_completo_jugador: String = ""
 var severidad_depresion: String = "Sin clasificar"
 
 #var dialogos = {
@@ -102,15 +104,28 @@ func debug_print_respuestas() -> void:
 var contador = 0
 var ultimo_pdf_path: String = ""
 
+func registrar_nombre_completo(nombre: String) -> void:
+	var limpio = nombre.replace("\t", " ").replace("\n", " ").replace("\r", " ")
+	nombre_completo_jugador = " ".join(limpio.split(" ", false))
+	nombre_jugador = nombre_completo_jugador.get_slice(" ", 0)
+
 func respuestas_a_pdf(prefix: String = "", destino: String = "") -> bool:
 	ultimo_pdf_path = ""
-	ReportePDF.new().generar(PDF, nombre_jugador, username, respuestas_test, total_test, severidad_depresion)
-	var filename = ("" if prefix.is_empty() else prefix.validate_filename() + "-") + "respuestas.pdf"
-	var path = destino if not destino.is_empty() else OS.get_user_data_dir().path_join(filename)
+	var nombre = nombre_completo_jugador if not nombre_completo_jugador.is_empty() else nombre_jugador
+	var path = destino
+	if path.is_empty():
+		var carpeta = ArchivoResultados.carpeta_resultados()
+		if DirAccess.make_dir_recursive_absolute(carpeta) != OK:
+			push_error("No se pudo crear la carpeta de resultados.")
+			return false
+		var filename = ArchivoResultados.nombre_pdf(nombre)
+		if not prefix.is_empty():
+			filename = prefix.validate_filename() + "-" + filename
+		path = ArchivoResultados.ruta_disponible(carpeta, filename)
+	ReportePDF.new().generar(PDF, nombre, username, respuestas_test, total_test, severidad_depresion)
 	var status = PDF.export(path)
 	if status:
 		ultimo_pdf_path = ProjectSettings.globalize_path(path)
-		print("PDF guardado en: ", ultimo_pdf_path)
 	else:
-		push_error("No se pudo exportar el PDF a: " + path)
+		push_error("No se pudo guardar el reporte de la partida.")
 	return status

@@ -4,6 +4,7 @@ Run exportacion_pdf.tscn first, then: python pruebas/validar_pdf.py tmp/pdfs
 """
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -22,6 +23,7 @@ def validate(directory):
         assert reader.metadata.title == "Resultados del cuestionario"
         assert reader.metadata.creator == "El Gato Milaneso"
         text = normal(" ".join(page.extract_text() for page in reader.pages))
+        assert re.search(r"\b\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2}\b", text), "Fecha debe usar día/mes/año"
         incomplete = "incompleta" in path.name
         assert ("0 / 27" if incomplete else "15 / 27") in text
         assert "La pregunta 10 se registra por separado y no modifica el puntaje." in text
@@ -29,7 +31,7 @@ def validate(directory):
             assert text.count("W") == 1600 and "FIN_NOMBRE" in text
             assert len(reader.pages) > 2
         elif path.name == "exportacion-prueba.pdf":
-            assert "José Muñoz (PRUEBA) \\" in text
+            assert "Jugador: José Muñoz (PRUEBA) \\" in text
             assert "áéíóú ü ¡¿" in text
             assert len(reader.pages) == 2
         found = {}

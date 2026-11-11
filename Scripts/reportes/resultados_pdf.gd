@@ -16,7 +16,9 @@ var _fecha = ""
 func generar(pdf: Node, nombre: String, usuario: String, respuestas: Dictionary, total: int, clasificacion: String) -> void:
 	_pdf = pdf
 	_pagina = 0
-	_fecha = Time.get_datetime_string_from_system(false, true)
+	var fecha = Time.get_datetime_dict_from_system()
+	_fecha = "%02d/%02d/%04d %02d:%02d:%02d" % [fecha.day, fecha.month, fecha.year,
+		fecha.hour, fecha.minute, fecha.second]
 	_pdf.newPDF("Resultados del cuestionario", "El Gato Milaneso")
 	_nueva_pagina()
 	_campo("Jugador", nombre.strip_edges() if not nombre.strip_edges().is_empty() else "Sin indicar")

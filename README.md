@@ -44,3 +44,5 @@ archivos van a subir.
 Cambios y pruebas: [Minijuegos](pruebas/MINIJUEGOS.md).
 
 Cuestionario y reportes: [Exportación PDF](pruebas/EXPORTACION_PDF.md).
+
+Acceso a los resultados y preparación del equipo: [Guía del evaluador](GUIA_EVALUADOR.md).

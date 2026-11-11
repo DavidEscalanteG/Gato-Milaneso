@@ -41,10 +41,34 @@ La prueba con F6 no requiere Python. Se incluye un reporte de ejemplo en `output
 
 Deja que Godot reimporte `Dialogos/test.dialogue` después de detectar los cambios. Para probar el final sin recorrer los minijuegos, abre `Escenas/EscenasDialogos/dialogo12.tscn` con F6, avanza hasta la pregunta 10 y elige una opción. Al entrar en `pantalla_final.tscn` se exporta automáticamente el PDF. En esa prueba directa, las primeras nueve respuestas conservarán sus valores iniciales.
 
-Durante una partida completa, las diez respuestas elegidas aparecen en el reporte final. La consola muestra la ruta del archivo, normalmente en:
+Durante una partida completa, las diez respuestas elegidas aparecen en el reporte final. El campo **Jugador** conserva el nombre completo capturado en el formulario; los diálogos siguen usando solo el primer nombre. La fecha del reporte usa **día/mes/año** y la hora local del equipo.
+
+El PDF se guarda automáticamente sin abrirse ni mostrar un aviso al participante, en:
 
 ```text
-%APPDATA%\Godot\app_userdata\MapaOriginal_v2.0\
+%APPDATA%\El Gato Milaneso\Resultados\
 ```
 
-El botón de `Escenas/Admin/amindExportar.tscn` sigue exportando los valores de la ejecución actual y muestra la ubicación del archivo. Ejecutarlo en un proceso nuevo no recupera respuestas de una partida anterior.
+Los nombres siguen el formato `Nombre_Apellidos_DD-MM-AAAA_HH-MM-SS_Folio-XXXXXXXXXXXX.pdf`. El folio es aleatorio; si aun así ya existe un archivo con el mismo nombre, se agrega un consecutivo para no sobrescribirlo. Se sustituyen los caracteres incompatibles con archivos y se limita a 80 caracteres la parte del nombre, conservando el nombre completo dentro del PDF.
+
+La escena `Escenas/Admin/amindExportar.tscn` ahora permite acceder con contraseña a la carpeta de reportes guardados. No vuelve a exportar las respuestas de la ejecución actual. Consulta [la guía del evaluador](../GUIA_EVALUADOR.md).
+
+## Prueba del almacenamiento y acceso
+
+En PowerShell, desde la raíz del proyecto (las variables solo afectan esa sesión y sus procesos):
+
+```powershell
+New-Item -ItemType Directory -Force tmp/test-appdata | Out-Null
+$appdataAnterior = $env:APPDATA
+$localappdataAnterior = $env:LOCALAPPDATA
+try {
+    $env:APPDATA = (Resolve-Path tmp/test-appdata).Path
+    $env:LOCALAPPDATA = $env:APPDATA
+    godot_console.exe --headless --path . --quit-after 1800 res://pruebas/acceso_resultados.tscn
+} finally {
+    $env:APPDATA = $appdataAnterior
+    $env:LOCALAPPDATA = $localappdataAnterior
+}
+```
+
+Debe aparecer **PRUEBA ACCESO OK**. La prueba comprueba configuración inicial, contraseña persistente, rechazo de contraseña incorrecta, bloqueo al reabrir, configuración inválida, nombre completo, formato de fecha, nombres de archivo seguros y exportaciones sin sobrescritura. Usa datos ficticios en `tmp/`; no configura la contraseña real del evaluador. El resultado impreso debe revisarse además del código de salida, porque `--quit-after` es solo un límite de tiempo de respaldo.

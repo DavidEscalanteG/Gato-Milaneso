@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwi1tfq4apsta"]
+[gd_scene load_steps=5 format=3 uid="uid://cwi1tfq4apsta"]
 
 [ext_resource type="Script" path="res://Escenas/Admin/amind_exportar.gd" id="1_mr8rl"]
+
+[sub_resource type="SystemFont" id="FuenteEvaluador"]
+font_names = PackedStringArray("Segoe UI", "Arial")
+subpixel_positioning = 0
+
+[sub_resource type="Theme" id="TemaEvaluador"]
+default_font = SubResource("FuenteEvaluador")
+default_font_size = 17
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(0.96, 0.98, 0.97, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
 [node name="AmindExportar" type="Control"]
 layout_mode = 3
@@ -9,7 +24,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("TemaEvaluador")
 script = ExtResource("1_mr8rl")
+
+[node name="Fondo" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.16, 0.18, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -19,12 +44,76 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="FileDialog" type="FileDialog" parent="CenterContainer"]
-
-[node name="Button" type="Button" parent="CenterContainer"]
+[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(660, 0)
 layout_mode = 2
-text = "EXPORTAR"
+theme_override_styles/panel = SubResource("Panel")
 
-[node name="Resultado" type="AcceptDialog" parent="."]
-title = "Exportación PDF"
-size = Vector2i(600, 150)
+[node name="Margen" type="MarginContainer" parent="CenterContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="Contenido" type="VBoxContainer" parent="CenterContainer/Panel/Margen"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Titulo" type="Label" parent="CenterContainer/Panel/Margen/Contenido"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.36, 0.38, 1)
+theme_override_font_sizes/font_size = 25
+text = "Acceso del evaluador"
+
+[node name="Instrucciones" type="Label" parent="CenterContainer/Panel/Margen/Contenido"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.17, 0.19, 1)
+autowrap_mode = 3
+
+[node name="Formulario" type="VBoxContainer" parent="CenterContainer/Panel/Margen/Contenido"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Clave" type="LineEdit" parent="CenterContainer/Panel/Margen/Contenido/Formulario"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.36, 0.42, 0.44, 1)
+theme_override_colors/font_color = Color(0.08, 0.17, 0.19, 1)
+placeholder_text = "Contraseña del evaluador"
+max_length = 128
+secret = true
+
+[node name="Confirmacion" type="LineEdit" parent="CenterContainer/Panel/Margen/Contenido/Formulario"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.36, 0.42, 0.44, 1)
+theme_override_colors/font_color = Color(0.08, 0.17, 0.19, 1)
+placeholder_text = "Repite la contraseña"
+max_length = 128
+secret = true
+
+[node name="Entrar" type="Button" parent="CenterContainer/Panel/Margen/Contenido/Formulario"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "Entrar"
+
+[node name="Acciones" type="VBoxContainer" parent="CenterContainer/Panel/Margen/Contenido"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Abrir" type="Button" parent="CenterContainer/Panel/Margen/Contenido/Acciones"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+text = "Abrir carpeta de resultados"
+
+[node name="Mensaje" type="Label" parent="CenterContainer/Panel/Margen/Contenido"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.17, 0.19, 1)
+autowrap_mode = 3
+
+[node name="Volver" type="Button" parent="CenterContainer/Panel/Margen/Contenido"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "Cerrar acceso y volver al juego"
