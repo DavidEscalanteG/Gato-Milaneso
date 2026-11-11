@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://bwuuj7tjhchk8"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsJuegoBolitas/hoyo.gd" id="1_28c6s"]
+[ext_resource type="Texture2D" uid="uid://ds0ya30s0p2rv" path="res://Assets/bolitas-assets.png" id="2_8llcw"]
+[ext_resource type="AudioStream" uid="uid://dp6pyjkuy2wp2" path="res://Assets/sonidos/chop.ogg" id="3_iykxw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jurnk"]
+radius = 15.0
+
+[sub_resource type="Gradient" id="Gradient_f8j3u"]
+offsets = PackedFloat32Array(0.2397)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ni5p4"]
+gradient = SubResource("Gradient_f8j3u")
+width = 5
+height = 5
+fill_from = Vector2(0, 0.0042735)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_7hudl"]
+interpolation_mode = 2
+interpolation_color_space = 2
+colors = PackedColorArray(0.60306, 0.2284, 0.347411, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_xw1lv"]
+min_value = -1.0
+_data = [Vector2(0.455446, 0.483444), 0.0, 0.0, 0, 0, Vector2(0.805281, -0.463576), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_76fw1"]
+offsets = PackedFloat32Array(0.434457)
+colors = PackedColorArray(0.940312, 0.686683, 0.745823, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xovtx"]
+gradient = SubResource("Gradient_76fw1")
+width = 2
+height = 2
+
+[sub_resource type="Curve" id="Curve_fs250"]
+min_value = -1.0
+_data = [Vector2(0.118812, 0.0357616), 0.0, 0.0, 0, 0, Vector2(0.40264, 1), 0.0, 0.0, 0, 0, Vector2(0.960396, -0.377483), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Nota" type="Area2D" node_paths=PackedStringArray("sprite", "explosion", "sfx")]
+monitoring = false
+script = ExtResource("1_28c6s")
+sprite = NodePath("Sprite2D")
+explosion = NodePath("Explosion")
+sfx = NodePath("AudioStreamPlayer2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8llcw")
+hframes = 5
+vframes = 2
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jurnk")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1, -15.5)
+scale = Vector2(0.9, 0.45)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." groups=["NOTA"]]
+show_behind_parent = true
+position = Vector2(0, -8)
+lifetime = 0.5
+speed_scale = 1.5
+lifetime_randomness = 0.07
+texture = SubResource("GradientTexture2D_ni5p4")
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, 0)
+gravity = Vector2(0, -980)
+angular_velocity_max = 71.55
+angle_min = 59.8
+angle_max = 286.2
+color_ramp = SubResource("Gradient_7hudl")
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_xw1lv")
+anim_offset_max = 0.1988
+
+[node name="Explosion" type="CPUParticles2D" parent="."]
+position = Vector2(0, 1)
+emitting = false
+amount = 16
+one_shot = true
+preprocess = 1.0
+draw_order = 1
+texture = SubResource("GradientTexture2D_xovtx")
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity_min = 490.68
+initial_velocity_max = 714.29
+angular_velocity_max = 720.0
+scale_amount_max = 7.21
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_fs250")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_iykxw")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,465 @@
+[gd_scene load_steps=32 format=3 uid="uid://byc70g0k2pya0"]
+
+[ext_resource type="Script" path="res://CreacionPersonaje/creacionPersonaje.gd" id="1_4u7q3"]
+[ext_resource type="Texture2D" uid="uid://bwlotstdvmyex" path="res://Assets/sprites/bkg.png" id="1_8vbe0"]
+[ext_resource type="Animation" uid="uid://cqdfjol5yulpu" path="res://Escenas/Player/Descanso.res" id="3_kgmxh"]
+[ext_resource type="Shader" path="res://Escenas/Player/color_setter.gdshader" id="4_giity"]
+[ext_resource type="Texture2D" uid="uid://cm5nq843a8ovj" path="res://Escenas/Player/Sprites/cabellos.png" id="6_bfm0i"]
+[ext_resource type="Texture2D" uid="uid://pqs0ogt4qphs" path="res://Escenas/Player/Sprites/personaje.png" id="6_ny0hl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atscm"]
+atlas = ExtResource("6_ny0hl")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ke8s"]
+shader = ExtResource("4_giity")
+shader_parameter/active = true
+shader_parameter/tint = Vector4(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_mn40x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cuerpo:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uum1s"]
+_data = {
+"Descanso": ExtResource("3_kgmxh"),
+"RESET": SubResource("Animation_mn40x")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_spsdl"]
+animation = &"Descanso"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lrb80"]
+states/Descanso/node = SubResource("AnimationNodeAnimation_spsdl")
+states/Descanso/position = Vector2(614, 105)
+states/End/position = Vector2(540, 190)
+states/Start/position = Vector2(413, 112)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_32keu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p3h26"]
+texture = SubResource("CanvasTexture_32keu")
+modulate_color = Color(0.729412, 0.415686, 0.141176, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_743n4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijs8u"]
+texture = SubResource("CanvasTexture_743n4")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+modulate_color = Color(0.728421, 0.415666, 0.14036, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3for2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yg3i5"]
+texture = SubResource("CanvasTexture_3for2")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+modulate_color = Color(0.822625, 0.479484, 0.186843, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q1c3f"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l533e"]
+texture = SubResource("CanvasTexture_q1c3f")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+modulate_color = Color(0.547495, 0.303805, 0.0873468, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3f1ty"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgo5h"]
+bg_color = Color(0.162066, 0.162066, 0.162066, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.54902, 0.301961, 0.0862745, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhyuk"]
+atlas = ExtResource("6_ny0hl")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nto0d"]
+atlas = ExtResource("6_ny0hl")
+region = Rect2(0, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plxg7"]
+atlas = ExtResource("6_ny0hl")
+region = Rect2(0, 448, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gmar"]
+atlas = ExtResource("6_ny0hl")
+region = Rect2(0, 640, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrevt"]
+atlas = ExtResource("6_bfm0i")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3i6i"]
+atlas = ExtResource("6_bfm0i")
+region = Rect2(0, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kic3"]
+atlas = ExtResource("6_bfm0i")
+region = Rect2(0, 448, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcq6w"]
+atlas = ExtResource("6_bfm0i")
+region = Rect2(0, 640, 32, 32)
+
+[sub_resource type="Theme" id="Theme_mo5ar"]
+ColorPicker/constants/h_width = 15
+ColorPicker/constants/sv_height = 128
+ColorPicker/constants/sv_width = 128
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("cabello", "cabellos", "color_picker", "personaje", "personajes")]
+script = ExtResource("1_4u7q3")
+cabello = NodePath("CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/ColorRect/CharacterBody2D/Cabello")
+cabellos = NodePath("CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/HBoxContainer2/ItemList")
+color_picker = NodePath("CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/ColorPickerButton")
+personaje = NodePath("CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/ColorRect/CharacterBody2D/Cuerpo")
+personajes = NodePath("CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Personaje/MarginContainer/GridContainer/HBoxContainer2/ItemListPersonajes")
+
+[node name="Game" type="Sprite2D" parent="."]
+position = Vector2(438, 250)
+scale = Vector2(1.62467, 1.90193)
+texture = ExtResource("1_8vbe0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="panelMenuContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -179.0
+offset_right = 1049.0
+offset_bottom = 652.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.467842, 0.439232)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/panelMenuContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 60
+
+[node name="GridGeneralContainer" type="GridContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/v_separation = 70
+
+[node name="VLabelTextContainer" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="nameGameLabel" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/VLabelTextContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelVariant"
+text = "CREACIÓN DE PERSONAJE"
+horizontal_alignment = 1
+
+[node name="welcomeBotton" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/VLabelTextContainer"]
+layout_mode = 2
+text = "¡Personaliza tu personaje!
+¿Cómo eres?"
+horizontal_alignment = 1
+
+[node name="PanelUserContainer" type="PanelContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer"]
+layout_mode = 2
+theme_type_variation = &"emptyPanelContainer"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/ColorRect"]
+position = Vector2(192.5, 116.5)
+
+[node name="Cuerpo" type="Sprite2D" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/ColorRect/CharacterBody2D"]
+position = Vector2(42, 1)
+scale = Vector2(5, 5)
+texture = SubResource("AtlasTexture_atscm")
+
+[node name="Cabello" type="Sprite2D" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/ColorRect/CharacterBody2D"]
+material = SubResource("ShaderMaterial_8ke8s")
+position = Vector2(42, -3)
+scale = Vector2(5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/ColorRect/CharacterBody2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/ColorRect/CharacterBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_uum1s")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/ColorRect/CharacterBody2D"]
+tree_root = SubResource("AnimationNodeStateMachine_lrb80")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_p3h26")
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_ijs8u")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_yg3i5")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_l533e")
+current_tab = 1
+
+[node name="Personaje" type="TabBar" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Personaje"]
+custom_minimum_size = Vector2(493, 219)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Personaje/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Personaje/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ItemListPersonajes" type="ItemList" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Personaje/MarginContainer/GridContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3f1ty")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wgo5h")
+allow_search = false
+item_count = 4
+max_columns = 5
+icon_scale = 2.0
+item_0/icon = SubResource("AtlasTexture_qhyuk")
+item_1/icon = SubResource("AtlasTexture_nto0d")
+item_2/icon = SubResource("AtlasTexture_plxg7")
+item_3/icon = SubResource("AtlasTexture_3gmar")
+
+[node name="Cabello" type="TabBar" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello"]
+custom_minimum_size = Vector2(493, 219)
+layout_mode = 0
+offset_right = 95.0
+offset_bottom = 69.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_type_variation = &"smallLabel"
+text = "Peinado
+"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ItemList" type="ItemList" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3f1ty")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wgo5h")
+allow_search = false
+item_count = 5
+max_columns = 5
+icon_scale = 2.0
+item_0/text = "Sin pelo"
+item_1/icon = SubResource("AtlasTexture_yrevt")
+item_2/icon = SubResource("AtlasTexture_d3i6i")
+item_3/icon = SubResource("AtlasTexture_8kic3")
+item_4/icon = SubResource("AtlasTexture_qcq6w")
+
+[node name="Label" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_type_variation = &"smallLabel"
+text = "Color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_mo5ar")
+toggle_mode = false
+color = Color(0.23407, 0.507813, 0.507813, 1)
+edit_alpha = false
+
+[node name="HBoxButtonContainer" type="HBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="backButton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer"]
+custom_minimum_size = Vector2(307, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"backButton"
+text = "VOLVER"
+
+[node name="ressetButton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer"]
+custom_minimum_size = Vector2(307, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"resetButton"
+text = "LIMPIAR"
+
+[node name="saveButton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer"]
+custom_minimum_size = Vector2(307, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "GUARDAR"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="panelMenuContainer" type="PanelContainer" parent="CanvasLayer2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -179.0
+offset_right = 792.0
+offset_bottom = 433.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.586962, 0.577113)
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/panelMenuContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 60
+
+[node name="GridGeneralContainer" type="GridContainer" parent="CanvasLayer2/panelMenuContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/v_separation = 60
+
+[node name="VLabelTextContainer" type="VBoxContainer" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="nameGameLabel" type="Label" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer/VLabelTextContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelVariant"
+text = "Nombre de jugador"
+horizontal_alignment = 1
+
+[node name="welcomeBotton" type="Label" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer/VLabelTextContainer"]
+layout_mode = 2
+text = "Por favor, inserta tu nombre de jugador."
+horizontal_alignment = 1
+
+[node name="PanelUserContainer" type="PanelContainer" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer"]
+layout_mode = 2
+theme_type_variation = &"emptyPanelContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Username" type="LineEdit" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"userLineEdit"
+theme_override_font_sizes/font_size = 70
+placeholder_text = "Ej. Jugador123"
+alignment = 1
+
+[node name="HBoxButtonContainer" type="HBoxContainer" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="backButton" type="Button" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"backButton"
+text = "VOLVER"
+
+[node name="ressetButton" type="Button" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"resetButton"
+text = "LIMPIAR"
+
+[node name="saveButton" type="Button" parent="CanvasLayer2/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "GUARDAR"
+
+[connection signal="tab_clicked" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer" to="." method="_on_tab_container_tab_button_pressed"]
+[connection signal="item_clicked" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Personaje/MarginContainer/GridContainer/HBoxContainer2/ItemListPersonajes" to="." method="_on_item_list_personajes_item_clicked"]
+[connection signal="item_clicked" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/HBoxContainer2/ItemList" to="." method="_on_item_list_item_clicked"]
+[connection signal="color_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/ColorPickerButton" to="." method="_on_play_select_pressed_click"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/backButton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/backButton" to="." method="_on_back_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/ressetButton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/ressetButton" to="." method="_on_resset_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/saveButton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/saveButton" to="." method="_on_save_button_pressed"]

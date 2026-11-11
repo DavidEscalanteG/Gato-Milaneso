@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://bauadhumxfw07"]
+
+[ext_resource type="Script" path="res://menuPrincipal/menu.gd" id="1_ocugm"]
+[ext_resource type="Texture2D" uid="uid://bwlotstdvmyex" path="res://Assets/sprites/bkg.png" id="2_x2h1k"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_ocugm")
+
+[node name="Game" type="Sprite2D" parent="."]
+position = Vector2(438, 250)
+scale = Vector2(1.62467, 1.90193)
+texture = ExtResource("2_x2h1k")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="panelMenuContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -179.0
+offset_right = 732.0
+offset_bottom = 401.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.619615, 0.611463)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/panelMenuContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 60
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 40
+
+[node name="VLabelContainer" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="nameGameLabel" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VLabelContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelVariant"
+text = "EL GATO MILANESO
+"
+horizontal_alignment = 1
+
+[node name="welcomeBotton" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VLabelContainer"]
+layout_mode = 2
+text = "¡Bienvenido!"
+horizontal_alignment = 1
+
+[node name="VBottonContainer" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="playBotton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "JUGAR"
+
+[node name="creditsBotton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "CRÉDITOS"
+
+[node name="supportBotton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+text = "SOPORTE
+"
+
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/playBotton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/playBotton" to="." method="_on_play_botton_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/creditsBotton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/creditsBotton" to="." method="_on_credits_botton_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/supportBotton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/supportBotton" to="." method="_on_credits_botton_pressed"]

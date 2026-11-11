@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=3 uid="uid://trffkqweyvb7"]
+
+[ext_resource type="Script" path="res://Scripts/instrucciones_ui.tscn.gd" id="1_6g0wb"]
+[ext_resource type="Texture2D" uid="uid://cc8pd144ruof8" path="res://Assets/Framers.png" id="2_162h0"]
+[ext_resource type="FontFile" uid="uid://d3yrjs7feckg7" path="res://Assets/fonts/PixelifySans-Bold.ttf" id="3_frvgs"]
+[ext_resource type="Texture2D" uid="uid://05xrh0wrl4at" path="res://Assets/botones.png" id="4_pidae"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25pam"]
+atlas = ExtResource("2_162h0")
+region = Rect2(224, 32, 96, 64)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mpv2f"]
+font = ExtResource("3_frvgs")
+font_size = 32
+outline_size = 9
+outline_color = Color(0.285156, 0.131708, 0.0233917, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xgn72"]
+font_color = Color(0.290196, 0.156863, 0.0627451, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p3jj8"]
+font = ExtResource("3_frvgs")
+font_size = 10
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d1gh"]
+atlas = ExtResource("4_pidae")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mnnb6"]
+texture = SubResource("AtlasTexture_2d1gh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrwwa"]
+atlas = ExtResource("4_pidae")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s2kbw"]
+texture = SubResource("AtlasTexture_nrwwa")
+
+[sub_resource type="Theme" id="Theme_letus"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 10
+Button/styles/hover = SubResource("StyleBoxTexture_mnnb6")
+Button/styles/normal = SubResource("StyleBoxTexture_s2kbw")
+
+[node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_6g0wb")
+
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(448, 264.194)
+scale = Vector2(6.92727, 6.24392)
+texture = SubResource("AtlasTexture_25pam")
+
+[node name="LabelTitulo" type="Label" parent="."]
+offset_left = 192.0
+offset_top = 96.0
+offset_right = 704.0
+offset_bottom = 135.0
+text = "HOLA"
+label_settings = SubResource("LabelSettings_mpv2f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelInstrucciones" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 144.0
+offset_right = 272.0
+offset_bottom = 183.0
+grow_horizontal = 2
+text = "HOLA"
+label_settings = SubResource("LabelSettings_xgn72")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LabelControles" type="Label" parent="."]
+offset_left = 368.0
+offset_top = 359.0
+offset_right = 528.0
+offset_bottom = 382.0
+text = "ESPACIO"
+label_settings = SubResource("LabelSettings_p3jj8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = 141.0
+offset_right = 46.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.34218, 1.1419)
+theme = SubResource("Theme_letus")
+text = "¡JUGAR!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -166.0
+offset_right = 272.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_boton_jugar_pressed"]

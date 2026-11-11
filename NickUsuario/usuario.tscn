@@ -1,0 +1,105 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2j3u5drpnxct"]
+
+[ext_resource type="Script" path="res://NickUsuario/usuario.gd" id="1_07eyt"]
+[ext_resource type="Texture2D" uid="uid://bwlotstdvmyex" path="res://Assets/sprites/bkg.png" id="1_fvcwm"]
+
+[node name="usuario" type="Node2D"]
+script = ExtResource("1_07eyt")
+
+[node name="Game" type="Sprite2D" parent="."]
+position = Vector2(438, 250)
+scale = Vector2(1.62467, 1.90193)
+texture = ExtResource("1_fvcwm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="panelMenuContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -179.0
+offset_right = 792.0
+offset_bottom = 433.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.586962, 0.577113)
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/panelMenuContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 60
+
+[node name="GridGeneralContainer" type="GridContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/v_separation = 60
+
+[node name="VLabelTextContainer" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="nameGameLabel" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/VLabelTextContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelVariant"
+text = "Nombre de jugador"
+horizontal_alignment = 1
+
+[node name="welcomeBotton" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/VLabelTextContainer"]
+layout_mode = 2
+text = "Por favor, inserta tu nombre de jugador."
+horizontal_alignment = 1
+
+[node name="PanelUserContainer" type="PanelContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer"]
+layout_mode = 2
+theme_type_variation = &"emptyPanelContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Username" type="LineEdit" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"userLineEdit"
+theme_override_font_sizes/font_size = 70
+placeholder_text = "Ej. Jugador123"
+alignment = 1
+
+[node name="HBoxButtonContainer" type="HBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="backButton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"backButton"
+text = "VOLVER"
+
+[node name="ressetButton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"resetButton"
+text = "LIMPIAR"
+
+[node name="saveButton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "GUARDAR"
+
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/backButton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/backButton" to="." method="_on_back_button_pressed"]
+[connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/ressetButton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/ressetButton" to="." method="_on_resset_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/saveButton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/saveButton" to="." method="_on_save_button_pressed"]

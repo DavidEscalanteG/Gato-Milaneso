@@ -1,0 +1,195 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcl4ta8mabkf3"]
+
+[ext_resource type="Script" path="res://datosUsuario/datos_personales.gd" id="1_sqljr"]
+[ext_resource type="Texture2D" uid="uid://bwlotstdvmyex" path="res://Assets/sprites/bkg.png" id="2_w3uc2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nphll"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="jugar" type="Node2D"]
+script = ExtResource("1_sqljr")
+
+[node name="Game" type="Sprite2D" parent="."]
+position = Vector2(438, 250)
+scale = Vector2(1.625, 1.902)
+texture = ExtResource("2_w3uc2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="panelMenuContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -195.0
+offset_right = 948.0
+offset_bottom = 617.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.514756, 0.489936)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/panelMenuContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 60
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 40
+
+[node name="VLabelContainer" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="nameGameLabel" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VLabelContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelVariant"
+text = "¡Hola!
+"
+horizontal_alignment = 1
+
+[node name="welcomeBotton" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VLabelContainer"]
+layout_mode = 2
+text = "¡Antes de comenzar, cuéntanos un
+ poco sobre ti!"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_type_variation = &"playPanelContainer"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 25
+columns = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="nameCompletLabel" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"formLabel"
+text = "Nombre completo"
+
+[node name="nameCompletInput" type="LineEdit" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/minimum_character_width = 10
+placeholder_text = "Nombre completo"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ageLabel" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+theme_type_variation = &"formLabel"
+text = "Edad"
+
+[node name="ageInput" type="LineEdit" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Edad"
+virtual_keyboard_type = 2
+clear_button_enabled = true
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="genderLabel" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer4"]
+layout_mode = 2
+theme_type_variation = &"formLabel"
+text = "Genero"
+
+[node name="genderOptionButton" type="OptionButton" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer4"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Masculino"
+popup/item_1/text = "Femenino"
+popup/item_1/id = 1
+popup/item_2/text = "Prefiero no decir"
+popup/item_2/id = 2
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="academicLabel" type="Label" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer5"]
+layout_mode = 2
+theme_type_variation = &"formLabel"
+text = "Grado academico"
+
+[node name="gradeOptionButton" type="OptionButton" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer5"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "1er Grado"
+popup/item_1/text = "2do Grado"
+popup/item_1/id = 1
+popup/item_2/text = "3er Grado"
+popup/item_2/id = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="backButton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"backButton"
+text = "VOLVER AL MENÚ"
+
+[node name="ressetButton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"resetButton"
+text = "LIMPIAR"
+
+[node name="saveButton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "GUARDAR Y SEGUIR"
+
+[node name="ErrorWindow" type="AcceptDialog" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer"]
+position = Vector2i(0, 36)
+size = Vector2i(125, 128)
+theme_override_styles/panel = SubResource("StyleBoxFlat_nphll")
+
+[connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_play_select_pressed_click"]
+[connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_type_sound"]
+[connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_name_complet_input_text_changed"]
+[connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer3/ageInput" to="." method="_on_play_select_pressed_click"]
+[connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer3/ageInput" to="." method="_on_name_complet_input_text_changed"]
+[connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer4/genderOptionButton" to="." method="_on_play_select_pressed_click"]
+[connection signal="item_selected" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer4/genderOptionButton" to="." method="_on_gender_option_button_item_selected"]
+[connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer5/gradeOptionButton" to="." method="_on_play_select_pressed_click"]
+[connection signal="item_selected" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer5/gradeOptionButton" to="." method="_on_gender_option_button_item_selected"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/HBoxContainer/backButton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/HBoxContainer/backButton" to="." method="_on_back_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/HBoxContainer/ressetButton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/HBoxContainer/ressetButton" to="." method="_on_resset_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/HBoxContainer/saveButton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/HBoxContainer/saveButton" to="." method="_on_save_button_pressed"]

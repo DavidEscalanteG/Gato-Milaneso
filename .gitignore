@@ -1,0 +1,22 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Local reports, test output, and temporary files.
+/output/
+/tmp/
+/respuestas.pdf
+/*-respuestas.pdf
+
+# Local player data (created by the game; do not publish personal records).
+/baseDatos.db
+/baseDatos.db-*
+
+# Local credentials and operating system files.
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc

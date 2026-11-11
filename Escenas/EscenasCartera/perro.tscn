@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://df1jgwf6tghcv"]
+
+[ext_resource type="Texture2D" uid="uid://b22ol2mndnrl4" path="res://Assets/Cats Download/black_1.png" id="1_8l8sc"]
+
+[sub_resource type="GDScript" id="GDScript_58cst"]
+script/source = "extends CharacterBody2D
+
+@export var velocidad: float = 400  # Velocidad de movimiento del perro
+var carriles = [280, 430, 570]  # Coordenadas X de los tres carriles
+var direccion = Vector2(0, 1)  # Movimiento hacia abajo
+
+func _ready() -> void:
+	# Elegir un carril aleatorio al iniciar
+	position.x = carriles[randi() % carriles.size()]
+	position.y = -50  # Aparece arriba de la pantalla
+
+func _process(delta: float) -> void:
+	# Movimiento hacia abajo
+	velocity = direccion * velocidad
+	move_and_slide()
+
+	# Si el perro sale de la pantalla, reiniciar en otro carril
+	if position.y > 450:  # Ajusta este valor según el tamaño de la pantalla
+		resetear_perro()
+
+func resetear_perro():
+	# Volver a la parte superior en un carril aleatorio
+	position.x = carriles[randi() % carriles.size()]
+	position.y = -50
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iho2g"]
+radius = 60.407
+
+[node name="Perro" type="CharacterBody2D" groups=["perros"]]
+collision_layer = 4
+collision_mask = 2
+script = SubResource("GDScript_58cst")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -8)
+scale = Vector2(3.65675, 3.38447)
+texture = ExtResource("1_8l8sc")
+region_enabled = true
+region_rect = Rect2(422.105, 32.2227, 19.4365, 28.9954)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_iho2g")

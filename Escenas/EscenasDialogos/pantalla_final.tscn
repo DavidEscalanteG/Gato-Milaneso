@@ -1,0 +1,263 @@
+[gd_scene load_steps=8 format=3 uid="uid://nfjsf14ic7of"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsDialogos/pantalla_final.gd" id="1_aklpc"]
+[ext_resource type="Texture2D" uid="uid://co7v5gcw0y6qq" path="res://Assets/FondosDialogos/finalfondo.png" id="2_q76c7"]
+
+[sub_resource type="Theme" id="Theme_27dsp"]
+Label/colors/font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_glx8x"]
+line_spacing = 0.0
+font_size = 52
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_0btei"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h7nah"]
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_42o5t"]
+_data = [Vector2(0.00444444, 0.076923), 0.0, 0.0, 0, 0, Vector2(1, 0.0659339), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="PantallaFinal" type="Node2D"]
+script = ExtResource("1_aklpc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(432.5, 242.5)
+scale = Vector2(0.563151, 0.477539)
+texture = ExtResource("2_q76c7")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 185.0
+offset_right = 683.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_27dsp")
+text = "GRACIAS POR JUGAR"
+label_settings = SubResource("LabelSettings_glx8x")
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+autostart = true
+
+[node name="Label2" type="Label" parent="Timer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 11.0
+offset_right = 167.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_0btei")
+text = "Presiona ESPACIO para regresar al menú"
+label_settings = SubResource("LabelSettings_h7nah")
+horizontal_alignment = 1
+
+[node name="Confetti" type="Node2D" parent="."]
+position = Vector2(408, 162)
+
+[node name="green" type="CPUParticles2D" parent="Confetti"]
+position = Vector2(425, 314)
+amount = 32
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+spread = 59.75
+gravity = Vector2(0, 100)
+initial_velocity_min = 104.1
+initial_velocity_max = 557.22
+angular_velocity_min = 283.28
+angular_velocity_max = 306.89
+linear_accel_min = 11.48
+linear_accel_max = 13.11
+scale_amount_min = 10.0
+scale_amount_max = 116.56
+scale_amount_curve = SubResource("Curve_42o5t")
+color = Color(7.70092e-07, 0.559843, 0.285995, 1)
+
+[node name="green2" type="CPUParticles2D" parent="Confetti"]
+position = Vector2(424, 322)
+amount = 32
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+spread = 59.75
+gravity = Vector2(0, 100)
+initial_velocity_min = 104.1
+initial_velocity_max = 557.22
+angular_velocity_min = 283.28
+angular_velocity_max = 306.89
+linear_accel_min = 11.48
+linear_accel_max = 13.11
+scale_amount_min = 10.0
+scale_amount_max = 116.56
+scale_amount_curve = SubResource("Curve_42o5t")
+color = Color(0.758609, 0, 0.0784105, 1)
+
+[node name="green3" type="CPUParticles2D" parent="Confetti"]
+position = Vector2(419, 315)
+amount = 32
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+spread = 59.75
+gravity = Vector2(0, 100)
+initial_velocity_min = 104.1
+initial_velocity_max = 557.22
+angular_velocity_min = 283.28
+angular_velocity_max = 306.89
+linear_accel_min = 11.48
+linear_accel_max = 13.11
+scale_amount_min = 10.0
+scale_amount_max = 116.56
+scale_amount_curve = SubResource("Curve_42o5t")
+color = Color(0.61872, 0.423519, 6.73831e-07, 1)
+
+[node name="Confetti2" type="Node2D" parent="."]
+visible = false
+position = Vector2(408, 162)
+
+[node name="green" type="CPUParticles2D" parent="Confetti2"]
+position = Vector2(-373, 317)
+amount = 16
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+spread = 59.75
+gravity = Vector2(0, 100)
+initial_velocity_min = 65.04
+initial_velocity_max = 143.16
+angular_velocity_min = 283.28
+angular_velocity_max = 306.89
+linear_accel_min = 11.48
+linear_accel_max = 13.11
+scale_amount_min = 10.0
+scale_amount_max = 116.56
+scale_amount_curve = SubResource("Curve_42o5t")
+color = Color(7.70092e-07, 0.559843, 0.285995, 1)
+
+[node name="green2" type="CPUParticles2D" parent="Confetti2"]
+position = Vector2(-374, 325)
+amount = 16
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+spread = 59.75
+gravity = Vector2(0, 100)
+initial_velocity_min = 65.04
+initial_velocity_max = 143.16
+angular_velocity_min = 283.28
+angular_velocity_max = 306.89
+linear_accel_min = 11.48
+linear_accel_max = 13.11
+scale_amount_min = 10.0
+scale_amount_max = 116.56
+scale_amount_curve = SubResource("Curve_42o5t")
+color = Color(0.758609, 0, 0.0784105, 1)
+
+[node name="green3" type="CPUParticles2D" parent="Confetti2"]
+position = Vector2(-379, 318)
+amount = 16
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+spread = 59.75
+gravity = Vector2(0, 100)
+initial_velocity_min = 65.04
+initial_velocity_max = 143.16
+angular_velocity_min = 283.28
+angular_velocity_max = 306.89
+linear_accel_min = 11.48
+linear_accel_max = 13.11
+scale_amount_min = 10.0
+scale_amount_max = 116.56
+scale_amount_curve = SubResource("Curve_42o5t")
+color = Color(0.61872, 0.423519, 6.73831e-07, 1)
+
+[node name="Confetti3" type="Node2D" parent="."]
+position = Vector2(408, 162)
+
+[node name="green" type="CPUParticles2D" parent="Confetti3"]
+position = Vector2(-378, 327)
+amount = 32
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+spread = 59.75
+gravity = Vector2(0, 100)
+initial_velocity_min = 104.1
+initial_velocity_max = 557.22
+angular_velocity_min = 283.28
+angular_velocity_max = 306.89
+linear_accel_min = 11.48
+linear_accel_max = 13.11
+scale_amount_min = 10.0
+scale_amount_max = 116.56
+scale_amount_curve = SubResource("Curve_42o5t")
+color = Color(7.70092e-07, 0.559843, 0.285995, 1)
+
+[node name="green2" type="CPUParticles2D" parent="Confetti3"]
+position = Vector2(-379, 335)
+amount = 32
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+spread = 59.75
+gravity = Vector2(0, 100)
+initial_velocity_min = 104.1
+initial_velocity_max = 557.22
+angular_velocity_min = 283.28
+angular_velocity_max = 306.89
+linear_accel_min = 11.48
+linear_accel_max = 13.11
+scale_amount_min = 10.0
+scale_amount_max = 116.56
+scale_amount_curve = SubResource("Curve_42o5t")
+color = Color(0.758609, 0, 0.0784105, 1)
+
+[node name="green3" type="CPUParticles2D" parent="Confetti3"]
+position = Vector2(-384, 328)
+amount = 32
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+spread = 59.75
+gravity = Vector2(0, 100)
+initial_velocity_min = 104.1
+initial_velocity_max = 557.22
+angular_velocity_min = 283.28
+angular_velocity_max = 306.89
+linear_accel_min = 11.48
+linear_accel_max = 13.11
+scale_amount_min = 10.0
+scale_amount_max = 116.56
+scale_amount_curve = SubResource("Curve_42o5t")
+color = Color(0.61872, 0.423519, 6.73831e-07, 1)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,143 @@
+[gd_scene load_steps=11 format=3 uid="uid://d3xeo6lj288sw"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsJuegoBolitas/bolitas.gd" id="1_j5d5s"]
+[ext_resource type="PackedScene" uid="uid://8rlxqia6myrg" path="res://Escenas/EscenaBolitas/carril.tscn" id="2_0htvn"]
+[ext_resource type="Texture2D" uid="uid://0vkaxh5s843f" path="res://Escenas/EscenaBolitas/Fondo1_Glow.jpg" id="2_uyxo0"]
+[ext_resource type="AudioStream" uid="uid://cvt1iknrhxnba" path="res://Assets/sonidos/Happy walk.mp3" id="2_vds6v"]
+[ext_resource type="FontFile" uid="uid://d3yrjs7feckg7" path="res://Assets/fonts/PixelifySans-Bold.ttf" id="3_wfj4a"]
+[ext_resource type="PackedScene" uid="uid://bomdbtnyrxmfl" path="res://Escenas/perdiste.tscn" id="5_q1san"]
+[ext_resource type="PackedScene" uid="uid://trffkqweyvb7" path="res://Escenas/InstruccionesUI.tscn.tscn" id="7_c0knf"]
+[ext_resource type="Texture2D" uid="uid://x4rdor831q2k" path="res://Assets/buttons.png" id="8_1ecqh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3fwrc"]
+font = ExtResource("3_wfj4a")
+font_size = 40
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebmni"]
+atlas = ExtResource("8_1ecqh")
+region = Rect2(-0.0640717, 159.736, 94.346, 32.3819)
+
+[node name="bolitas" type="Node2D" node_paths=PackedStringArray("etiqueta", "timer", "vidas_cont", "timer_bolitas")]
+script = ExtResource("1_j5d5s")
+etiqueta = NodePath("CanvasLayer/Label")
+timer = NodePath("Timer")
+vidas_cont = NodePath("CanvasLayer/HBoxContainer")
+timer_bolitas = NodePath("TimerNotas")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.564689, -209.807)
+scale = Vector2(0.998693, 0.995092)
+texture = ExtResource("2_uyxo0")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -596)
+
+[node name="Carril" parent="." node_paths=PackedStringArray("limit", "gestor") instance=ExtResource("2_0htvn")]
+scale = Vector2(2, 2)
+limit = NodePath("../Marker2D")
+gestor = NodePath("..")
+
+[node name="Carril2" parent="." node_paths=PackedStringArray("limit", "gestor") instance=ExtResource("2_0htvn")]
+position = Vector2(-86, 0)
+scale = Vector2(2, 2)
+color = 1
+limit = NodePath("../Marker2D")
+gestor = NodePath("..")
+
+[node name="Carril3" parent="." node_paths=PackedStringArray("limit", "gestor") instance=ExtResource("2_0htvn")]
+position = Vector2(-178, 0)
+scale = Vector2(2, 2)
+color = 3
+limit = NodePath("../Marker2D")
+gestor = NodePath("..")
+
+[node name="Carril4" parent="." node_paths=PackedStringArray("limit", "gestor") instance=ExtResource("2_0htvn")]
+position = Vector2(94, 0)
+scale = Vector2(2, 2)
+color = 2
+limit = NodePath("../Marker2D")
+gestor = NodePath("..")
+
+[node name="Carril5" parent="." node_paths=PackedStringArray("limit", "gestor") instance=ExtResource("2_0htvn")]
+position = Vector2(179, 0)
+scale = Vector2(2, 2)
+color = 4
+limit = NodePath("../Marker2D")
+gestor = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -209)
+skew = 0.603884
+editor_draw_drag_margin = true
+
+[node name="ZonaPulsacion" type="Polygon2D" parent="."]
+z_index = 1
+color = Color(1, 0.9, 0.3, 0.25)
+polygon = PackedVector2Array(-216, -30, 216, -30, 216, 10, -216, 10)
+
+[node name="LineaPulsacion" type="Line2D" parent="."]
+z_index = 2
+points = PackedVector2Array(-216, -10, 216, -10)
+width = 5.0
+default_color = Color(1, 0.95, 0.4, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vds6v")
+volume_db = -4.208
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+text = "TIEMPO"
+label_settings = SubResource("LabelSettings_3fwrc")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+mouse_filter = 2
+mouse_default_cursor_shape = 3
+
+[node name="AyudaPulsacion" type="Label" parent="CanvasLayer"]
+offset_left = 182.0
+offset_top = 464.0
+offset_right = 682.0
+offset_bottom = 485.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 16
+text = "ESPACIO o clic en la franja amarilla"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 50.0
+one_shot = true
+autostart = true
+
+[node name="TimerNotas" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="Perdiste" parent="." instance=ExtResource("5_q1san")]
+
+[node name="InstruccionesUI" parent="." instance=ExtResource("7_c0knf")]
+texto_titulo = "Canción de Cuna"
+texto_explicacion = "Sigue el ritmo para mantener el sueño profundo. Pulsa ESPACIO o haz clic en la franja amarilla inferior cuando una esfera cruce la línea brillante. ¡Que no pare la música!
+
+Vidas: 3 fallos permitidos
+
+Controles:"
+lista_teclas = Array[Texture2D]([SubResource("AtlasTexture_ebmni")])
+texto_controles = "ESPACIO o clic izquierdo en la franja"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerNotas" to="." method="_on_timer_notas_timeout"]

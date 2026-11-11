@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cvt1iknrhxnba"
+path="res://.godot/imported/Happy walk.mp3-66e5f13a89a6d383dc15e9040f6d0efa.mp3str"
+
+[deps]
+
+source_file="res://Assets/sonidos/Happy walk.mp3"
+dest_files=["res://.godot/imported/Happy walk.mp3-66e5f13a89a6d383dc15e9040f6d0efa.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

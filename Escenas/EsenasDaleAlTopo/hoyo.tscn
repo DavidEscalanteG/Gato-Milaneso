@@ -1,0 +1,207 @@
+[gd_scene load_steps=20 format=3 uid="uid://gk2ep3tvyb06"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsDaleAlTopo/hoyo.gd" id="1_qne81"]
+[ext_resource type="Texture2D" uid="uid://dtbgwsi6k0p8s" path="res://Assets/imagenesPrueba.png" id="2_c6qc1"]
+[ext_resource type="Texture2D" uid="uid://dy8goh2k2dvbf" path="res://Escenas/EsenasDaleAlTopo/hoyo.atlastex" id="2_rqmdt"]
+[ext_resource type="Shader" path="res://Assets/hit.gdshader" id="3_u1rqw"]
+[ext_resource type="AudioStream" uid="uid://dp6pyjkuy2wp2" path="res://Assets/sonidos/chop.ogg" id="4_78ksp"]
+[ext_resource type="Texture2D" uid="uid://bt3qtf223v6ng" path="res://Assets/recursosJuegoBolitas.png" id="4_kjevu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iout3"]
+shader = ExtResource("3_u1rqw")
+shader_parameter/active = false
+shader_parameter/tint = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d2sw1"]
+load_path = "res://.godot/imported/imagenesPrueba.png-5212f1c2d9819bce283ab9d06fef1a38.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tncyv"]
+atlas = SubResource("CompressedTexture2D_d2sw1")
+region = Rect2(723, 74, 43, 43)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynhys"]
+load_path = "res://.godot/imported/imagenesPrueba.png-5212f1c2d9819bce283ab9d06fef1a38.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yd17"]
+atlas = SubResource("CompressedTexture2D_ynhys")
+region = Rect2(620, 24, 38, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri875"]
+atlas = ExtResource("4_kjevu")
+region = Rect2(10, 64, 51, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7xlg"]
+atlas = ExtResource("2_c6qc1")
+region = Rect2(704, 49, 88, 11)
+
+[sub_resource type="Animation" id="Animation_3jhwc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animales/Gato:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 32.21)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animales/Topo:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 29.725)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animales/Zarigueya:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 33)]
+}
+
+[sub_resource type="Animation" id="Animation_tyytc"]
+resource_name = "mostrar_gato"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animales/Gato:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 32.21), Vector2(0, -16), Vector2(0, -11)]
+}
+
+[sub_resource type="Animation" id="Animation_6wm0c"]
+resource_name = "mostrar_topo"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animales/Topo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 29.725), Vector2(0, -14), Vector2(0, -4.07)]
+}
+
+[sub_resource type="Animation" id="Animation_cc1o3"]
+resource_name = "mostrar_zari"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animales/Zarigueya:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 33), Vector2(0, -10), Vector2(0, -5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8byk7"]
+_data = {
+"RESET": SubResource("Animation_3jhwc"),
+"mostrar_gato": SubResource("Animation_tyytc"),
+"mostrar_topo": SubResource("Animation_6wm0c"),
+"mostrar_zari": SubResource("Animation_cc1o3")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tlhnt"]
+radius = 36.03
+
+[node name="Hoyo" type="Node2D" node_paths=PackedStringArray("animation_player", "hit", "area", "animales", "timer_sacar", "timer_fuera")]
+script = ExtResource("1_qne81")
+animation_player = NodePath("AnimationPlayer")
+hit = NodePath("AudioStreamPlayer2D")
+area = NodePath("Area2D")
+animales = NodePath("Animales")
+timer_sacar = NodePath("Timer")
+timer_fuera = NodePath("Timer2")
+
+[node name="hoyo_atras" type="Sprite2D" parent="."]
+texture = ExtResource("2_rqmdt")
+
+[node name="Animales" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_iout3")
+position = Vector2(0, -6)
+
+[node name="Topo" type="Sprite2D" parent="Animales"]
+use_parent_material = true
+position = Vector2(0, 29.725)
+texture = SubResource("AtlasTexture_tncyv")
+
+[node name="Gato" type="Sprite2D" parent="Animales"]
+use_parent_material = true
+position = Vector2(0, 32.21)
+texture = SubResource("AtlasTexture_7yd17")
+
+[node name="Zarigueya" type="Sprite2D" parent="Animales"]
+position = Vector2(0, 33)
+texture = SubResource("AtlasTexture_ri875")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -27.0
+offset_top = 9.0
+offset_right = 30.0
+offset_bottom = 61.0
+mouse_filter = 2
+color = Color(0.803922, 0.490196, 0.282353, 1)
+
+[node name="hoyo_frente" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = SubResource("AtlasTexture_e7xlg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8byk7")
+}
+speed_scale = 3.0
+movie_quit_on_finish = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -16)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1, 0.5)
+shape = SubResource("CircleShape2D_tlhnt")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_78ksp")
+panning_strength = 4.0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

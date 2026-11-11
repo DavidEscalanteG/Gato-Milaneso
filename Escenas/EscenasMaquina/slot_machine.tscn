@@ -1,0 +1,497 @@
+[gd_scene load_steps=37 format=3 uid="uid://bypvf4yqtumsk"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsMaquina/slot_machine.gd" id="1_sb10h"]
+[ext_resource type="Texture2D" uid="uid://bvv3ln263o4it" path="res://Assets/fondo2.png" id="2_xohvd"]
+[ext_resource type="PackedScene" uid="uid://cy6aogy5sxfq7" path="res://Escenas/EscenasMaquina/hilera.tscn" id="3_vpvf7"]
+[ext_resource type="Texture2D" uid="uid://be5vkd2xpp0ea" path="res://Assets/slot.png" id="3_xfx0s"]
+[ext_resource type="FontFile" uid="uid://d3yrjs7feckg7" path="res://Assets/fonts/PixelifySans-Bold.ttf" id="4_cfgtf"]
+[ext_resource type="FontFile" uid="uid://btm7ogs0oimf6" path="res://addons/godotpdf/Amplify.ttf" id="5_8in4e"]
+[ext_resource type="Texture2D" uid="uid://cgl0vv03smosb" path="res://Assets/rectangulo.png" id="5_mwdya"]
+[ext_resource type="Texture2D" uid="uid://b7pocvwf2k3v2" path="res://Assets/carta.png" id="6_kt6c6"]
+[ext_resource type="Texture2D" uid="uid://dxxh30gegyj60" path="res://Assets/Comidas/taco.tres" id="7_xdh7m"]
+[ext_resource type="Texture2D" uid="uid://bro2idvof7uoo" path="res://Assets/Comidas/pollo.tres" id="8_ibfea"]
+[ext_resource type="Texture2D" uid="uid://cyrr3fhqtbmig" path="res://Assets/Comidas/pitahaya.tres" id="9_qrp2s"]
+[ext_resource type="Texture2D" uid="uid://chxefnr7h5meo" path="res://Assets/Comidas/piña.tres" id="10_r78bl"]
+[ext_resource type="Texture2D" uid="uid://8xa2rsropxo8" path="res://Assets/Comidas/helado.tres" id="11_lwbhd"]
+[ext_resource type="Texture2D" uid="uid://dm27hureic5do" path="res://Assets/Comidas/marquesita.tres" id="12_nh6ko"]
+[ext_resource type="Texture2D" uid="uid://b1bm22fdorxks" path="res://Assets/Comidas/hotdog.tres" id="13_25lmx"]
+[ext_resource type="Texture2D" uid="uid://c86ojb41qo0wp" path="res://Assets/botonHover.png" id="15_fwq1s"]
+[ext_resource type="PackedScene" uid="uid://trffkqweyvb7" path="res://Escenas/InstruccionesUI.tscn.tscn" id="16_wqhrl"]
+[ext_resource type="Texture2D" uid="uid://dytuk5qgyy3sv" path="res://Assets/click_izquierdo.tres" id="17_0mg8j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktuj2"]
+atlas = ExtResource("3_xfx0s")
+region = Rect2(224, 128, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3yfn"]
+atlas = ExtResource("3_xfx0s")
+region = Rect2(224, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7cfp"]
+atlas = ExtResource("3_xfx0s")
+region = Rect2(224, 64, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_shcr0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktuj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3yfn")
+}],
+"loop": false,
+"name": &"activo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7cfp")
+}],
+"loop": true,
+"name": &"reposo",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wxr74"]
+radius = 10.1865
+
+[sub_resource type="LabelSettings" id="LabelSettings_h52ga"]
+font = ExtResource("5_8in4e")
+font_size = 35
+font_color = Color(0.846154, 0.712166, 0, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fje53"]
+font = ExtResource("4_cfgtf")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+outline_size = 10
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5ktn6"]
+texture = ExtResource("5_mwdya")
+region_rect = Rect2(-6, 78, 628, 266)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mlbdf"]
+font = ExtResource("5_8in4e")
+font_size = 34
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oxnxx"]
+texture = ExtResource("6_kt6c6")
+expand_margin_right = 2.0
+region_rect = Rect2(80, 40, 256, 536)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e8awg"]
+line_spacing = 30.0
+font = ExtResource("4_cfgtf")
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7grf7"]
+font = ExtResource("5_8in4e")
+font_size = 24
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iprhu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dqpgo"]
+font = ExtResource("4_cfgtf")
+font_size = 100
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lkcb7"]
+texture = ExtResource("5_mwdya")
+expand_margin_left = 25.0
+expand_margin_top = 25.0
+expand_margin_right = 25.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mhvp5"]
+texture = ExtResource("15_fwq1s")
+expand_margin_left = 25.0
+expand_margin_top = 20.0
+expand_margin_right = 25.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_evvb4"]
+texture = ExtResource("5_mwdya")
+region_rect = Rect2(62, 103, 485, 216)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ujwiu"]
+font = ExtResource("5_8in4e")
+font_size = 24
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="SlotMachine" type="Node2D"]
+position = Vector2(-3, -2)
+scale = Vector2(0.751806, 0.755528)
+script = ExtResource("1_sb10h")
+costo_jugada = 1
+meta_monedas = 70
+
+[node name="Fondo" type="Sprite2D" parent="."]
+position = Vector2(578, 325.75)
+scale = Vector2(0.75, 0.626465)
+texture = ExtResource("2_xohvd")
+
+[node name="SlotMachine" type="Sprite2D" parent="."]
+position = Vector2(557, 355)
+scale = Vector2(2.61711, 2.54078)
+texture = ExtResource("3_xfx0s")
+region_enabled = true
+region_rect = Rect2(56, 24, 144, 232)
+
+[node name="PalancaAnimada" type="AnimatedSprite2D" parent="."]
+position = Vector2(735, 222)
+scale = Vector2(4.127, 3.46227)
+sprite_frames = SubResource("SpriteFrames_shcr0")
+animation = &"reposo"
+autoplay = "reposo"
+
+[node name="Palanca" type="Area2D" parent="."]
+position = Vector2(714, 151)
+scale = Vector2(2.75, 2.3125)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Palanca"]
+position = Vector2(15.6364, 3.45946)
+scale = Vector2(0.615674, 0.755652)
+shape = SubResource("CircleShape2D_wxr74")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576.5, 259.5)
+scale = Vector2(1.8587, 1.91667)
+texture = ExtResource("3_xfx0s")
+region_enabled = true
+region_rect = Rect2(82, 98, 92, 60)
+
+[node name="Mask" type="ColorRect" parent="."]
+clip_children = 1
+offset_left = 430.0
+offset_top = 244.0
+offset_right = 602.0
+offset_bottom = 353.0
+scale = Vector2(1.44932, 1.47723)
+
+[node name="Hilera" parent="Mask" instance=ExtResource("3_vpvf7")]
+position = Vector2(32, 53)
+scale = Vector2(1.8, 1.8)
+last_if = 0.05
+
+[node name="Hilera2" parent="Mask" instance=ExtResource("3_vpvf7")]
+position = Vector2(88, 53)
+scale = Vector2(1.8, 1.8)
+extra_slots = 50
+
+[node name="Hilera3" parent="Mask" instance=ExtResource("3_vpvf7")]
+position = Vector2(144, 53)
+scale = Vector2(1.8, 1.8)
+last_if = 0.15
+
+[node name="ResultadoLabel" type="Label" parent="."]
+offset_left = 480.0
+offset_top = 94.0
+offset_right = 635.0
+offset_bottom = 143.0
+text = "WIN: 3"
+label_settings = SubResource("LabelSettings_h52ga")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GanadoLabel" type="Label" parent="."]
+offset_left = 464.0
+offset_top = 51.0
+offset_right = 652.0
+offset_bottom = 100.0
+text = "GANASTE"
+label_settings = SubResource("LabelSettings_fje53")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 327.0
+offset_bottom = 122.0
+scale = Vector2(0.743797, 0.804042)
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxTexture_5ktn6")
+
+[node name="MonedasLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cantidad de monedas"
+label_settings = SubResource("LabelSettings_mlbdf")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 846.0
+offset_top = 14.0
+offset_right = 894.0
+offset_bottom = 54.0
+scale = Vector2(6.01047, 10.1096)
+theme_override_styles/panel = SubResource("StyleBoxTexture_oxnxx")
+
+[node name="PremioLabel" type="Label" parent="."]
+offset_left = 924.0
+offset_top = 33.0
+offset_right = 1059.0
+offset_bottom = 72.0
+text = "PREMIOS"
+label_settings = SubResource("LabelSettings_e8awg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ListaPremios" type="VBoxContainer" parent="."]
+offset_left = 868.0
+offset_top = 74.0
+offset_right = 1107.0
+offset_bottom = 388.0
+theme_override_constants/separation = 15
+
+[node name="Tacos" type="HBoxContainer" parent="ListaPremios"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ListaPremios/Tacos"]
+layout_mode = 2
+texture = ExtResource("7_xdh7m")
+
+[node name="Label2" type="Label" parent="ListaPremios/Tacos"]
+layout_mode = 2
+text = "X2 = 75"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="TextureRect2" type="TextureRect" parent="ListaPremios/Tacos"]
+layout_mode = 2
+texture = ExtResource("7_xdh7m")
+
+[node name="Label3" type="Label" parent="ListaPremios/Tacos"]
+layout_mode = 2
+text = "X3 = 200"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="Pollo" type="HBoxContainer" parent="ListaPremios"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ListaPremios/Pollo"]
+layout_mode = 2
+texture = ExtResource("8_ibfea")
+
+[node name="Label2" type="Label" parent="ListaPremios/Pollo"]
+layout_mode = 2
+text = "X2 = 40"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="TextureRect2" type="TextureRect" parent="ListaPremios/Pollo"]
+layout_mode = 2
+texture = ExtResource("8_ibfea")
+
+[node name="Label3" type="Label" parent="ListaPremios/Pollo"]
+layout_mode = 2
+text = "X3 = 100"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="Pitahaya" type="HBoxContainer" parent="ListaPremios"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ListaPremios/Pitahaya"]
+layout_mode = 2
+texture = ExtResource("9_qrp2s")
+
+[node name="Label2" type="Label" parent="ListaPremios/Pitahaya"]
+layout_mode = 2
+text = "X2 = 30"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="TextureRect2" type="TextureRect" parent="ListaPremios/Pitahaya"]
+layout_mode = 2
+texture = ExtResource("9_qrp2s")
+
+[node name="Label3" type="Label" parent="ListaPremios/Pitahaya"]
+layout_mode = 2
+text = "X3 = 60"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="Piña" type="HBoxContainer" parent="ListaPremios"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ListaPremios/Piña"]
+layout_mode = 2
+texture = ExtResource("10_r78bl")
+
+[node name="Label2" type="Label" parent="ListaPremios/Piña"]
+layout_mode = 2
+text = "X2 = 20"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="TextureRect2" type="TextureRect" parent="ListaPremios/Piña"]
+layout_mode = 2
+texture = ExtResource("10_r78bl")
+
+[node name="Label3" type="Label" parent="ListaPremios/Piña"]
+layout_mode = 2
+text = "X3 = 40"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="Helado" type="HBoxContainer" parent="ListaPremios"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ListaPremios/Helado"]
+layout_mode = 2
+texture = ExtResource("11_lwbhd")
+
+[node name="Label2" type="Label" parent="ListaPremios/Helado"]
+layout_mode = 2
+text = "X2 = 15"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="TextureRect2" type="TextureRect" parent="ListaPremios/Helado"]
+layout_mode = 2
+texture = ExtResource("11_lwbhd")
+
+[node name="Label3" type="Label" parent="ListaPremios/Helado"]
+layout_mode = 2
+text = "X3 = 30"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="Marquesita" type="HBoxContainer" parent="ListaPremios"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ListaPremios/Marquesita"]
+layout_mode = 2
+texture = ExtResource("12_nh6ko")
+
+[node name="Label2" type="Label" parent="ListaPremios/Marquesita"]
+layout_mode = 2
+text = "X2 = 10"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="TextureRect2" type="TextureRect" parent="ListaPremios/Marquesita"]
+layout_mode = 2
+texture = ExtResource("12_nh6ko")
+
+[node name="Label3" type="Label" parent="ListaPremios/Marquesita"]
+layout_mode = 2
+text = "X3 = 20"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="HotDog" type="HBoxContainer" parent="ListaPremios"]
+layout_mode = 2
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ListaPremios/HotDog"]
+layout_mode = 2
+texture = ExtResource("13_25lmx")
+
+[node name="Label2" type="Label" parent="ListaPremios/HotDog"]
+layout_mode = 2
+text = "X2 = 5"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="TextureRect2" type="TextureRect" parent="ListaPremios/HotDog"]
+layout_mode = 2
+texture = ExtResource("13_25lmx")
+
+[node name="Label3" type="Label" parent="ListaPremios/HotDog"]
+layout_mode = 2
+text = "X3 = 10
+"
+label_settings = SubResource("LabelSettings_7grf7")
+
+[node name="PanelGanador" type="Panel" parent="."]
+offset_left = 429.0
+offset_top = 298.0
+offset_right = 716.0
+offset_bottom = 338.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_iprhu")
+
+[node name="LabelGanador" type="Label" parent="PanelGanador"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.5
+offset_top = -60.0
+offset_right = 233.5
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-2, -82)
+label_settings = SubResource("LabelSettings_dqpgo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonReiniciar" type="Button" parent="."]
+offset_left = 41.0
+offset_top = 122.0
+offset_right = 213.0
+offset_bottom = 175.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_cfgtf")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxTexture_lkcb7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lkcb7")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_mhvp5")
+theme_override_styles/normal = SubResource("StyleBoxTexture_lkcb7")
+text = "REINICIAR"
+
+[node name="Panel3" type="Panel" parent="."]
+offset_left = 887.0
+offset_top = 536.0
+offset_right = 1095.0
+offset_bottom = 613.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_evvb4")
+
+[node name="Label" type="Label" parent="Panel3"]
+layout_mode = 0
+offset_left = 1.52708
+offset_top = 7.99046
+offset_right = 207.527
+offset_bottom = 70.9905
+text = "MISIÓN: 70 MONEDAS"
+label_settings = SubResource("LabelSettings_ujwiu")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="InstruccionesUI" parent="." instance=ExtResource("16_wqhrl")]
+visible = false
+texto_titulo = "El Gran Jackpot"
+texto_explicacion = "¡Prueba tu suerte! Tu objetivo es acumular 70 monedas. Cada tiro cuesta 1 moneda. Consulta la tabla de premios a la derecha y...¡Dale CLICK a la palanca para girar!
+
+Misión: 70 monedas
+
+Controles:"
+lista_teclas = Array[Texture2D]([ExtResource("17_0mg8j")])
+texto_controles = "CLICK IZQUIERDO"
+
+[connection signal="input_event" from="Palanca" to="." method="_on_palanca_input_event"]
+[connection signal="pressed" from="BotonReiniciar" to="." method="_on_boton_reiniciar_pressed"]

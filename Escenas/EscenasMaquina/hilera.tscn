@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy6aogy5sxfq7"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsMaquina/hilera.gd" id="1_8fxn6"]
+[ext_resource type="PackedScene" uid="uid://bp5nbhxitid1u" path="res://Escenas/EscenasMaquina/tarjeta.tscn" id="2_k8trb"]
+
+[node name="Hilera" type="Node2D" groups=["hilera"]]
+scale = Vector2(0.988612, 0.995993)
+script = ExtResource("1_8fxn6")
+
+[node name="Tarjeta" parent="." instance=ExtResource("2_k8trb")]
+
+[node name="Tarjeta2" parent="." instance=ExtResource("2_k8trb")]
+position = Vector2(0, 32)
+
+[node name="Tarjeta3" parent="." instance=ExtResource("2_k8trb")]
+position = Vector2(0, -32)

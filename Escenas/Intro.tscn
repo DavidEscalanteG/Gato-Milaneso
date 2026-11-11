@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://rj2leqnvmpxn"]
+
+[ext_resource type="Script" path="res://Scripts/intro.gd" id="1_pqdwr"]
+[ext_resource type="Texture2D" uid="uid://dqvv1qp7rdwtq" path="res://Assets/logo.png" id="1_vqnv4"]
+[ext_resource type="FontFile" uid="uid://d3yrjs7feckg7" path="res://Assets/fonts/PixelifySans-Bold.ttf" id="3_5iq0m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_05esp"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_02e7s"]
+font = ExtResource("3_5iq0m")
+font_size = 42
+outline_size = 12
+outline_color = Color(0.710938, 0.456008, 0.0166626, 1)
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_pqdwr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 864.0
+offset_bottom = 496.0
+color = Color(0.292969, 0.292969, 0.292969, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 336.0
+offset_top = 48.0
+offset_right = 1585.0
+offset_bottom = 1907.0
+scale = Vector2(0.166543, 0.154921)
+texture = ExtResource("1_vqnv4")
+stretch_mode = 5
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+autostart = true
+
+[node name="Label" type="Label" parent="Timer"]
+offset_left = 640.0
+offset_top = 416.0
+offset_right = 848.0
+offset_bottom = 471.0
+text = "Cargando..."
+label_settings = SubResource("LabelSettings_05esp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 240.0
+offset_top = 320.0
+offset_right = 608.0
+offset_bottom = 371.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "EL GATO MILANESO"
+label_settings = SubResource("LabelSettings_02e7s")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,132 @@
+[gd_scene load_steps=17 format=3 uid="uid://7ycehy7s7ghi"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsMonedas/tienda.gd" id="1_1i8h4"]
+[ext_resource type="Texture2D" uid="uid://ba202phahpe5w" path="res://Assets/MonedaV1.png" id="2_xxu0d"]
+[ext_resource type="Texture2D" uid="uid://bq25wd5fw7hgj" path="res://Assets/MonedaV2.png" id="3_xmeis"]
+[ext_resource type="Texture2D" uid="uid://dmt28a6s0shmx" path="res://Assets/MonedaV3.png" id="4_kewpu"]
+[ext_resource type="FontFile" uid="uid://d3yrjs7feckg7" path="res://Assets/fonts/PixelifySans-Bold.ttf" id="5_ycsqa"]
+[ext_resource type="PackedScene" uid="uid://bomdbtnyrxmfl" path="res://Escenas/perdiste.tscn" id="6_yl734"]
+[ext_resource type="PackedScene" uid="uid://trffkqweyvb7" path="res://Escenas/InstruccionesUI.tscn.tscn" id="7_iunhn"]
+[ext_resource type="Texture2D" uid="uid://dytuk5qgyy3sv" path="res://Assets/click_izquierdo.tres" id="8_3l310"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_n5fbv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vleyi"]
+texture = SubResource("CanvasTexture_n5fbv")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+modulate_color = Color(0.176471, 0.176471, 0.176471, 0.615686)
+
+[sub_resource type="Theme" id="Theme_b0y8j"]
+Panel/styles/panel = SubResource("StyleBoxTexture_vleyi")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fd66k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yesqx"]
+texture = SubResource("CanvasTexture_fd66k")
+modulate_color = Color(0.694118, 0.376471, 0.0941176, 0.803922)
+
+[sub_resource type="Theme" id="Theme_bny60"]
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("5_ycsqa")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8x5yg"]
+modulate_color = Color(0.0980392, 0.0980392, 0.0980392, 0.298039)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4qoq7"]
+font = ExtResource("5_ycsqa")
+font_size = 50
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Tienda" type="Node2D"]
+script = ExtResource("1_1i8h4")
+
+[node name="Fondo" type="Sprite2D" parent="."]
+centered = false
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 264.0
+offset_top = 3.0
+offset_right = 607.0
+offset_bottom = 54.0
+theme = SubResource("Theme_b0y8j")
+theme_override_styles/panel = SubResource("StyleBoxTexture_yesqx")
+
+[node name="Moneda1" type="Sprite2D" parent="Panel"]
+position = Vector2(70.067, 25)
+scale = Vector2(0.0641865, 0.0633114)
+texture = ExtResource("2_xxu0d")
+
+[node name="Moneda2" type="Sprite2D" parent="Panel"]
+position = Vector2(100.067, 25)
+scale = Vector2(0.0420733, 0.0456278)
+texture = ExtResource("3_xmeis")
+
+[node name="Moneda3" type="Sprite2D" parent="Panel"]
+position = Vector2(128.067, 25)
+scale = Vector2(0.0420733, 0.0476132)
+texture = ExtResource("4_kewpu")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 159.067
+offset_top = 2.0
+offset_right = 251.067
+offset_bottom = 47.0
+theme = SubResource("Theme_bny60")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+vertical_alignment = 1
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 718.0
+offset_top = 2.0
+offset_right = 862.0
+offset_bottom = 53.0
+theme = SubResource("Theme_b0y8j")
+theme_override_styles/panel = SubResource("StyleBoxTexture_yesqx")
+
+[node name="LabelTimer" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 3.0
+offset_right = 120.0
+offset_bottom = 48.0
+theme = SubResource("Theme_bny60")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+vertical_alignment = 1
+
+[node name="Panel3" type="Panel" parent="."]
+offset_left = 268.0
+offset_top = 165.0
+offset_right = 582.0
+offset_bottom = 311.0
+mouse_filter = 2
+theme = SubResource("Theme_b0y8j")
+theme_override_styles/panel = SubResource("StyleBoxTexture_8x5yg")
+
+[node name="LabelCentral" type="Label" parent="Panel3"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 17.0
+offset_right = 290.0
+offset_bottom = 190.0
+text = "JUEGO COMPLETADO"
+label_settings = SubResource("LabelSettings_4qoq7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Perdiste" parent="." instance=ExtResource("6_yl734")]
+
+[node name="InstruccionesUI" parent="." instance=ExtResource("7_iunhn")]
+texto_titulo = "Encuentra la moneda"
+texto_explicacion = "Encuentra las 5 monedas ocultas antes que el reloj marque 0:00. ¡Mira el ejemplo arriba! Cada click incorrecto te RESTARÁ 10 segundos de tiempo.
+
+Misión: 5 monedas
+
+Controles:"
+lista_teclas = Array[Texture2D]([ExtResource("8_3l310")])
+texto_controles = "CLICK IZQUIERDO"

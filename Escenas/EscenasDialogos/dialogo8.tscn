@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://2lvucydyxbth"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsDialogos/dialogo8.gd" id="1_0l3ep"]
+[ext_resource type="Texture2D" uid="uid://dgdt071kpctd3" path="res://Assets/FondosDialogos/fondo7.png" id="2_nc44w"]
+
+[node name="Dialogo8" type="Node2D"]
+script = ExtResource("1_0l3ep")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(427, 246)
+scale = Vector2(0.564936, 0.481522)
+texture = ExtResource("2_nc44w")

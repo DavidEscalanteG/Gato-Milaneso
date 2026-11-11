@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://chbn21ia2ulr1"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsCartera/cartera.gd" id="1_2st7t"]
+[ext_resource type="Texture2D" uid="uid://drtco5smof3h8" path="res://Assets/Cartera.png" id="2_ymohl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krrb6"]
+size = Vector2(39, 23.75)
+
+[node name="Cartera" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_2st7t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -1)
+scale = Vector2(0.142109, 0.129709)
+texture = ExtResource("2_ymohl")
+region_rect = Rect2(302.193, 44.0861, 135.762, 141.086)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_krrb6")

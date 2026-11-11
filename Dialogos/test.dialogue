@@ -1,0 +1,308 @@
+
+
+~ pregunta1
+Mente: Dime algo, en las últimas dos semanas ¿Que tan seguido te has sentido con poco interés o placer en hacer cosas?
+- Ningún día 
+	do Global.set_respuesta(1,0)
+- Varios días
+	do Global.set_respuesta(1,1)
+- Más de la mitad de los días
+	do Global.set_respuesta(1,2)
+- Casi todos los días
+	do Global.set_respuesta(1,3)
+Mente: Entiendo...
+- Continuar => END
+	
+
+
+
+	
+~ pregunta2
+Kati: Dime algo, en las últimas dos semanas ¿Te has sentido decaído(a), deprimido(a) o sin esperanzas?
+- Ningún día
+	do Global.set_respuesta(2,0)
+- Varios días
+	do Global.set_respuesta(2,1)
+- Más de la mitad de los días
+	do Global.set_respuesta(2,2)
+- Casi todos los días
+	do Global.set_respuesta(2,3)
+{nombre_jugador}: Kati me preguntaba si habías visto...
+- Continuar => END
+
+
+~ pregunta3y4
+Doña Maria: ¿Y tú? ¿Has tenido dificultad para quedarte o permanecer dormido(a), o has dormido demasiado?
+- Ningún día
+	do Global.set_respuesta(3,0)
+- Varios días
+	do Global.set_respuesta(3,1)
+- Más de la mitad de los días
+	do Global.set_respuesta(3,2)
+- Casi todos los días
+	do Global.set_respuesta(3,3)
+Doña Maria: ¿Te has sentido cansado(a) o con poca energía?
+- Ningún día
+	do Global.set_respuesta(4,0)
+- Varios días
+	do Global.set_respuesta(4,1)
+- Más de la mitad de los días
+	do Global.set_respuesta(4,2)
+- Casi todos los días
+	do Global.set_respuesta(4,3)
+Doña Maria: Entiendo.
+- Continuar => END
+
+~ pregunta5
+Diego: Durante las últimas dos semanas ¿Te has sentido sin apetito o has comido en exceso?
+- Ningún día 
+	do Global.set_respuesta(5,0)
+- Varios días
+	do Global.set_respuesta(5,1)
+- Más de la mitad de los días
+	do Global.set_respuesta(5,2)
+- Casi todos los días
+	do Global.set_respuesta(5,3)
+Diego: Ya veo...
+- Continuar => END
+
+~ pregunta6
+Diego: ¿Tú también te has sentido mal contigo mismo(a) - o que eres un fracaso o que has quedado mal contigo mismo(a) o con tu familia?
+- Ningún día
+	do Global.set_respuesta(6,0)
+- Varios días
+	do Global.set_respuesta(6,1)
+- Más de la mitad de los días
+	do Global.set_respuesta(6,2)
+- Casi todos los días
+	do Global.set_respuesta(6,3)
+Diego: Bueno, me haz ayudado y ahora me toca a mi. Ten, una entrada a la feria por si te sirve. 
+- Continuar => END 
+
+~ pregunta7
+Mente: En las últimas dos semanas ¿Has tenido dificultad para concentrarte en ciertas actividades, tales como leer o ver la televisión?
+- Ningún día
+	do Global.set_respuesta(7,0)
+- Varios días
+	do Global.set_respuesta(7,1)
+- Más de la mitad de los días
+	do Global.set_respuesta(7,2)
+- Casi todos los días
+	do Global.set_respuesta(7,3)
+=> END
+
+~ pregunta8
+Mente: Te has movido o has hablado tan lento que otras personas podrían haberlo notado? o lo contrario - muy inquieto(a) o agitado(a) que has estado moviéndote mucho más de lo normal?
+- Ningún día
+	do Global.set_respuesta(8,0)
+- Varios días
+	do Global.set_respuesta(8,1)
+- Más de la mitad de los días
+	do Global.set_respuesta(8,2)
+- Casi todos los días
+	do Global.set_respuesta(8,3)
+=> END
+
+~ pregunta9
+Mente: ¿Has tenido pensamiento de que estarías mejor muerto(a) o de lastimarte de alguna manera?
+- Ningún día
+	do Global.set_respuesta(9,0)
+- Varios días
+	do Global.set_respuesta(9,1)
+- Más de la mitad de los días
+	do Global.set_respuesta(9,2)
+- Casi todos los días
+	do Global.set_respuesta(9,3)
+Mente: Entiendo...
+- Continuar => END 
+
+~ pregunta10
+Milaneso: Recuerda todos los problemas que tuviste estas dos últimas semanas en tu vida cotidiana, ¿qué tanta dificultad te ha dado estos problemas para hacer tu trabajo, encargarte de las tareas del hogar, o llevarte bien con otras personas?
+- No ha sido difícil
+	do Global.set_respuesta(10,0)
+- Un poco difícil
+	do Global.set_respuesta(10,1)
+- Muy difícil
+	do Global.set_respuesta(10,2)
+- Extremadamente difícil
+	do Global.set_respuesta(10,3)
+=> END
+
+
+
+
+~ start
+{nombre_jugador}: ¿Dónde estará?
+- Continuar
+{nombre_jugador}: Siempre te me pierdes...
+- Continuar
+Mente: ¿Cuándo fue la última vez que lo viste?
+- Continuar
+{nombre_jugador}: Hace dos semanas...
+- Continuar
+Mente: ¿Qué es lo que recuerdas?
+- Continuar
+{nombre_jugador}: Recuerdo que estaba cerca...
+- Continuar
+Mente: Hablando de recordar, recúerdame cómo eres físicamente
+- Continuar => END
+#Empieza la personalización de personaje
+
+
+~ first_question
+Mente: Sí, ya recuerdo. Fue un arduo trabajo elegir tu apariencia ¿no?
+- Continuar =>< pregunta1
+Mente: Ya sé donde podría estar aquello que buscas... ¡Con Kati!
+- Continuar => END
+
+~ conv2
+{nombre_jugador}: Hola Kati
+- Continuar
+Kati: Hola...
+- Continuar
+{nombre_jugador}: ¿Qué tienes?
+- Continuar
+Kati: Se me cayó mi cartera de regreso a mi casa y jamás la recuperaré por que están los perros de la colonia por toda la calle
+- Continuar
+{nombre_jugador}: Yo puedo ayudarte
+- Continuar
+Kati: No, déjalo, es imposible, esos perros muerden a las personas
+- Continuar
+{nombre_jugador}: Lo intentaré
+- Continuar => END
+
+
+
+~ second_question
+# Empieza el juego de los perros...
+{nombre_jugador}: Aquí tienes Kati
+- Continuar
+Kati: ¡Muchas gracias! Me sentía tan mal y había perdido todas las esperanzas
+- Continuar =>< pregunta2
+Kati: Sí, las últimas dos semanas lo he visto cerca de la casa de doña María
+- Continuar
+{nombre_jugador}: ¡Muchas gracias Kati!
+- Continuar => END
+
+
+
+
+~ conv3
+# Pasa a la escena con Doña María
+{nombre_jugador}: Buenos días doña María, me preguntaba si había visto...
+- Continuar
+Doña Maria: Qué bueno que estés aquí, necesito que cuides a mi bebé mientras voy a comprar unas cosas.
+- Continuar
+{nombre_jugador}: pero... bueno, está bien.
+- Continuar
+{nombre_jugador}: Parece que tienes un poco de sueño
+- Continuar => END
+# Aquí pasa al juego de "Canción de Cuna"
+
+
+
+~ conv4
+Doña Maria: Ya regresé. Ohh es difícil que mi bebé se quede dormido, pero lo lograste
+- Continuar =>< pregunta3y4
+Doña Maria: Por cierto, me dijo Kati que andas buscando tu...
+- Continuar
+{nombre_jugador}: ¡Sí!
+- Continuar
+Doña Maria: Deberías revisar en la feria, algunas veces lo he visto allí
+- Continuar
+{nombre_jugador}: Gracias doña María, que pase linda tarde.
+- Continuar => END
+
+~ conv5
+#Cambio de Escenario - Fuera de casa de Doña María
+{nombre_jugador}: Tanta búsqueda me ha dado hambre
+- Continuar
+Mente: Deberías ir al mercado a buscar algo de comer
+- Continuar => END
+
+
+~ conv6
+#Cambio de Escenario - Mercado
+Mente: ¿Qué se te antoja?
+- Continuar => END
+
+
+
+~ conv7
+Diego: ¡Hola! Guau te ves con mucha hambre
+- Continuar =>< pregunta5
+{nombre_jugador}: Hola Diego, ¿Cómo estás?
+- Continuar
+Diego: *Suspira*
+- Continuar
+Diego: Soy una decepción
+- Continuar
+{nombre_jugador}: No digas eso
+- Continuar
+Diego: Soy un fracaso
+- Continuar
+{nombre_jugador}: ¿Qué pasa?
+- Continuar
+Diego: Resulta que he perdido el dinero para las tortillas.¡No lo puedo creer!
+- Continuar
+{nombre_jugador}: ¡Que mal, Diego! ¿Cómo sucedio eso?
+- Continuar
+Diego: Pues verás, salí de mi casa con el dinero en el bolsillo y cuando llegué a la tienda, ya no estaba. Es como si se hubiera esfumado. Ahora mi familia no tendrá nada para almorzar hoy y me siento terrible por eso.
+- Continuar
+{nombre_jugador}: Tranquilo, ¡Yo te ayudo a buscar!
+- Continuar => END
+#Empieza el quinto juego de encontrar las monedas
+
+
+~ conv8
+Diego: Muchas gracias por ayudarme, sentía que era una decepción, ¿Cómo se me pudo haber caído el dinero?
+- Continuar
+Diego: ¿Puedo preguntarte algo?
+- Continuar =>< pregunta6
+{nombre_jugador}: ¡Claro que me sirve! Muchas gracias Diego
+- Continuar => END
+#Regresa al mapa principal
+
+
+~ conv9
+#Cambio de escenario
+{nombre_jugador}: Tiene que estar por aquí
+- Continuar
+#Cambio de escuena (Después de mucha búsqueda sin resultados...)
+{nombre_jugador}: *Suspiro*
+- Continuar
+{nombre_jugador}: Creo que debo darme por vencido. Es hora de irme a casa
+- Continuar
+Mente: ¿Por qué no intentas un juego antes de irte?
+- Continuar
+Mente: A lo mejor dale al topo te anima un poco
+- Continuar
+Mente: Necesitas concentración
+- Continuar =>< pregunta7
+Mente: ...[speed=0.5]Entiendo
+- Continuar => END
+
+
+
+~ conv10
+#Empieza el sexto juego
+{nombre_jugador}: ¿Eso es lo que creo que es?
+- Continuar =>< pregunta8
+=> pregunta9
+
+~ conv11
+{nombre_jugador}: ¡Mi gato!
+- Continuar
+{nombre_jugador}: ¡Llevo todo el día buscándote! No sabes todo lo que tuve que pasar, ¡Creí que nunca te encontraría!
+- Continuar
+{nombre_jugador}: Al fin te encuentro
+- Continuar =>< pregunta10
+Milaneso: Digo, miau
+- Continuar => resultados_test
+
+# FIN : ¡GRACIAS POR JUGAR!
+
+~ resultados_test
+do Global.debug_print_respuestas()
+
+

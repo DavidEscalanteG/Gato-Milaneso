@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://8rlxqia6myrg"]
+
+[ext_resource type="Script" path="res://Scripts/ScriptsJuegoBolitas/carril.gd" id="1_pevm2"]
+[ext_resource type="Texture2D" uid="uid://ds0ya30s0p2rv" path="res://Assets/bolitas-assets.png" id="2_fleih"]
+[ext_resource type="PackedScene" uid="uid://bwuuj7tjhchk8" path="res://Escenas/EscenaBolitas/nota.tscn" id="2_xx1kk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fe8yl"]
+size = Vector2(30, 20)
+
+[node name="Carril" type="Node2D" node_paths=PackedStringArray("panel")]
+script = ExtResource("1_pevm2")
+nota = ExtResource("2_xx1kk")
+panel = NodePath("Panel/Sprite2D")
+
+[node name="Panel" type="Area2D" parent="."]
+monitorable = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel"]
+texture = ExtResource("2_fleih")
+hframes = 5
+vframes = 2
+frame = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_fe8yl")
+
+[connection signal="area_entered" from="Panel" to="." method="_on_panel_area_entered"]
+[connection signal="area_exited" from="Panel" to="." method="_on_panel_area_exited"]

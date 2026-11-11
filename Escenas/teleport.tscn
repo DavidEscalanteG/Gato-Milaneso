@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://catwqkohuj6xk"]
+
+[ext_resource type="Script" path="res://Escenas/teleport.gd" id="1_khyov"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ff71l"]
+shadow_color = Color(0, 0, 0, 0.757)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j12ta"]
+size = Vector2(26, 18)
+
+[sub_resource type="Gradient" id="Gradient_4ewhm"]
+offsets = PackedFloat32Array(0.75, 1)
+colors = PackedColorArray(0.95057, 0.950368, 0.864415, 1, 0.616732, 0.588702, 0.178987, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v6ebc"]
+gradient = SubResource("Gradient_4ewhm")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.918803, 0.175214)
+metadata/_snap_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_a6qrx"]
+outline_size = 5
+outline_color = Color(0.382069, 0.0551368, 0.403687, 1)
+shadow_color = Color(0, 0, 0, 0.757)
+
+[node name="Teleport" type="Area2D" node_paths=PackedStringArray("label")]
+monitorable = false
+script = ExtResource("1_khyov")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1000
+offset_left = -48.0
+offset_top = -73.0
+offset_right = 50.0
+offset_bottom = -34.0
+text = "Promp"
+label_settings = SubResource("LabelSettings_ff71l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_j12ta")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.40625, 0.28125)
+texture = SubResource("GradientTexture2D_v6ebc")
+
+[node name="Label2" type="Label" parent="."]
+z_index = 1
+offset_left = -45.0
+offset_top = -33.0
+offset_right = 45.0
+offset_bottom = 6.0
+text = "Presiona 'e'"
+label_settings = SubResource("LabelSettings_a6qrx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

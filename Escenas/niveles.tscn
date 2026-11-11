@@ -1,0 +1,172 @@
+[gd_scene load_steps=14 format=3 uid="uid://b82v66wocnvs5"]
+
+[ext_resource type="Texture2D" uid="uid://b6h2vkearyj8f" path="res://Assets/sprites/Mapa.jpg" id="1_3fusb"]
+[ext_resource type="Script" path="res://Escenas/niveles.gd" id="1_htr7f"]
+[ext_resource type="PackedScene" uid="uid://dof7vo6052bfb" path="res://Escenas/Player/Player.tscn" id="2_d2x3w"]
+[ext_resource type="PackedScene" uid="uid://catwqkohuj6xk" path="res://Escenas/teleport.tscn" id="3_0g8dr"]
+[ext_resource type="AudioStream" uid="uid://ceien7tt2bdyy" path="res://Assets/sonidos/mapSong.mp3" id="3_u7dlr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jd1wc"]
+size = Vector2(864, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hi8p"]
+size = Vector2(48, 504)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6ppe"]
+size = Vector2(112, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjlkq"]
+size = Vector2(160, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n32aj"]
+size = Vector2(216, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6ckh"]
+size = Vector2(56.3321, 74.3934)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1juk7"]
+size = Vector2(56.3321, 63.0727)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e6kpn"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Niveles" type="Node2D" node_paths=PackedStringArray("indicador", "player", "niveles")]
+position = Vector2(-184, 0)
+scale = Vector2(0.585812, 0.618334)
+script = ExtResource("1_htr7f")
+indicador = NodePath("Player/Sprite2D")
+player = NodePath("Player")
+niveles = NodePath("Teleports")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture = ExtResource("1_3fusb")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -140)
+shape = SubResource("RectangleShape2D_jd1wc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 264)
+shape = SubResource("RectangleShape2D_jd1wc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-423.344, 25.876)
+shape = SubResource("RectangleShape2D_1hi8p")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(448, 16)
+shape = SubResource("RectangleShape2D_1hi8p")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-312, -88)
+shape = SubResource("RectangleShape2D_j6ppe")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-288, 128)
+shape = SubResource("RectangleShape2D_j6ppe")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-8, -88)
+shape = SubResource("RectangleShape2D_xjlkq")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-64, 184)
+shape = SubResource("RectangleShape2D_j6ppe")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(212, 72)
+shape = SubResource("RectangleShape2D_n32aj")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(288, -32)
+scale = Vector2(0.975828, 1)
+shape = SubResource("RectangleShape2D_s6ckh")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(339.699, -32.345)
+scale = Vector2(0.975828, 1)
+shape = SubResource("RectangleShape2D_s6ckh")
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(361.891, 54.1778)
+scale = Vector2(0.975828, 1)
+shape = SubResource("RectangleShape2D_1juk7")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(104, -96)
+shape = SubResource("RectangleShape2D_s6ckh")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-376, 96)
+shape = SubResource("RectangleShape2D_s6ckh")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-77.67, 69.5417)
+shape = SubResource("RectangleShape2D_s6ckh")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_u7dlr")
+autoplay = true
+
+[node name="Teleports" type="Node2D" parent="."]
+
+[node name="Teleport" parent="Teleports" instance=ExtResource("3_0g8dr")]
+position = Vector2(-63.1602, 226.415)
+escena = "res://Escenas/EscenasDialogos/dialogo2.tscn"
+texto = "Casa de Kati"
+
+[node name="Teleport2" parent="Teleports" instance=ExtResource("3_0g8dr")]
+position = Vector2(27.3125, -40.4312)
+rotation = 0.00166242
+escena = "res://Escenas/EscenasDialogos/dialogo4.tscn"
+texto = "Casa de doña María"
+
+[node name="Teleport3" parent="Teleports" instance=ExtResource("3_0g8dr")]
+position = Vector2(163.875, 121.294)
+escena = "res://Escenas/EscenasDialogos/dialogo7.tscn"
+texto = "Mercado"
+
+[node name="Teleport4" parent="Teleports" instance=ExtResource("3_0g8dr")]
+position = Vector2(360.184, 92.1832)
+escena = "res://Escenas/EscenasDialogos/dialogo10.tscn"
+texto = "Feria"
+
+[node name="Teleport6" parent="Teleports" instance=ExtResource("3_0g8dr")]
+position = Vector2(-303.852, 179.515)
+escena = "res://Escenas/EsenasDaleAlTopo/dale_al_topo.tscn"
+texto = "Casa de Pablo"
+
+[node name="Player" parent="." instance=ExtResource("2_d2x3w")]
+position = Vector2(-331.164, -27.4932)
+scale = Vector2(0.25, 0.254054)
+velocidad = 110.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2.5, 2.5)
+limit_left = -426
+limit_top = -150
+limit_right = 70
+limit_bottom = 150
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+self_modulate = Color(1, 1, 1, 0.5)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -372.0
+offset_top = -160.0
+offset_right = -251.0
+offset_bottom = -89.0
+scale = Vector2(0.996912, 0.993666)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "'W' 'A' 'S' 'D'
+o las flechitas
+para moverse"
+label_settings = SubResource("LabelSettings_e6kpn")
+horizontal_alignment = 1
+autowrap_mode = 2
