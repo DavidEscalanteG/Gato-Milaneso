@@ -6,6 +6,7 @@ const ArchivoResultados = preload("res://Scripts/reportes/archivo_resultados.gd"
 var username = "username"
 var borrador_personaje: ConfigFile = null
 var borrador_datos_personales: Dictionary = {}
+var registro_datos_personales_id: int = 0
 ### Usado para controlar el nivel actual (base 0)
 ### En niveles, es el nivel que estará desbloqueados
 var ronda = 0
@@ -92,6 +93,7 @@ func reiniciar_partida() -> void:
 	username = "Jugador"
 	borrador_personaje = null
 	borrador_datos_personales.clear()
+	registro_datos_personales_id = 0
 	reiniciar_test()
 	
 	

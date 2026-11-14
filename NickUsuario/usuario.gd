@@ -44,6 +44,7 @@ func _on_save_button_pressed() -> void:
 	config.save("user://player.cfg")
 	Global.username = username
 	Global.borrador_datos_personales.clear()
+	Global.registro_datos_personales_id = 0
 	
 	Transicion.cambiar_escena("res://Escenas/EscenasDialogos/dialogo1.tscn")
 

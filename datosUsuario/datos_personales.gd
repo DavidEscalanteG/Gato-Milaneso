@@ -33,6 +33,7 @@ func _enfocar_campo_por_corregir() -> void:
 func _on_back_button_pressed() -> void:
 	SoundManager.play_click()
 	Global.borrador_datos_personales.clear()
+	Global.registro_datos_personales_id = 0
 	#Volver a la escena principal
 	get_tree().change_scene_to_file("res://menuPrincipal/menu.tscn")
 
@@ -63,21 +64,14 @@ func _on_save_button_pressed() -> void:
 		mostrar_error(mensaje)
 		return
 
-	var dir = DirAccess.open("user://BaseDeDatos")
-	db = SQLite.new()
-	db.path = db_name
-	db.verbosity_level = verbosity_level
-	db.open_db()
-	db.query(tabla)
-
-	db.query_with_bindings(
-		"INSERT INTO DatosPersonales (nombre, edad, genero, gradoAcademico) VALUES (?, ?, ?, ?);",
-		[nombre_completo.text, int(edad_jugador.text), genero_jugador.text, grado_jugador.text]
-	)
-	db.query("SELECT * FROM DatosPersonales;")
+	var registro_id = _guardar_registro()
+	if registro_id <= 0:
+		mostrar_error("No se pudieron guardar tus datos. Inténtalo nuevamente.")
+		return
 	
 	Global.registrar_nombre_completo(nombre_completo.text)
 	Global.reiniciar_partida()
+	Global.registro_datos_personales_id = registro_id
 	Global.borrador_datos_personales = {
 		"nombre": nombre_completo.text,
 		"edad": edad_jugador.text,
@@ -86,6 +80,27 @@ func _on_save_button_pressed() -> void:
 	}
 	
 	get_tree().change_scene_to_file("res://Escenas/EscenasDialogos/dialogo_inicial.tscn")
+
+func _guardar_registro() -> int:
+	db = SQLite.new()
+	db.path = db_name
+	db.verbosity_level = verbosity_level
+	if not db.open_db():
+		return 0
+	var valores = [nombre_completo.text, int(edad_jugador.text), genero_jugador.text, grado_jugador.text]
+	var registro_id = Global.registro_datos_personales_id
+	var correcto = db.query(tabla)
+	if correcto and registro_id > 0:
+		valores.append(registro_id)
+		correcto = db.query_with_bindings("UPDATE DatosPersonales SET nombre = ?, edad = ?, genero = ?, gradoAcademico = ? WHERE id = ?;", valores)
+	elif correcto:
+		correcto = db.query_with_bindings("INSERT INTO DatosPersonales (nombre, edad, genero, gradoAcademico) VALUES (?, ?, ?, ?);", valores)
+		if correcto:
+			correcto = db.query("SELECT last_insert_rowid() AS id;")
+			if correcto and not db.query_result.is_empty():
+				registro_id = int(db.query_result[0].id)
+	db.close_db()
+	return registro_id if correcto else 0
 
 func validar_campos() -> bool:
 	return _mensaje_error_campos().is_empty()
