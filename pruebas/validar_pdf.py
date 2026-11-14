@@ -18,17 +18,26 @@ def normal(value):
 
 def validate(directory):
     expected = json.loads((directory / "esperado.json").read_text(encoding="utf-8"))
-    for path in sorted(directory.glob("*.pdf")):
+    assert len(expected["archivos"]) == 18
+    assert not (directory / "no-debe-existir.pdf").exists(), "No emitir el definitivo incompleto"
+    for filename, case in sorted(expected["archivos"].items()):
+        path = directory / filename
         reader = PdfReader(path, strict=True)
         assert reader.metadata.title == "Resultados del cuestionario"
         assert reader.metadata.creator == "El Gato Milaneso"
         text = normal(" ".join(page.extract_text() for page in reader.pages))
         assert re.search(r"\b\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2}\b", text), "Fecha debe usar día/mes/año"
-        incomplete = "incompleta" in path.name
-        assert ("0 / 27" if incomplete else "15 / 27") in text
+        assert f"{case['total']} / 27" in text
+        assert case["clasificacion"] in text
+        # Los campos pueden cruzar líneas/páginas; no perder ningún carácter.
+        with pdfplumber.open(path) as fields_pdf:
+            fields = " ".join(page.crop((40, 115, 572, 724)).extract_text() for page in fields_pdf.pages)
+        compact = re.sub(r"\s", "", fields)
+        assert re.sub(r"\s", "", case["nombre"]) in compact
+        assert re.sub(r"\s", "", case["alias"]) in compact
         assert "La pregunta 10 se registra por separado y no modifica el puntaje." in text
         if "larga" in path.name:
-            assert text.count("W") == 1600 and "FIN_NOMBRE" in text
+            assert text.count("W") == 1600 and "FIN_NOMBRE" in text and "FIN_ALIAS" in text
             assert len(reader.pages) > 2
         elif path.name == "exportacion-prueba.pdf":
             assert "Jugador: José Muñoz (PRUEBA) \\" in text
@@ -58,15 +67,12 @@ def validate(directory):
                     question = normal(page.crop((84, row["top"], 400, row["bottom"])).extract_text())
                     answer = normal(page.crop((412, row["top"], 572, row["bottom"])).extract_text())
                     assert question == expected["preguntas"][number - 1], (path, number, question)
-                    value = 0 if incomplete else expected["valores"][number - 1]
+                    value = case["respuestas"][f"p{number}"]
+                    if value == -1:
+                        assert answer == "Sin responder"
+                        found[number] = question
+                        continue
                     if number == 10:
-                        if incomplete:
-                            assert answer == "Sin responder"
-                            found[number] = question
-                            continue
-                        value = 3 if "larga" in path.name else value
-                        if path.name.startswith("pregunta10-"):
-                            value = int(path.stem.split("-")[-1])
                         choice = expected["dificultades"][value]
                         assert answer == f"{choice} Valor: {value} - no suma"
                     else:
@@ -74,7 +80,7 @@ def validate(directory):
                         assert answer == f"{choice} Valor: {value}"
                     found[number] = question
         assert set(found) == set(range(1, 11)), f"Missing questions: {path}"
-        print(f"OK: {path.name}, {len(reader.pages)} pages, 10 complete rows with correct answers")
+        print(f"OK: {path.name}, {len(reader.pages)} pages, 10 rows with correct answers and margins")
 
 
 if __name__ == "__main__":

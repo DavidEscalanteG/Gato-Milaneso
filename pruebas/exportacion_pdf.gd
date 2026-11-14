@@ -4,7 +4,7 @@ const Cuestionario = preload("res://Singleton/Cuestionario.gd")
 var _fallos: Array[String] = []
 
 func _ready() -> void:
-	var salida = OS.get_user_data_dir()
+	var salida = "res://tmp/pdfs"
 	for argumento in OS.get_cmdline_user_args():
 		if argumento.begins_with("--salida="):
 			salida = argumento.trim_prefix("--salida=")
@@ -38,25 +38,49 @@ func _ready() -> void:
 	_comprobar(Global.nombre_completo_jugador == "José Muñoz (PRUEBA) \\ áéíóú ü ¡¿", "El reporte debe conservar el nombre completo.")
 	Global.username = "niño_prueba"
 	var valores = [1, 2, 3, 0, 1, 2, 3, 1, 2, 2]
-	var manifiesto = FileAccess.open(salida.path_join("esperado.json"), FileAccess.WRITE)
-	manifiesto.store_string(JSON.stringify({"preguntas": Cuestionario.PREGUNTAS,
-		"frecuencias": Cuestionario.FRECUENCIAS, "dificultades": Cuestionario.DIFICULTADES,
-		"valores": valores}))
-	manifiesto.close()
+	var casos = {}
 	for indice in valores.size():
 		Global.set_respuesta(indice + 1, valores[indice])
 	_comprobar(Global.total_test == 15, "El total esperado de preguntas 1-9 es 15.")
 	_comprobar(Global.respuestas_a_pdf("", salida.path_join("exportacion-prueba.pdf")), "No se pudo generar el reporte completo.")
+	casos["exportacion-prueba.pdf"] = _caso_actual()
 	for valor in 4:
 		Global.set_respuesta(10, valor)
 		_comprobar(Global.respuestas_a_pdf("", salida.path_join("pregunta10-%d.pdf" % valor)), "Falló la exportación de una opción 10.")
+		casos["pregunta10-%d.pdf" % valor] = _caso_actual()
 	Global.registrar_nombre_completo("W".repeat(1600) + " FIN_NOMBRE")
+	Global.username = "Niño_Álvarez_".repeat(80) + " FIN_ALIAS"
 	_comprobar(Global.respuestas_a_pdf("", salida.path_join("exportacion-larga.pdf")), "Falló el reporte con nombre largo.")
+	casos["exportacion-larga.pdf"] = _caso_actual()
 	Global.registrar_nombre_completo("PRUEBA SIN RESPUESTA 10")
+	Global.username = "Jugador"
 	Global.reiniciar_test()
 	_comprobar(Global.respuestas_test["p10"] == -1, "Reiniciar debe dejar la pregunta 10 sin responder.")
 	_comprobar(not Global.respuestas_a_pdf("", salida.path_join("no-debe-existir.pdf")), "Un reporte definitivo debe requerir las diez respuestas.")
 	_comprobar(Global.respuestas_a_pdf("", salida.path_join("exportacion-incompleta.pdf"), true), "Falló la vista diagnóstica de respuestas pendientes.")
+	casos["exportacion-incompleta.pdf"] = _caso_actual()
+	var limites = {0: "Sin síntomas significativos", 1: "Depresión mínima", 4: "Depresión mínima",
+		5: "Depresión leve", 9: "Depresión leve", 10: "Depresión moderada", 14: "Depresión moderada",
+		15: "Depresión moderadamente severa", 19: "Depresión moderadamente severa",
+		20: "Depresión severa", 27: "Depresión severa"}
+	for puntaje in limites:
+		Global.reiniciar_test()
+		Global.registrar_nombre_completo("Persona Ficticia")
+		var restante: int = puntaje
+		for numero in range(1, 10):
+			var valor = mini(restante, 3)
+			Global.set_respuesta(numero, valor)
+			restante -= valor
+		Global.set_respuesta(10, puntaje % 4)
+		_comprobar(Global.total_test == puntaje and Global.severidad_depresion == limites[puntaje], "Cambió un límite de puntaje o clasificación.")
+		var archivo = "puntaje-%02d.pdf" % puntaje
+		_comprobar(Global.respuestas_a_pdf("", salida.path_join(archivo)), "Falló la exportación de un límite de puntaje.")
+		casos[archivo] = _caso_actual()
+	var manifiesto = FileAccess.open(salida.path_join("esperado.json"), FileAccess.WRITE)
+	manifiesto.store_string(JSON.stringify({"preguntas": Cuestionario.PREGUNTAS,
+		"frecuencias": Cuestionario.FRECUENCIAS, "dificultades": Cuestionario.DIFICULTADES,
+		"archivos": casos}))
+	manifiesto.close()
 	Global.nombre_jugador = anterior[0]
 	Global.username = anterior[1]
 	Global.respuestas_test = anterior[2]
@@ -65,7 +89,7 @@ func _ready() -> void:
 	Global.ultimo_pdf_path = anterior[5]
 	Global.nombre_completo_jugador = anterior[6]
 	if _fallos.is_empty():
-		print("PRUEBA PDF OK: diez preguntas, opciones del diálogo, puntaje y paginación. Archivos en: ", ProjectSettings.globalize_path(salida))
+		print("PRUEBA PDF OK: diez preguntas, cuatro opciones finales, once límites de puntaje y 18 reportes. Archivos en: ", ProjectSettings.globalize_path(salida))
 		get_tree().quit(0)
 	else:
 		for fallo in _fallos:
@@ -75,3 +99,8 @@ func _ready() -> void:
 func _comprobar(condicion: bool, mensaje: String) -> void:
 	if not condicion:
 		_fallos.append(mensaje)
+
+func _caso_actual() -> Dictionary:
+	return {"respuestas": Global.respuestas_test.duplicate(), "total": Global.total_test,
+		"clasificacion": Global.severidad_depresion, "nombre": Global.nombre_completo_jugador,
+		"alias": Global.username}
