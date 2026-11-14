@@ -16,6 +16,12 @@ respuestas como pendientes; una respuesta cero no equivale a una pendiente.
 
 ## Consultar los reportes
 
+Durante una partida, **Escape** abre la pausa con volumen de música y efectos.
+También se ajustan desde **AUDIO** en el menú principal. Los ajustes se conservan
+entre sesiones. Volver al menú desde la pausa solicita confirmar que se perderá
+el progreso; no hay reanudación de partida después de cerrar el juego.
+La pantalla final mantiene el reintento de guardado y su salida propia.
+
 1. Al terminar la partida, vuelve al menú principal.
 2. Presiona **Ctrl + Shift + E**, escribe la contraseña y selecciona
    **Abrir carpeta de resultados**.
@@ -69,6 +75,7 @@ No edites sus respuestas ni la clasificación manualmente.
 | PDF terminados | `%APPDATA%\El Gato Milaneso\Resultados\` |
 | Base de datos personales | `%APPDATA%\Godot\app_userdata\MapaOriginal_v2.0\baseDatos.db` |
 | Apariencia y alias | Misma carpeta, `player.cfg` |
+| Ajustes de audio | Misma carpeta, `audio.cfg` |
 | Acceso del responsable | Misma carpeta, `evaluador.cfg` |
 | Reportes pendientes | Misma carpeta, subcarpeta `reportes_pendientes\` |
 

@@ -4,7 +4,8 @@ extends RefCounted
 static func segundos(nodo: Node, duracion: float) -> bool:
 	if not nodo.is_inside_tree() or nodo.is_queued_for_deletion():
 		return false
-	var temporizador = nodo.get_tree().create_timer(duracion)
+	# Las esperas del juego también se detienen al abrir la pausa.
+	var temporizador = nodo.get_tree().create_timer(duracion, false)
 	var cancelada = [false]
 	var cancelar = func():
 		cancelada[0] = true

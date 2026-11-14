@@ -119,5 +119,16 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
+[node name="PistaPausa" type="Label" parent="."]
+offset_left = 208.0
+offset_top = 434.0
+offset_right = 688.0
+offset_bottom = 454.0
+theme_override_colors/font_color = Color(0.29, 0.15, 0.06, 1)
+theme_override_font_sizes/font_size = 12
+text = "ESC: PAUSA Y AUDIO"
+horizontal_alignment = 1
+mouse_filter = 2
+
 [connection signal="mouse_entered" from="Button" to="." method="_on_play_botton_mouse_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_boton_jugar_pressed"]

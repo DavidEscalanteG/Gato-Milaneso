@@ -45,6 +45,9 @@ archivos van a subir.
 
 Cambios y pruebas: [Minijuegos](pruebas/MINIJUEGOS.md).
 
+Pausa, controles de audio y barra del reto de perros:
+[Uso y verificación](pruebas/PAUSA_Y_AUDIO.md).
+
 Personajes y recorrido del juego: [Revisión del juego](pruebas/REVISION_JUEGO.md).
 
 Cuestionario y reportes: [Exportación PDF](pruebas/EXPORTACION_PDF.md).
@@ -56,7 +59,7 @@ Cambios A01-A16 y sus commits: [Estado de la auditoría](pruebas/ESTADO_AUDITORI
 Autoría original, licencias incluidas y documentación de recursos pendiente:
 [Autorías y licencias](AUTORIAS_Y_LICENCIAS.md).
 
-Para repetir las doce suites con datos ficticios aislados:
+Para repetir las trece suites con datos ficticios aislados:
 
 ```powershell
 ./pruebas/ejecutar_pruebas.ps1 -Godot43 'C:\ruta\Godot_v4.3-stable_win64_console.exe'

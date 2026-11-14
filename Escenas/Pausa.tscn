@@ -1,0 +1,212 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://Scripts/pausa.gd" id="1"]
+[ext_resource type="Theme" path="res://resources/bottonsTheme.tres" id="2"]
+[ext_resource type="Texture2D" path="res://Assets/botones.png" id="3"]
+
+[sub_resource type="StyleBoxFlat" id="Carril"]
+bg_color = Color(0.29, 0.15, 0.05, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.66, 0.34, 0.04, 1)
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="Foco"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.64, 0.08, 1)
+
+[sub_resource type="AtlasTexture" id="Mando"]
+atlas = ExtResource("3")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="MandoActivo"]
+atlas = ExtResource("3")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="Theme" id="Deslizadores"]
+HSlider/icons/grabber = SubResource("Mando")
+HSlider/icons/grabber_highlight = SubResource("MandoActivo")
+HSlider/styles/slider = SubResource("Carril")
+HSlider/styles/grabber_area = SubResource("Carril")
+HSlider/styles/grabber_area_highlight = SubResource("Carril")
+HSlider/styles/focus = SubResource("Foco")
+
+[node name="Pausa" type="CanvasLayer"]
+process_mode = 3
+layer = 120
+script = ExtResource("1")
+
+[node name="Pantalla" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2")
+
+[node name="Sombra" type="ColorRect" parent="Pantalla"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.03, 0.01, 0.65)
+
+[node name="Centrar" type="CenterContainer" parent="Pantalla"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Pantalla/Centrar"]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 2
+
+[node name="Margen" type="MarginContainer" parent="Pantalla/Centrar/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 16
+
+[node name="Columna" type="VBoxContainer" parent="Pantalla/Centrar/Panel/Margen"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Titulo" type="Label" parent="Pantalla/Centrar/Panel/Margen/Columna"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LabelVariant"
+theme_override_font_sizes/font_size = 36
+text = "PAUSA"
+horizontal_alignment = 1
+
+[node name="Ayuda" type="Label" parent="Pantalla/Centrar/Panel/Margen/Columna"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "ESC para continuar"
+horizontal_alignment = 1
+
+[node name="Contenido" type="VBoxContainer" parent="Pantalla/Centrar/Panel/Margen/Columna"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FilaMusica" type="HBoxContainer" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido"]
+layout_mode = 2
+
+[node name="Etiqueta" type="Label" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido/FilaMusica"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Música"
+
+[node name="ValorMusica" type="Label" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido/FilaMusica"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100 %"
+horizontal_alignment = 2
+
+[node name="Musica" type="HSlider" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 32)
+theme = SubResource("Deslizadores")
+value = 100.0
+step = 1.0
+
+[node name="FilaEfectos" type="HBoxContainer" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido"]
+layout_mode = 2
+
+[node name="Etiqueta" type="Label" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido/FilaEfectos"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Efectos"
+
+[node name="ValorEfectos" type="Label" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido/FilaEfectos"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100 %"
+horizontal_alignment = 2
+
+[node name="Efectos" type="HSlider" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 32)
+theme = SubResource("Deslizadores")
+value = 100.0
+step = 1.0
+
+[node name="EstadoAudio" type="Label" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Continuar" type="Button" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "CONTINUAR"
+
+[node name="VolverMenu" type="Button" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "VOLVER AL MENÚ"
+
+[node name="Confirmacion" type="VBoxContainer" parent="Pantalla/Centrar/Panel/Margen/Columna"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Aviso" type="Label" parent="Pantalla/Centrar/Panel/Margen/Columna/Confirmacion"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 145)
+theme_override_font_sizes/font_size = 22
+text = "¿Volver al menú?\n\nSe perderá el progreso de esta partida."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SeguirJugando" type="Button" parent="Pantalla/Centrar/Panel/Margen/Columna/Confirmacion"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "SEGUIR JUGANDO"
+
+[node name="ConfirmarSalida" type="Button" parent="Pantalla/Centrar/Panel/Margen/Columna/Confirmacion"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "VOLVER AL MENÚ"
+
+[node name="GuardarTimer" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true

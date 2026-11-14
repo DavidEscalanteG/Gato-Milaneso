@@ -25,6 +25,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 PDF="*res://addons/godotpdf/PDF.gd"
 SoundManager="*res://SoundManager.gd"
 Transicion="*res://Escenas/Transicion.tscn"
+Pausa="*res://Escenas/Pausa.tscn"
 
 [display]
 

@@ -26,6 +26,7 @@ $pruebas = [ordered]@{
     nombres_largos = "NOMBRES LARGOS OK"
     personajes = "PRUEBAS PERSONAJES OK"
     minijuegos = "PRUEBAS MINIJUEGOS OK"
+    pausa_audio = "PAUSA Y AUDIO OK"
     exportacion_pdf = "PRUEBA PDF OK"
     acceso_resultados = "PRUEBA ACCESO OK"
     recorrido_completo = "RECORRIDO COMPLETO OK"
@@ -73,7 +74,7 @@ try {
         & $PythonPDF (Join-Path $PSScriptRoot "renderizar_pdf.py") (Join-Path $salida "pdfs")
         if ($LASTEXITCODE -ne 0) { throw "Falló renderizar_pdf.py" }
     }
-    Write-Output "VERIFICACION COMPLETA OK: 12 suites en Godot $version. Logs: $salida"
+    Write-Output "VERIFICACION COMPLETA OK: $($pruebas.Count) suites en Godot $version. Logs: $salida"
 } finally {
     $env:APPDATA = $appdataAnterior
     $env:LOCALAPPDATA = $localappdataAnterior

@@ -14,7 +14,8 @@ func _ready():
 func _physics_process(_delta):
 	var horizontal = Input.get_axis("izquierda", "derecha")
 	velocity = Vector2(horizontal * 400, 0)
-	apariencia.animar(Vector2(horizontal, 0))
+	# El fondo simula el avance continuo; A/D solo desplazan al jugador de lado.
+	apariencia.animar(Vector2.UP)
 	move_and_slide()
 
 func perder_vida():

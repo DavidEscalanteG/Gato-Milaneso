@@ -187,6 +187,7 @@ scale = Vector2(1, 0.5)
 shape = SubResource("CircleShape2D_tlhnt")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"Efectos"
 stream = ExtResource("4_78ksp")
 panning_strength = 4.0
 

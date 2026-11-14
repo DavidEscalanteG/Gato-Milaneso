@@ -11,6 +11,13 @@ var cartera_escena = preload("res://Escenas/EscenasCartera/cartera.tscn")
 
 @onready var spawn_timer = Timer.new()
 @onready var instrucciones = $InstruccionesUI
+@onready var panel_progreso: PanelContainer = $ProgresoUI/PanelProgreso
+@onready var barra_progreso: ProgressBar = $ProgresoUI/PanelProgreso/Columna/Barra
+@onready var texto_progreso: Label = $ProgresoUI/PanelProgreso/Columna/Cabecera/Texto
+
+var tiempo_busqueda: float = 0.0
+var _duracion_busqueda: float = 0.0
+var _busqueda_en_curso: bool = false
 
 var generando_perros = true 
 var juego_terminado = false
@@ -32,6 +39,12 @@ func _ready():
 func iniciar_juego():
 	# Verificación inicial por seguridad
 	if not is_inside_tree(): return
+	# Incluye las tres esperas existentes; la barra no cambia sus duraciones.
+	_duracion_busqueda = 3.0 + maxf(0.1, float(tiempo_para_cartera) - 3.0) + 3.0
+	tiempo_busqueda = 0.0
+	barra_progreso.value = 0.0
+	_busqueda_en_curso = true
+	panel_progreso.show()
 	
 	# --- ESPERA 1 ---
 	if not await Espera.segundos(self, 3.0):
@@ -72,6 +85,13 @@ func iniciar_juego():
 
 	generar_cartera()
 
+
+func _process(delta: float) -> void:
+	if not _busqueda_en_curso or juego_terminado:
+		return
+	tiempo_busqueda = minf(tiempo_busqueda + delta, _duracion_busqueda)
+	barra_progreso.value = minf(99.0, 100.0 * tiempo_busqueda / _duracion_busqueda)
+
 func _on_bark_ambience_timer_timeout():
 	# Si el juego terminó, detenemos este timer y no hacemos nada
 	if juego_terminado or not generando_perros:
@@ -102,6 +122,10 @@ func generar_cartera():
 		return
 	
 	generando_perros = false  # Detener la generación de perros
+	_busqueda_en_curso = false
+	panel_progreso.show()
+	barra_progreso.value = 100.0
+	texto_progreso.text = "¡Recoge la cartera!"
 	var cartera = cartera_escena.instantiate()
 	cartera.position = Vector2(430, -50)  # Ajusta la posición según tu diseño
 	add_child(cartera)
@@ -110,6 +134,7 @@ func generar_cartera():
 
 func marcar_juego_terminado():
 	juego_terminado = true
+	_busqueda_en_curso = false
 	spawn_timer.stop()
 
 func continuar_sin_perros() -> void:

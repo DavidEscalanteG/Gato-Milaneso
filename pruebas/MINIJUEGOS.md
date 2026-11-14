@@ -31,6 +31,11 @@ El motor vigente y validado es Godot **4.3 stable**. Con renderizado se comprob�
 
 ### Perros
 
+La barra de misión usa el mismo marco dorado de las instrucciones y el icono de
+cartera. Durante el recorrido, el personaje camina mirando hacia arriba aunque
+no pulses una tecla; A/D o las flechas conservan el desplazamiento horizontal.
+Escape congela tanto esa animación como la barra, y continuar las reanuda.
+
 1. Pierde las tres vidas. En la primera y segunda derrota debe aparecer únicamente la opción habitual de reintentar con ESPACIO.
 2. Reintenta hasta perder la partida por tercera vez. Ahora aparece **Continuar sin perros** debajo del aviso de derrota. Puedes seguir reintentando si prefieres.
 3. Pulsa el botón: los perros desaparecen, se reanuda el movimiento del jugador y del fondo, y aparece la cartera. Recógela normalmente y pulsa ESPACIO para continuar con el diálogo de Kati.

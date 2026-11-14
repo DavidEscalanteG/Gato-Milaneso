@@ -81,9 +81,30 @@ size_flags_vertical = 3
 text = "SOPORTE
 "
 
+[node name="audioBotton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer"]
+layout_mode = 2
+text = "AUDIO"
+
+[node name="PistaPausa" type="Label" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.29, 0.13, 0.02, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "Durante la partida: ESC para pausar"
+horizontal_alignment = 1
+
 [connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/playBotton" to="." method="_on_play_botton_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/playBotton" to="." method="_on_play_botton_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/creditsBotton" to="." method="_on_play_botton_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/creditsBotton" to="." method="_on_credits_botton_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/supportBotton" to="." method="_on_play_botton_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/supportBotton" to="." method="_on_credits_botton_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/audioBotton" to="." method="_on_play_botton_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/audioBotton" to="." method="_on_audio_pressed"]

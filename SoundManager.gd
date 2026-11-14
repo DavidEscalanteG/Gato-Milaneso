@@ -1,5 +1,10 @@
 extends Node
 
+const RUTA_AJUSTES_AUDIO = "user://audio.cfg"
+var volumen_musica: float = 100.0
+var volumen_efectos: float = 100.0
+var cerrando: bool = false
+
 # MENÚ
 @onready var player_click := AudioStreamPlayer.new()
 @onready var player_hover := AudioStreamPlayer.new()
@@ -134,6 +139,70 @@ func _ready() -> void:
 	ambiente_cartera.volume_db = -15
 	ambiente_slot_machine.volume_db = -60
 	ambiente_monedas.volume_db = -60
+	for sonido in get_children():
+		if sonido is AudioStreamPlayer:
+			sonido.bus = &"Efectos"
+	for musica in [ambiente_menu, ambiente_cartera, ambiente_slot_machine, ambiente_monedas]:
+		musica.bus = &"Musica"
+	cargar_ajustes_audio()
+	get_tree().auto_accept_quit = false
+	get_tree().root.close_requested.connect(cerrar_juego)
+
+
+func cargar_ajustes_audio() -> void:
+	var config = ConfigFile.new()
+	config.load(RUTA_AJUSTES_AUDIO)
+	ajustar_musica(_volumen_valido(config.get_value("audio", "musica", 100.0)))
+	ajustar_efectos(_volumen_valido(config.get_value("audio", "efectos", 100.0)))
+
+
+func _volumen_valido(valor: Variant) -> float:
+	if (valor is float or valor is int) and is_finite(float(valor)):
+		return clampf(float(valor), 0.0, 100.0)
+	return 100.0
+
+
+func ajustar_musica(valor: float) -> void:
+	volumen_musica = _volumen_valido(valor)
+	_aplicar_volumen(&"Musica", volumen_musica)
+
+
+func ajustar_efectos(valor: float) -> void:
+	volumen_efectos = _volumen_valido(valor)
+	_aplicar_volumen(&"Efectos", volumen_efectos)
+
+
+func _aplicar_volumen(bus: StringName, valor: float) -> void:
+	var indice = AudioServer.get_bus_index(bus)
+	if indice < 0:
+		return
+	AudioServer.set_bus_mute(indice, valor == 0.0)
+	AudioServer.set_bus_volume_db(indice, linear_to_db(maxf(valor / 100.0, 0.0001)))
+
+
+func guardar_ajustes_audio() -> bool:
+	var config = ConfigFile.new()
+	config.set_value("audio", "musica", volumen_musica)
+	config.set_value("audio", "efectos", volumen_efectos)
+	return config.save(RUTA_AJUSTES_AUDIO) == OK
+
+
+func detener_audio(nodo: Node) -> void:
+	if nodo is AudioStreamPlayer or nodo is AudioStreamPlayer2D or nodo is AudioStreamPlayer3D:
+		nodo.stop()
+	for hijo in nodo.get_children():
+		detener_audio(hijo)
+
+
+func cerrar_juego() -> void:
+	if cerrando:
+		return
+	cerrando = true
+	get_tree().paused = true
+	detener_audio(get_tree().root)
+	# Da tiempo al mezclador para liberar la reproducción MP3 antes del cierre.
+	await get_tree().create_timer(0.2, true).timeout
+	get_tree().quit()
 	
 # ------------------------
 # AMBIENTE

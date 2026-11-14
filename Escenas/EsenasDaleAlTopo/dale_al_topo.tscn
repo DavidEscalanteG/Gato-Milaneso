@@ -438,6 +438,7 @@ libraries = {
 speed_scale = 3.5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Musica"
 stream = ExtResource("6_8csgu")
 autoplay = true
 

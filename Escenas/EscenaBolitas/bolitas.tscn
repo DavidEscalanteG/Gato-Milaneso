@@ -82,6 +82,7 @@ width = 5.0
 default_color = Color(1, 0.95, 0.4, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Musica"
 stream = ExtResource("2_vds6v")
 volume_db = -4.208
 autoplay = true

@@ -133,13 +133,30 @@ func _victoria(tecla: Key) -> void:
 	config.set_value("player", "id_cabello", PackedInt32Array([4]))
 	config.set_value("player", "color_cabello", Vector4(0.7, 0.2, 0.1, 1))
 	calle.get_node("Gato/Apariencia").configurar(config)
+	var gato = calle.get_node("Gato")
+	var animacion = gato.apariencia.animation
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	var posicion_y = gato.position.y
+	var fotograma = gato.apariencia.sprite.frame
+	await get_tree().create_timer(0.25).timeout
+	comprobar(animacion.current_animation == "arriba" and animacion.is_playing()
+		and gato.apariencia.sprite.frame != fotograma,
+		"Perros: caminar hacia arriba sin necesitar pulsar una tecla.")
+	comprobar(gato.position.y == posicion_y and gato.velocity.y == 0,
+		"Perros: la caminata es visual; no debe desplazar al jugador hacia los perros.")
 	await _capturar("perros-personaje-silla")
 	Input.action_press("izquierda")
 	await get_tree().physics_frame
 	await get_tree().physics_frame
+	comprobar(animacion.current_animation == "arriba" and gato.velocity.x == -400
+		and gato.apariencia.sprite.frame == gato.apariencia.cabello.frame,
+		"Perros: conservar la vista trasera y la alineación al desplazarse lateralmente.")
 	await _capturar("perros-silla-lateral")
 	Input.action_release("izquierda")
 	calle.get_node("Gato").win()
+	comprobar(not animacion.is_playing() and gato.apariencia.sprite.frame == 8,
+		"Perros: detener la caminata y mirar al frente al ganar.")
 	await _capturar("perros-victoria")
 	var evento = InputEventKey.new()
 	evento.keycode = tecla

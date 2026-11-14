@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://do47ihtcexjqa"]
+[gd_scene load_steps=25 format=3 uid="uid://do47ihtcexjqa"]
 
 [ext_resource type="Script" path="res://Scripts/ScriptsCartera/calle.gd" id="1_3y6e2"]
 [ext_resource type="Texture2D" uid="uid://dj2nqmejgqu66" path="res://Assets/corazón.png" id="2_2jysx"]
@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://ck1ggemxrk8t4" path="res://Assets/derecha.tres" id="11_5hhaf"]
 [ext_resource type="Texture2D" uid="uid://b5da1mo1f5vd8" path="res://Assets/tecla_A.tres" id="12_rakf5"]
 [ext_resource type="Texture2D" uid="uid://dt18am8oc6xka" path="res://Assets/tecla_D.tres" id="13_41mda"]
+[ext_resource type="Texture2D" path="res://Assets/Framers.png" id="14_marco"]
+[ext_resource type="Texture2D" path="res://Assets/Cartera.png" id="15_cartera"]
+[ext_resource type="FontFile" path="res://Assets/fonts/PixelifySans-Bold.ttf" id="16_fuente"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_581bv"]
 size = Vector2(6, 486)
@@ -25,6 +28,39 @@ size = Vector2(434.5, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1uel"]
 size = Vector2(432, 14.5)
+
+[sub_resource type="AtlasTexture" id="MarcoProgreso"]
+atlas = ExtResource("14_marco")
+region = Rect2(224, 32, 96, 64)
+
+[sub_resource type="StyleBoxTexture" id="PanelProgreso"]
+texture = SubResource("MarcoProgreso")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="FondoProgreso"]
+bg_color = Color(1, 0.96, 0.85, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.48, 0.22, 0.02, 1)
+
+[sub_resource type="StyleBoxFlat" id="RellenoProgreso"]
+bg_color = Color(1, 0.79, 0.22, 1)
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(1, 0.92, 0.57, 1)
+expand_margin_left = -2.0
+expand_margin_top = -2.0
+expand_margin_right = -2.0
+expand_margin_bottom = -2.0
 
 [node name="Calle" type="Node2D"]
 script = ExtResource("1_3y6e2")
@@ -115,6 +151,59 @@ color = Color(0.929836, 0, 0.147823, 1)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(432, 240)
 script = ExtResource("8_iytmj")
+
+[node name="ProgresoUI" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="PanelProgreso" type="PanelContainer" parent="ProgresoUI"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -172.0
+offset_top = 10.0
+offset_right = 172.0
+offset_bottom = 80.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("PanelProgreso")
+
+[node name="Columna" type="VBoxContainer" parent="ProgresoUI/PanelProgreso"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 5
+
+[node name="Cabecera" type="HBoxContainer" parent="ProgresoUI/PanelProgreso/Columna"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="IconoCartera" type="TextureRect" parent="ProgresoUI/PanelProgreso/Columna/Cabecera"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("15_cartera")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Texto" type="Label" parent="ProgresoUI/PanelProgreso/Columna/Cabecera"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.13, 0.02, 1)
+theme_override_fonts/font = ExtResource("16_fuente")
+theme_override_font_sizes/font_size = 16
+text = "Buscando la cartera..."
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="Barra" type="ProgressBar" parent="ProgresoUI/PanelProgreso/Columna"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("FondoProgreso")
+theme_override_styles/fill = SubResource("RellenoProgreso")
+show_percentage = false
 
 [node name="InstruccionesUI" parent="." instance=ExtResource("9_l3ac8")]
 texto_titulo = "Recuperar la Billetera"

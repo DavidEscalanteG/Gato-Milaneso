@@ -5,6 +5,13 @@ El motor de referencia es **Godot 4.3 stable**, validado con
 
 ## Cambios actuales
 
+- Escape abre una pausa con continuar, música, efectos y salida confirmada al
+  menú. AUDIO permite ajustar el sonido desde el menú principal. Los ajustes se
+  conservan en `audio.cfg`; los cronómetros y la música del reto se reanudan.
+- Perros muestra una barra hasta la aparición de la cartera, sin cambiar sus
+  esperas ni la ayuda existente. El cierre detiene el audio antes de salir.
+- [Pausa y audio](PAUSA_Y_AUDIO.md) documenta estos cambios, sus controles y las
+  pruebas nuevas. Se mantiene la legibilidad aprobada y el triángulo de orientación.
 - El creador conserva las 20 combinaciones de cuerpo y cabello, el color, la
   opción sin pelo y la alineación de la silla en mapa y perros.
 - Flechas, Tab y Enter permiten recorrer las selecciones del creador. Volver
@@ -29,16 +36,21 @@ El motor de referencia es **Godot 4.3 stable**, validado con
   partida reinicia progreso y respuestas.
 
 El diseño habitual, la intro con «Cargando...», las preguntas, la máquina de
-premios y sus dos mensajes de victoria se conservan. Los cambios visuales de esta
-ronda se limitan a los casos aprobados: avisos de error/reintento, acción de
-recuperación del responsable, contención de textos extremos y correcciones de texto.
+premios y sus dos mensajes de victoria se conservan. A los avisos y correcciones
+anteriores se añaden únicamente el panel de pausa/audio, sus accesos y la barra
+de perros acordados en esta ronda.
 
 ## Repetir la verificación
 
-La ejecución integrada del 14 de noviembre de 2026 terminó con
+La ejecución integrada anterior del 14 de noviembre de 2026 terminó con
 **VERIFICACION COMPLETA OK: 12 suites**, con `-Render` y la comprobación Python
 de los 18 PDF. Incluyó el fallo real de guardar el alias en un archivo de solo
 lectura y no dejó errores de script ni avisos de objetos filtrados al cerrar.
+
+Después de incorporar pausa y audio, la verificación integrada terminó con
+**13 suites correctas** sin `-Render`, y la nueva suite se ejecutó además con
+renderizado y revisión de capturas. Esta pasada no repitió la inspección externa
+de las páginas PDF.
 
 Desde PowerShell en la raíz del proyecto, indica el ejecutable **console de 4.3**:
 
@@ -55,7 +67,7 @@ Abre antes `project.godot` con el editor 4.3 y espera la importación de recurso
 En una copia sin caché puede ser necesario cerrar y volver a importar para que
 el editor resuelva todos los autoloads después de importar imágenes y audio.
 
-El comando ejecuta doce suites, aísla APPDATA/LOCALAPPDATA bajo
+El comando ejecuta trece suites, aísla APPDATA/LOCALAPPDATA bajo
 `tmp/v`, conserva logs bajo `tmp/verificacion` y restaura las variables
 al terminar. Comprueba código de salida, marcador de éxito y errores de script o
 recursos al cerrar. Las pruebas de fallos provocan deliberadamente errores de
@@ -92,6 +104,8 @@ Para obtener capturas de personajes o nombres largos, ejecuta su escena sin
 | Máquina | Clic en la palanca, Enter o Espacio para girar. |
 | Monedas y topo | Clic izquierdo sobre el objeto. |
 | Derrota | Espacio para reintentar; perros ofrece ayuda tras tres derrotas. |
+| Pausa durante la partida | Escape; CONTINUAR o Escape para regresar al punto anterior. |
+| Ajustes de audio | AUDIO en el menú principal, o deslizadores de la pausa. |
 | Pantalla final | Espacio al guardar correctamente; R para reintentar si falla. |
 | Responsable, desde menú | Ctrl + Shift + E y contraseña. |
 
@@ -100,5 +114,5 @@ Para obtener capturas de personajes o nombres largos, ejecuta su escena sin
 Los cambios y commits A01-A16 están en [ESTADO_AUDITORIA.md](ESTADO_AUDITORIA.md).
 A09, A13 y A16 permanecen excluidos por decisión del usuario. Esta verificación
 no certifica una distribución Windows nueva ni una partida con jugadores reales.
-No se incorporaron pausa, ajustes de destellos, guardado general de progreso ni
-un rediseño de pantallas.
+Se incorporó la pausa descrita arriba. No se añadieron ajustes de destellos,
+guardado general de progreso ni un rediseño de las pantallas existentes.

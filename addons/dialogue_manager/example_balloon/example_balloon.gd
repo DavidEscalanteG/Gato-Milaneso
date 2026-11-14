@@ -23,6 +23,7 @@ var will_hide_balloon: bool = false
 var locals: Dictionary = {}
 
 var _locale: String = TranslationServer.get_locale()
+var _saliendo: bool = false
 
 ## The current line
 var dialogue_line: DialogueLine:
@@ -64,6 +65,8 @@ var dialogue_line: DialogueLine:
 		if not dialogue_line.text.is_empty():
 			dialogue_label.type_out()
 			await dialogue_label.finished_typing
+			if _saliendo:
+				return
 
 		# Wait for input
 		if dialogue_line.responses.size() > 0:
@@ -103,6 +106,13 @@ func _ready() -> void:
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
+
+
+func _exit_tree() -> void:
+	# Al abandonar desde pausa, liberar la espera de escritura del diálogo.
+	_saliendo = true
+	if is_instance_valid(dialogue_label) and dialogue_label.is_typing:
+		dialogue_label.is_typing = false
 
 
 ## Mantiene el nombre dentro de su línea sin modificar el valor guardado.

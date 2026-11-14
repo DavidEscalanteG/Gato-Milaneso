@@ -27,7 +27,11 @@ func _on_play_botton_pressed():
 
 
 func _on_support_botton_pressed() -> void:
-	get_tree().quit()
+	SoundManager.cerrar_juego()
+
+
+func _on_audio_pressed() -> void:
+	Pausa.abrir_audio()
 
 
 func _on_credits_botton_pressed() -> void:
