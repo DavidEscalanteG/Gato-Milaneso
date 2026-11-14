@@ -5,6 +5,7 @@ var aviso_nombre: AcceptDialog
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	input_username.text_submitted.connect(func(_texto): _on_save_button_pressed())
 	aviso_nombre = AcceptDialog.new()
 	aviso_nombre.title = "Nombre de jugador"
 	aviso_nombre.dialog_text = "Escribe un nombre de jugador para continuar."
