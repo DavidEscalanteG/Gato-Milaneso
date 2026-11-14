@@ -14,6 +14,7 @@ func _ready() -> void:
 	panel.bg_color = Color("fff4dc")
 	aviso_nombre.add_theme_stylebox_override("panel", panel)
 	aviso_nombre.get_label().add_theme_color_override("font_color", Color("30251c"))
+	input_username.call_deferred("grab_focus")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,6 +43,7 @@ func _on_save_button_pressed() -> void:
 	
 	config.save("user://player.cfg")
 	Global.username = username
+	Global.borrador_datos_personales.clear()
 	
 	Transicion.cambiar_escena("res://Escenas/EscenasDialogos/dialogo1.tscn")
 
