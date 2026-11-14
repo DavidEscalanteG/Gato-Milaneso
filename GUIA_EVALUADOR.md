@@ -1,48 +1,106 @@
-# Consulta de resultados
+# Consulta y conservación de resultados
 
-## Preparar el equipo antes de la primera evaluación
+## Preparar el equipo
 
-1. Abre el juego y llega al menú principal.
-2. Presiona **Ctrl + Shift + E** para abrir **Acceso del evaluador**. El menú del participante no muestra un botón de resultados.
-3. Crea y confirma una contraseña de al menos ocho caracteres. No hay una contraseña predeterminada. Guarda la contraseña en un lugar al que solo tenga acceso el evaluador.
-4. Selecciona **Cerrar acceso y volver al juego** antes de entregar el equipo al participante.
+1. Abre el proyecto con **Godot 4.3 stable**, espera la importación y ejecuta el
+   juego completo con F5. Esta revisión no genera un ejecutable de distribución nuevo.
+2. En el menú principal, presiona **Ctrl + Shift + E** para abrir el acceso del
+   responsable. El menú del participante no muestra un botón de resultados.
+3. Crea y confirma una contraseña de al menos ocho caracteres. No hay una
+   contraseña predeterminada. Consérvala solo con el responsable del equipo.
+4. Comprueba la fecha y la hora de Windows y cierra el acceso antes de comenzar.
 
-La contraseña se configura por cuenta de Windows. Si se usa otra cuenta, debe prepararse su acceso y sus reportes se guardarán en el perfil de esa cuenta.
+La contraseña y los datos corresponden a la cuenta de Windows utilizada. Otra
+cuenta requiere su propia configuración. Cada partida nueva reinicia las diez
+respuestas como pendientes; una respuesta cero no equivale a una pendiente.
 
-## Revisar las evaluaciones
+## Consultar los reportes
 
 1. Al terminar la partida, vuelve al menú principal.
-2. Presiona **Ctrl + Shift + E** y escribe la contraseña.
-3. Selecciona **Abrir carpeta de resultados**. Se abre el Explorador con los PDF guardados, incluso después de cerrar y volver a abrir el juego.
-4. Busca el nombre del participante o la fecha y abre el PDF correspondiente.
-5. Cierra los PDF y las ventanas del Explorador antes de seleccionar **Cerrar acceso y volver al juego**. Volver al menú bloquea nuevamente el apartado del evaluador, pero no cierra las ventanas externas que se hayan abierto.
+2. Presiona **Ctrl + Shift + E**, escribe la contraseña y selecciona
+   **Abrir carpeta de resultados**.
+3. Busca el nombre o la fecha del participante. Los PDF se conservan después de
+   cerrar y volver a abrir el juego.
+4. Cierra los documentos y el Explorador antes de cerrar el acceso y volver al
+   juego. Cerrar el acceso bloquea el apartado; no cierra ventanas externas.
 
-Los reportes se guardan en:
+Carpeta de reportes:
 
 ```text
 %APPDATA%\El Gato Milaneso\Resultados\
 ```
 
-Puedes pegar esa ruta en la barra de direcciones del Explorador. Windows la adapta al usuario de la sesión; no necesitas escribir `C:\Users\...`.
-
-Ejemplo ficticio de un archivo:
+Ejemplo ficticio:
 
 ```text
-María_Fernanda_López_Pérez_11-11-2026_15-30-25_Folio-A4B8C20F9D31.pdf
+María_Fernanda_López_Pérez_14-11-2026_15-30-25_Folio-A4B8C20F9D31.pdf
 ```
 
-El orden es **nombre completo, día-mes-año, hora-minuto-segundo y folio**. La fecha y la hora son las del equipo, por lo que conviene comprobar su reloj antes de evaluar. El folio distingue sesiones y se evita sobrescribir reportes existentes. Para nombres muy largos, el archivo limita a 80 caracteres la parte del nombre; el PDF conserva el nombre completo.
+El nombre contiene nombre completo, fecha día-mes-año, hora y folio. Si una ruta
+ya existe, se usa otra sin sobrescribirla. El nombre del archivo limita a 80
+caracteres su parte de nombre; el interior conserva el nombre y alias completos.
+El PDF se guarda al terminar, sin abrirlo ante el participante.
 
-El juego guarda el reporte al entrar en la pantalla final, sin abrirlo ni mostrar un aviso al participante. Cada partida nueva inicia las respuestas del cuestionario desde cero.
+## Si no se pudo guardar al terminar
 
-## Recuperar el acceso
+La pantalla final permite pulsar **R** para reintentar. Solo permite volver al
+menú con Espacio después de guardar. Conserva la partida mientras se reintenta;
+no hace falta volver a contestar.
 
-Si se olvida la contraseña, cierra el juego y, con acceso autorizado al equipo, renombra `evaluador.cfg` a `evaluador.cfg.bak` en `%APPDATA%\Godot\app_userdata\MapaOriginal_v2.0\`. Vuelve a abrir el juego y configura una contraseña nueva antes de entregar el equipo al participante. Esto no borra los PDF. Una configuración dañada bloquea el acceso hasta que se recupere de esta forma.
+Antes de exportar se intenta conservar una instantánea de las respuestas. Si el
+juego se cerró después de ese guardado, entra con contraseña y selecciona
+**Recuperar reportes pendientes**. El botón aparece únicamente si hay copias
+pendientes. El resultado indica cuántas se recuperaron y cuántas siguen pendientes.
+Las copias se eliminan de la cola solo después de exportar correctamente; los
+fallidos permanecen disponibles. No utiliza las respuestas de otro participante.
 
-La configuración guarda una derivación PBKDF2-HMAC-SHA256 con sal aleatoria y 100 000 iteraciones; no guarda la contraseña en texto legible. Después de tres intentos fallidos seguidos, el formulario espera 15 segundos para permitir otro intento.
+Si ambas ubicaciones de almacenamiento rechazan escrituras, no se puede garantizar
+una copia en disco: mantén el juego abierto, libera espacio o recupera permisos y
+pulsa R. Los errores de captura personal también conservan los campos para reintentar.
 
-## Alcance de la privacidad
+Una copia incompleta o dañada no se convierte en un reporte definitivo. Si persiste
+el fallo, conserva una copia de la carpeta de datos antes de solicitar revisión.
+No edites sus respuestas ni la clasificación manualmente.
 
-La contraseña controla el apartado del juego. Los PDF no están cifrados: alguien con acceso a la misma cuenta de Windows puede abrirlos directamente desde el Explorador. La carpeta y el acceso discreto reducen los encuentros casuales; si se requiere impedir la lectura fuera del juego, se necesita una solución adicional de cifrado o almacenamiento con acceso exclusivo del evaluador.
+## Ubicaciones para respaldo
 
-La ubicación de la base de datos y de la personalización del personaje se conserva. La carpeta de resultados se utiliza únicamente para los reportes.
+| Contenido | Ubicación por cuenta de Windows |
+| --- | --- |
+| PDF terminados | `%APPDATA%\El Gato Milaneso\Resultados\` |
+| Base de datos personales | `%APPDATA%\Godot\app_userdata\MapaOriginal_v2.0\baseDatos.db` |
+| Apariencia y alias | Misma carpeta, `player.cfg` |
+| Acceso del responsable | Misma carpeta, `evaluador.cfg` |
+| Reportes pendientes | Misma carpeta, subcarpeta `reportes_pendientes\` |
+
+Cierra el juego antes de copiar las dos carpetas de datos. Guarda el respaldo en
+una ubicación a la que solo acceda el responsable y comprueba que contiene los
+PDF y la base. Para restaurarlo, conserva primero los datos actuales y copia el
+respaldo con el juego cerrado. Evita mezclar reportes pendientes ya recuperados:
+reintroducirlos puede generar otro PDF de la misma sesión.
+
+El responsable decide cuándo borrar los datos según el uso del proyecto. Para
+hacerlo, revisa por separado PDF, copias pendientes, base, `player.cfg`, logs y
+respaldos. Borrar solamente los PDF no borra los datos personales de SQLite. No hay
+borrado automático ni sincronización con una nube implementados por el juego.
+
+## Recuperar la contraseña
+
+Con el juego cerrado y acceso autorizado al equipo, renombra `evaluador.cfg` a
+`evaluador.cfg.bak` en su carpeta de datos. Vuelve a abrir y configura una contraseña
+nueva antes de entregar el equipo. Esto conserva los PDF. Una configuración dañada
+bloquea el acceso hasta recuperarlo de esta forma.
+
+Se guarda una derivación PBKDF2-HMAC-SHA256 con sal aleatoria y 100 000 iteraciones,
+sin contraseña legible. Tras tres intentos fallidos se esperan 15 segundos.
+
+## Alcance de la protección
+
+La contraseña controla el apartado del juego. PDF, SQLite, configuraciones y
+copias pendientes **no están cifrados**: una persona con acceso a la misma cuenta
+de Windows puede leerlos desde fuera del juego. La cola contiene nombre, alias y
+respuestas; protégela como los PDF. Los nuevos logs omiten identidad y respuestas;
+los logs y respaldos de versiones anteriores pueden conservarlas.
+
+Las pruebas utilizan datos ficticios y APPDATA aislado en `tmp/`. No deben
+confundirse con resultados reales. Consulta [la revisión técnica](pruebas/REVISION_JUEGO.md)
+y [el estado de las recomendaciones](pruebas/ESTADO_AUDITORIA.md).

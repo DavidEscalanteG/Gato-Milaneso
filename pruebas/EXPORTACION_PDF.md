@@ -1,74 +1,77 @@
-# Exportación del cuestionario
+# Cuestionario y reportes PDF
 
-## Qué incluye el PDF
+## Contenido y reglas conservadas
 
-- Las diez preguntas completas, con el mismo texto que aparece en el juego.
-- La respuesta elegida en texto y su valor numérico.
-- Nombre, alias, fecha de exportación, puntaje de las preguntas 1 a 9 y clasificación registrada por el juego.
-- Tabla con colores alternados, encabezados repetidos y números de página. Las preguntas y respuestas de una fila permanecen juntas.
+El PDF contiene nombre completo, alias, fecha local, diez preguntas y sus
+respuestas, puntaje de las preguntas 1 a 9 y clasificación registrada. Conserva
+el texto del cuestionario del juego; esta revisión no modifica ni valida su
+interpretación. La pregunta 10 no suma al total, cuyo máximo sigue siendo 27.
 
-La pregunta 10 tiene cuatro opciones: **No ha sido difícil**, **Un poco difícil**, **Muy difícil** y **Extremadamente difícil**. Ahora cada opción llama a `Global.set_respuesta(10, valor)` desde el diálogo y aparece en el reporte. Se almacena como `p10`, con valores 0 a 3; si todavía no fue respondida, se representa internamente con -1 y en el PDF con **Sin responder**.
+Todas las preguntas comienzan en `-1` (pendiente). Una respuesta con valor cero
+es válida y distinta de una pendiente. La pantalla final y la recuperación
+requieren diez respuestas entre 0 y 3. Un diagnóstico incompleto solo se genera
+si una prueba solicita expresamente `permitir_incompleto = true`; sus filas dicen
+«Sin responder» y no se entrega como reporte definitivo.
 
-El puntaje conserva la suma de las preguntas 1 a 9, con máximo de 27. La pregunta 10 se presenta por separado y no modifica ni el total ni la clasificación. Las respuestas continúan viviendo en `Global` durante la ejecución; el PDF es la exportación a disco. No se añadió una nueva base de datos de resultados.
+La tabla conserva juntas las filas y repite encabezados, fecha y paginación. Los
+nombres y alias largos se distribuyen en líneas/páginas sin perder su contenido.
+Se comprobaron acentos, ñ, ü, signos españoles, paréntesis y barras. La fuente
+actual utiliza WinAnsi; otros alfabetos o emojis no se certifican en esta revisión.
 
-## Prueba sin recorrer los minijuegos
+## Pruebas reproducibles con 4.3
 
-1. Abre `pruebas/exportacion_pdf.tscn` en Godot y presiona **F6**.
-2. La escena comprueba las cuatro opciones de la pregunta 10 utilizando Dialogue Manager y genera reportes con datos ficticios.
-3. Busca **PRUEBA PDF OK** y la carpeta de salida en el panel **Salida**. La prueba se cierra automáticamente.
-4. Abre `exportacion-prueba.pdf`: debe tener dos páginas, las diez preguntas y sus respuestas; el puntaje de ejemplo es **15 / 27** y la respuesta 10 es **Muy difícil**.
-5. Los archivos `pregunta10-0.pdf` a `pregunta10-3.pdf` comprueban cada opción. `exportacion-incompleta.pdf` muestra **Sin responder** para la pregunta 10. `exportacion-larga.pdf` prueba nombres de gran longitud y paginación.
-
-La prueba no escribe en SQLite ni en `player.cfg`, y restaura las variables que modifica. Reemplaza sus propios archivos de ejemplo cuando se ejecuta de nuevo.
-
-Desde PowerShell, en la carpeta del proyecto:
+Abre `project.godot` con **Godot 4.3 stable** y espera la importación. Desde la raíz:
 
 ```powershell
-godot_console.exe --headless --path . res://pruebas/exportacion_pdf.tscn -- --salida=res://tmp/pdfs
+$motor43 = 'C:\ruta\Godot_v4.3-stable_win64_console.exe'
+& $motor43 --version
+& $motor43 --headless --path . res://pruebas/exportacion_pdf.tscn -- --salida=res://tmp/pdfs
 ```
 
-Sustituye el ejecutable si tu instalación utiliza otro nombre. Si omites `--salida`, la prueba utiliza la carpeta de datos del juego.
+También puedes abrir esa escena con F6 en el editor 4.3. La salida predeterminada
+es `tmp/pdfs`; no se guardan ejemplos en la carpeta real de resultados. La suite
+produce 18 archivos sintéticos y `esperado.json`: ejemplo completo, cuatro
+respuestas finales, vista incompleta, nombre/alias largos y once puntajes frontera.
+Se espera **PRUEBA PDF OK**. Al repetir, reemplaza únicamente sus ejemplos.
 
-Con Python, `pypdf` y `pdfplumber` instalados, puedes comprobar además las diez filas, el texto completo, las respuestas, los márgenes y la paginación de los archivos generados:
+Con Python y los paquetes indicados:
 
 ```powershell
+# validar_pdf.py requiere pypdf y pdfplumber
 python pruebas/validar_pdf.py tmp/pdfs
+# renderizar_pdf.py requiere pypdfium2 y Pillow
+python pruebas/renderizar_pdf.py tmp/pdfs
 ```
 
-La prueba con F6 no requiere Python. Se incluye un reporte de ejemplo en `output/pdf/exportacion-prueba.pdf`.
+El primer comando verifica texto, campos completos, valores, clasificación, diez
+filas, márgenes y paginación. El segundo crea PNG por página y contactos bajo
+`tmp/pdfs/render/`; deben revisarse visualmente. La evidencia de esta revisión
+está descrita en [VERIFICACION_PDF.md](VERIFICACION_PDF.md).
 
-## Prueba dentro del juego
-
-Deja que Godot reimporte `Dialogos/test.dialogue` después de detectar los cambios. Para probar el final sin recorrer los minijuegos, abre `Escenas/EscenasDialogos/dialogo12.tscn` con F6, avanza hasta la pregunta 10 y elige una opción. Al entrar en `pantalla_final.tscn` se exporta automáticamente el PDF. En esa prueba directa, las primeras nueve respuestas conservarán sus valores iniciales.
-
-Durante una partida completa, las diez respuestas elegidas aparecen en el reporte final. El campo **Jugador** conserva el nombre completo capturado en el formulario; los diálogos siguen usando solo el primer nombre. La fecha del reporte usa **día/mes/año** y la hora local del equipo.
-
-El PDF se guarda automáticamente sin abrirse ni mostrar un aviso al participante, en:
-
-```text
-%APPDATA%\El Gato Milaneso\Resultados\
-```
-
-Los nombres siguen el formato `Nombre_Apellidos_DD-MM-AAAA_HH-MM-SS_Folio-XXXXXXXXXXXX.pdf`. El folio es aleatorio; si aun así ya existe un archivo con el mismo nombre, se agrega un consecutivo para no sobrescribirlo. Se sustituyen los caracteres incompatibles con archivos y se limita a 80 caracteres la parte del nombre, conservando el nombre completo dentro del PDF.
-
-La escena `Escenas/Admin/amindExportar.tscn` ahora permite acceder con contraseña a la carpeta de reportes guardados. No vuelve a exportar las respuestas de la ejecución actual. Consulta [la guía del evaluador](../GUIA_EVALUADOR.md).
-
-## Prueba del almacenamiento y acceso
-
-En PowerShell, desde la raíz del proyecto (las variables solo afectan esa sesión y sus procesos):
+Para ejecutar también almacenamiento, recuperación, acceso y el recorrido real
+con un perfil aislado, utiliza [ejecutar_pruebas.ps1](ejecutar_pruebas.ps1):
 
 ```powershell
-New-Item -ItemType Directory -Force tmp/test-appdata | Out-Null
-$appdataAnterior = $env:APPDATA
-$localappdataAnterior = $env:LOCALAPPDATA
-try {
-    $env:APPDATA = (Resolve-Path tmp/test-appdata).Path
-    $env:LOCALAPPDATA = $env:APPDATA
-    godot_console.exe --headless --path . --quit-after 1800 res://pruebas/acceso_resultados.tscn
-} finally {
-    $env:APPDATA = $appdataAnterior
-    $env:LOCALAPPDATA = $localappdataAnterior
-}
+./pruebas/ejecutar_pruebas.ps1 -Godot43 $motor43 -Render -PythonPDF 'C:\ruta\python.exe'
 ```
 
-Debe aparecer **PRUEBA ACCESO OK**. La prueba comprueba configuración inicial, contraseña persistente, rechazo de contraseña incorrecta, bloqueo al reabrir, configuración inválida, nombre completo, formato de fecha, nombres de archivo seguros y exportaciones sin sobrescritura. Usa datos ficticios en `tmp/`; no configura la contraseña real del evaluador. El resultado impreso debe revisarse además del código de salida, porque `--quit-after` es solo un límite de tiempo de respaldo.
+Este comando guarda los ejemplos en `tmp/verificacion/pdfs`. `-PythonPDF` es
+opcional y necesita los cuatro paquetes; las doce suites Godot no requieren Python.
+
+## Flujo del juego
+
+Al terminar una partida completa se guarda el PDF sin abrirlo. Abrir directamente
+el último diálogo con F6 no representa una partida completa: faltarán las primeras
+respuestas y el guardado definitivo se rechazará.
+
+Los reportes se guardan en `%APPDATA%\El Gato Milaneso\Resultados\`, con nombre
+completo, fecha día-mes-año, hora y folio aleatorio. El nombre de archivo limita a
+80 caracteres su parte de nombre; el interior conserva el texto completo. Si una
+ruta ya existe, se usa un consecutivo, conservando el archivo anterior.
+
+Ante un fallo, se conserva una instantánea en
+`user://reportes_pendientes/`. La pantalla final permite reintentar con **R** y
+continuar al menú con **Espacio** después de guardar. Si se cierra el juego, el
+responsable puede recuperar la copia desde su apartado protegido, sin depender de
+las respuestas de otra partida. Una instantánea incompleta o dañada no se entrega
+como un reporte válido. Consulta [GUIA_EVALUADOR.md](../GUIA_EVALUADOR.md).

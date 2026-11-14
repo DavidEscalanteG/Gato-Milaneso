@@ -1,51 +1,104 @@
-# Revisión del juego — 11 de noviembre de 2026
+# Revisión vigente del juego - 14 de noviembre de 2026
 
-## Correcciones realizadas
+El motor de referencia es **Godot 4.3 stable**, validado con
+`4.3.stable.official.77dcf97d8` y Forward Plus. El proyecto no requiere migrar a 4.7.
 
-- **Pelo inicial:** el creador muestra y guarda el primer peinado desde el inicio. El selector de color coincide con el cabello. Limpiar restaura esos mismos valores.
-- **Sin pelo:** elegir explícitamente esa opción se respeta en el mapa y en el juego de perros. Se conserva el significado de los índices de las configuraciones existentes.
-- **Personaje en los perros:** se sustituyó el modelo genérico por la misma escena de apariencia que utiliza el mapa. Conserva cuerpo, ayudas de movilidad, peinado y color; también participa en el parpadeo de inmunidad.
-- **Silla de ruedas:** el cabello sube seis píxeles del atlas al mirar de lado, tanto a la izquierda como a la derecha. Recupera su posición al mirar al frente o hacia atrás.
-- **Volver desde el nombre:** conserva la apariencia que se acababa de guardar, en lugar de reiniciar la personalización.
-- **Movimiento del mapa:** misma velocidad en diagonal y en línea recta; la animación responde al movimiento del fotograma actual. Las vistas frontal y trasera dejan de heredar el espejo de la vista izquierda.
-- **Victoria de los perros:** Enter y Espacio continúan al diálogo correcto. Se eliminó una ruta vacía y la doble captura de Espacio. Las transiciones ignoran solicitudes simultáneas.
-- **Nueva partida:** reinicia nivel, ronda local, derrotas, puntos y vidas. Antes podía conservar el nivel 6 de una partida terminada y solicitar un destino inexistente del mapa.
-- **Configuraciones incompletas:** las selecciones vacías, incorrectas o fuera de rango utilizan valores válidos sin interrumpir la carga del personaje.
+## Cambios actuales
 
-La apariencia se concentra en `Escenas/Player/Apariencia.tscn`, `apariencia.gd` y `datos_apariencia.gd`, para que futuros cambios se reflejen en mapa y perros.
+- El creador conserva las 20 combinaciones de cuerpo y cabello, el color, la
+  opción sin pelo y la alineación de la silla en mapa y perros.
+- Flechas, Tab y Enter permiten recorrer las selecciones del creador. Volver
+  conserva la apariencia y el borrador de datos personales.
+- El formulario valida nombre y edad de **6 a 18 años**; sus avisos usan panel
+  claro y texto oscuro. El alias rechaza una captura vacía.
+- Corregir los datos de una misma partida actualiza su registro; otro
+  participante obtiene uno distinto. Los fallos de escritura conservan la captura.
+- El mapa conserva la velocidad diagonal normalizada y su animación. Una entrada
+  ignora pulsaciones repetidas durante el fundido.
+- Los nombres largos conservan sus datos completos. En el mapa quedan dentro de
+  su espacio y el nombre del hablante utiliza puntos suspensivos si lo necesita.
+- La victoria de perros acepta Enter/Espacio una sola vez. Se conserva la ayuda
+  que aparece después de tres derrotas y la dificultad acordada de cada reto.
+- Música, monedas y topo controlan una sola vez cada acierto/fallo y respetan las
+  vidas y estados de ronda. Las instrucciones describen las reglas actuales.
+- Todas las respuestas comienzan pendientes; un reporte final requiere las diez.
+  La pregunta 10 se registra por separado y no cambia el puntaje de 0 a 27.
+- Una exportación fallida conserva una copia recuperable de las respuestas. El
+  apartado protegido del responsable permite recuperar esos reportes.
+- Las esperas y animaciones de las escenas se cancelan al abandonarlas. La nueva
+  partida reinicia progreso y respuestas.
 
-## Validación
+El diseño habitual, la intro con «Cargando...», las preguntas, la máquina de
+premios y sus dos mensajes de victoria se conservan. Los cambios visuales de esta
+ronda se limitan a los casos aprobados: avisos de error/reintento, acción de
+recuperación del responsable, contención de textos extremos y correcciones de texto.
 
-Se ejecutó en Godot **4.7.2**, con datos de prueba aislados mediante APPDATA. La revisión combinó lectura del código, interacción con el creador, capturas con renderizado y recorridos automatizados de las escenas; no fue una sesión manual completa de principio a fin.
+## Repetir la verificación
 
-`pruebas/personajes.tscn` comprueba:
+La ejecución integrada del 14 de noviembre de 2026 terminó con
+**VERIFICACION COMPLETA OK: 12 suites**, con `-Render` y la comprobación Python
+de los 18 PDF. Incluyó el fallo real de guardar el alias en un archivo de solo
+lectura y no dejó errores de script ni avisos de objetos filtrados al cerrar.
 
-- Inicio y limpieza del creador, conversión de su configuración y regreso a editar.
-- Las **20 combinaciones** de cuatro cuerpos y cinco opciones de cabello en los dos contextos.
-- Fotogramas de las cuatro direcciones, posición del pelo de la silla, color, ausencia de pelo e independencia de materiales.
-- Velocidad diagonal y parada del jugador en el mapa real.
-- Victoria real de los perros con Enter y Espacio, destino de la transición y rechazo de una solicitud duplicada.
-- Reinicio de una partida que había llegado al final.
-
-También pasó `pruebas/minijuegos.tscn`: reintentos y ayuda de perros, notas acertadas/falladas, monedas y vidas del topo. Un recorrido adicional procesó **23 títulos y 90 líneas de diálogo**, cargó 20 escenas de la ruta principal y comprobó el premio y reinicio de la máquina.
-
-Para repetir las comprobaciones desde la carpeta del proyecto:
+Desde PowerShell en la raíz del proyecto, indica el ejecutable **console de 4.3**:
 
 ```powershell
-godot_console.exe --headless --path . res://pruebas/personajes.tscn
-godot_console.exe --headless --path . res://pruebas/minijuegos.tscn
+$motor43 = 'C:\ruta\Godot_v4.3-stable_win64_console.exe'
+& $motor43 --version
+./pruebas/ejecutar_pruebas.ps1 -Godot43 $motor43
 ```
 
-La prueba de personajes no guarda `player.cfg`, registros personales ni reportes. Para obtener capturas se puede ejecutar sin `--headless`, agregando `-- --capturas=C:/ruta/de/capturas`.
+La ruta utilizada en esta estación es
+`tmp/.tmp/restauracion-godot43/motor/Godot_v4.3-stable_win64_console.exe`;
+no pertenece al repositorio. No se usa el comando genérico `godot` del PATH.
+Abre antes `project.godot` con el editor 4.3 y espera la importación de recursos.
+En una copia sin caché puede ser necesario cerrar y volver a importar para que
+el editor resuelva todos los autoloads después de importar imágenes y audio.
 
-## Mejoras siguientes sugeridas
+El comando ejecuta doce suites, aísla APPDATA/LOCALAPPDATA bajo
+`tmp/v`, conserva logs bajo `tmp/verificacion` y restaura las variables
+al terminar. Comprueba código de salida, marcador de éxito y errores de script o
+recursos al cerrar. Las pruebas de fallos provocan deliberadamente errores de
+almacenamiento, que no se confunden con fallos de la suite.
 
-1. **Navegación por teclado en el creador.** Las listas tienen el foco desactivado y dependen de `item_clicked`. Conviene permitir flechas, Tab y Enter, con foco visible.
-2. **Pausa y ajustes accesibles desde el juego.** Un menú común permitiría revisar controles y ajustar audio; también ofrecer una opción para reducir el destello y la sacudida de cámara de los perros.
-3. **Validación del nombre de jugador.** Actualmente admite un nombre vacío o compuesto solamente por espacios. Conviene indicar el error junto al campo.
-4. **Continuar una partida.** El progreso vive en `Global`, mientras que `player.cfg` conserva la apariencia. Faltan puntos de guardado para recuperar una sesión tras cerrar el juego.
-5. **Coherencia de retratos.** Los diálogos siguen mostrando un retrato genérico cuando habla el protagonista. Se podría generar su retrato con la misma apariencia compartida.
+La ruta corta del perfil evita errores de caché de shaders de 4.3 en rutas Windows
+muy largas. Si el proyecto está en una ruta extensa y aparecen errores en
+`_initialize_cache`, cópialo a una ruta más corta para repetir la prueba renderizada;
+no es necesario cambiar la versión ni el renderizador del proyecto.
 
-### Compatibilidad del editor
+Para verificar también la selección real con el ratón y el renderizado:
 
-La importación en el editor **4.7.2** detectó una incompatibilidad previa del complemento Dialogue Manager: `editor_translation_parser_plugin.gd` implementa la firma antigua de `_parse_file`. La ejecución de las pruebas del juego sí pasó. Se conservó la configuración del proyecto para **4.3**; una migración del editor requiere actualizar ese complemento y volver a validar las traducciones. No se verificó esta revisión ejecutándola en 4.3.
+```powershell
+./pruebas/ejecutar_pruebas.ps1 -Godot43 $motor43 -Render
+```
+
+`recorrido_completo.tscn` integra la captura, los diálogos, las entradas del mapa,
+los cinco retos y el PDF final: **26 entradas de escena, diez respuestas**. Resuelve
+los retos de forma asistida; no mide dificultad ni comprensión humana. Requiere
+APPDATA bajo `tmp/`. No se debe ejecutar contra los datos reales del responsable.
+
+Para obtener capturas de personajes o nombres largos, ejecuta su escena sin
+`--headless` y agrega `-- --capturas=res://tmp/capturas`.
+
+## Controles vigentes
+
+| Contexto | Control |
+| --- | --- |
+| Formulario y creador | Ratón; Tab para cambiar foco; flechas y Enter en selecciones. |
+| Mapa | WASD o flechas para moverse; E junto al destino disponible. |
+| Diálogos | Clic o Enter/Espacio para avanzar cuando corresponde; seleccionar una opción para responder. |
+| Perros | A/D o flechas izquierda/derecha; Enter/Espacio tras recoger la cartera. |
+| Música | Espacio o clic en la franja amarilla al cruzar una esfera. |
+| Máquina | Clic en la palanca, Enter o Espacio para girar. |
+| Monedas y topo | Clic izquierdo sobre el objeto. |
+| Derrota | Espacio para reintentar; perros ofrece ayuda tras tres derrotas. |
+| Pantalla final | Espacio al guardar correctamente; R para reintentar si falla. |
+| Responsable, desde menú | Ctrl + Shift + E y contraseña. |
+
+## Alcance del cierre
+
+Los cambios y commits A01-A16 están en [ESTADO_AUDITORIA.md](ESTADO_AUDITORIA.md).
+A09, A13 y A16 permanecen excluidos por decisión del usuario. Esta verificación
+no certifica una distribución Windows nueva ni una partida con jugadores reales.
+No se incorporaron pausa, ajustes de destellos, guardado general de progreso ni
+un rediseño de pantallas.

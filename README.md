@@ -16,7 +16,9 @@ y el reconocimiento de autoría original en [LICENSE](LICENSE).
    git clone https://github.com/DavidEscalanteG/Gato-Milaneso.git
    ```
 
-2. Importa el archivo `project.godot` desde Godot 4.3 (versión indicada por el proyecto).
+2. Importa el archivo `project.godot` desde **Godot 4.3 stable**, con Forward Plus.
+   La revisión actual se validó en `4.3.stable.official.77dcf97d8`; utiliza la ruta
+   explícita de su ejecutable, porque `godot` en el PATH puede apuntar a otra versión.
 3. Espera a que Godot importe los recursos y ejecuta el proyecto con F6 para la
    escena actual o F5 para el juego completo.
 
@@ -30,7 +32,7 @@ Desde la carpeta del proyecto, revisa y publica tus cambios con:
 
 ```sh
 git status
-git add .
+git add -- archivo-que-modificaste
 git commit -m "Describe los cambios realizados"
 git push
 ```
@@ -48,3 +50,19 @@ Personajes y recorrido del juego: [Revisión del juego](pruebas/REVISION_JUEGO.m
 Cuestionario y reportes: [Exportación PDF](pruebas/EXPORTACION_PDF.md).
 
 Acceso a los resultados y preparación del equipo: [Guía del evaluador](GUIA_EVALUADOR.md).
+
+Cambios A01-A16 y sus commits: [Estado de la auditoría](pruebas/ESTADO_AUDITORIA.md).
+
+Autoría original, licencias incluidas y documentación de recursos pendiente:
+[Autorías y licencias](AUTORIAS_Y_LICENCIAS.md).
+
+Para repetir las doce suites con datos ficticios aislados:
+
+```powershell
+./pruebas/ejecutar_pruebas.ps1 -Godot43 'C:\ruta\Godot_v4.3-stable_win64_console.exe'
+```
+
+Agrega `-Render` para probar también el renderizado y la selección real con el
+ratón. Las instrucciones completas y el alcance del recorrido asistido están en
+la revisión del juego. No se generó una distribución nueva ni se realizaron las
+pruebas con jugadores excluidas por el usuario.

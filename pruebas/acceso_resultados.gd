@@ -6,11 +6,11 @@ const EscenaAcceso = preload("res://Escenas/Admin/amindExportar.tscn")
 var _fallos: Array[String] = []
 
 func _ready() -> void:
-	# APPDATA debe redirigirse a tmp/test-appdata al ejecutar esta prueba.
+	# APPDATA debe redirigirse a una subcarpeta de tmp al ejecutar esta prueba.
 	# Evita tocar la contraseña real o crear reportes junto a evaluaciones reales.
-	var temporal = ProjectSettings.globalize_path("res://tmp/test-appdata").replace("\\", "/")
+	var temporal = ProjectSettings.globalize_path("res://tmp").replace("\\", "/")
 	if not OS.get_data_dir().replace("\\", "/").begins_with(temporal + "/") and OS.get_data_dir().replace("\\", "/") != temporal:
-		push_error("Redirige APPDATA a tmp/test-appdata antes de ejecutar esta prueba.")
+		push_error("Redirige APPDATA a una carpeta bajo tmp antes de ejecutar esta prueba.")
 		get_tree().quit(1)
 		return
 	var carpeta = "res://tmp/acceso-" + Crypto.new().generate_random_bytes(6).hex_encode()

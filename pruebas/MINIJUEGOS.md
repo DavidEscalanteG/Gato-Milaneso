@@ -11,12 +11,14 @@ PRUEBAS MINIJUEGOS OK: perros, música, monedas y topo.
 También puedes ejecutarla desde la carpeta del proyecto:
 
 ```powershell
-godot_console.exe --headless --path . res://pruebas/minijuegos.tscn
+$motor43 = 'C:\ruta\Godot_v4.3-stable_win64_console.exe'
+& $motor43 --version
+& $motor43 --headless --path . res://pruebas/minijuegos.tscn
 ```
 
 La prueba no escribe en la base de datos, en `player.cfg` ni en los PDF. Silencia el audio solamente durante su propia ejecución. Comprueba reintentos reales, el clic del botón de ayuda, notas falladas y acertadas, pulsos separados, monedas durante el aviso inicial y las vidas del topo.
 
-La suite pasó en Godot 4.3 y 4.7.2. Con renderizado se comprobó también el clic real del botón y se revisaron visualmente el botón, la franja y los corazones. En modo headless, la comprobación del botón utiliza su señal porque el renderizador Dummy no realiza la selección de controles con el ratón.
+El motor vigente y validado es Godot **4.3 stable**. Con renderizado se comprobó también el clic real del botón y se revisaron visualmente el botón, la franja y los corazones. En modo headless, la comprobación del botón utiliza su señal porque el renderizador Dummy no realiza la selección de controles con el ratón. Para la verificación integrada con perfil aislado utiliza [REVISION_JUEGO.md](REVISION_JUEGO.md).
 
 ## Pruebas manuales con F6
 
@@ -62,5 +64,9 @@ La moneda consulta el mismo estado de ronda que utiliza el contador, antes de re
 2. Compruébalo también llegando desde la música con una sola vida restante: el topo debe empezar con tres.
 3. Golpea tres zarigüeyas. Los corazones deben pasar de 3 a 2, a 1 y a 0; entonces aparece la derrota. Golpear varias veces el mismo animal no debe restar vidas adicionales.
 4. Reintenta: se reponen los tres corazones. Cada nueva ronda también empieza con tres vidas.
+
+Cada topo suma 100 puntos. Las metas son 1000 y 1100 en las dos rondas; basta
+alcanzarlas. La zarigüeya quita una vida. El atlas utiliza el PNG original y se
+puede regenerar importando el proyecto con 4.3, sin conservar la caché `.godot`.
 
 El juego antes conservaba cualquier salud positiva de `Global`, por eso heredaba la vida restante de la música. Ahora reinicia las vidas en cada intento y actualiza todos los corazones según la salud real.
