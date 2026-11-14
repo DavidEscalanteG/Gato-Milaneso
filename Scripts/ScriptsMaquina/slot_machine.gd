@@ -121,7 +121,7 @@ func calcular_premio(frutas: Array):
 		monedas += premio_total
 		actualizar_monedas_ui()
 		verificar_ganador()
-		mostrar_resultado("WIN: " + str(premio_total))
+		mostrar_resultado("PREMIO: " + str(premio_total))
 	else:
 		resultado_label.visible = false
 
