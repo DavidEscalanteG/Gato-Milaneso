@@ -91,8 +91,10 @@ func _guardar_registro() -> int:
 	var registro_id = Global.registro_datos_personales_id
 	var correcto = db.query(tabla)
 	if correcto and registro_id > 0:
-		valores.append(registro_id)
-		correcto = db.query_with_bindings("UPDATE DatosPersonales SET nombre = ?, edad = ?, genero = ?, gradoAcademico = ? WHERE id = ?;", valores)
+		correcto = db.query_with_bindings("SELECT id FROM DatosPersonales WHERE id = ?;", [registro_id]) and not db.query_result.is_empty()
+		if correcto:
+			valores.append(registro_id)
+			correcto = db.query_with_bindings("UPDATE DatosPersonales SET nombre = ?, edad = ?, genero = ?, gradoAcademico = ? WHERE id = ?;", valores)
 	elif correcto:
 		correcto = db.query_with_bindings("INSERT INTO DatosPersonales (nombre, edad, genero, gradoAcademico) VALUES (?, ?, ?, ?);", valores)
 		if correcto:

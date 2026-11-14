@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var input_username = $CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/VBoxContainer/Username
 var aviso_nombre: AcceptDialog
+var ruta_personaje: String = "user://player.cfg"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,30 +24,38 @@ func _process(delta: float) -> void:
 
 
 func _on_save_button_pressed() -> void:
+	if Transicion.en_transicion:
+		return
 	SoundManager.play_click()
 	var username = input_username.get_text()
 	if username.strip_edges().is_empty():
-		SoundManager.play_error()
-		aviso_nombre.popup_centered()
+		_mostrar_error("Escribe un nombre de jugador para continuar.")
 		return
 	
 	## Cargar configuracion personaje personalizado
 	var config = ConfigFile.new() 
 	
-	var err = config.load("user://player.cfg")
+	var err = config.load(ruta_personaje)
 	
 	if err != OK:
-		printerr(err)
+		_mostrar_error("No se pudo cargar tu personaje. Pulsa VOLVER para guardarlo otra vez.")
 		return
 	
 	config.set_value("player", "username", username)
 	
-	config.save("user://player.cfg")
+	if config.save(ruta_personaje) != OK:
+		_mostrar_error("No se pudo guardar tu nombre. Inténtalo nuevamente.")
+		return
 	Global.username = username
 	Global.borrador_datos_personales.clear()
 	Global.registro_datos_personales_id = 0
 	
 	Transicion.cambiar_escena("res://Escenas/EscenasDialogos/dialogo1.tscn")
+
+func _mostrar_error(texto: String) -> void:
+	SoundManager.play_error()
+	aviso_nombre.dialog_text = texto
+	aviso_nombre.popup_centered()
 
 
 func _on_play_botton_mouse_entered():

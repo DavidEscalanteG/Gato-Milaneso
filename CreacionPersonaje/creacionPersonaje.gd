@@ -1,6 +1,8 @@
 extends Node2D
 
 const Datos = preload("res://Escenas/Player/datos_apariencia.gd")
+var ruta_personaje: String = "user://player.cfg"
+var aviso_guardado: AcceptDialog
 
 # Referencias a los nodos relevantes
 @export var cabello : Sprite2D = null
@@ -12,6 +14,14 @@ const Datos = preload("res://Escenas/Player/datos_apariencia.gd")
 
 # Método para inicializar las señales de los paneles de cabello
 func _ready() -> void:
+	aviso_guardado = AcceptDialog.new()
+	aviso_guardado.title = "Guardar personaje"
+	aviso_guardado.dialog_text = "No se pudo guardar tu personaje. Inténtalo nuevamente."
+	add_child(aviso_guardado)
+	var panel = aviso_guardado.get_theme_stylebox("panel").duplicate()
+	panel.bg_color = Color("fff4dc")
+	aviso_guardado.add_theme_stylebox_override("panel", panel)
+	aviso_guardado.get_label().add_theme_color_override("font_color", Color("30251c"))
 	cabello.material = cabello.material.duplicate()
 	_restablecer_apariencia()
 	if Global.borrador_personaje != null:
@@ -53,8 +63,9 @@ func _on_item_list_item_clicked(index: int, at_position: Vector2 = Vector2.ZERO,
 func _on_save_button_pressed() -> void:
 	SoundManager.play_click()
 	var config = crear_configuracion()
-	if config.save("user://player.cfg") != OK:
-		push_error("No se pudo guardar el personaje.")
+	if config.save(ruta_personaje) != OK:
+		SoundManager.play_error()
+		aviso_guardado.popup_centered()
 		return
 	get_tree().change_scene_to_file("res://NickUsuario/usuario.tscn")
 
