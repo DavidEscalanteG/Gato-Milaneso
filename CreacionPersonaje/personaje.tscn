@@ -269,7 +269,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_mode = 0
+focus_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3f1ty")
 theme_override_styles/panel = SubResource("StyleBoxFlat_wgo5h")
 allow_search = false
@@ -315,7 +315,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_mode = 0
+focus_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3f1ty")
 theme_override_styles/panel = SubResource("StyleBoxFlat_wgo5h")
 allow_search = false
@@ -453,8 +453,8 @@ size_flags_vertical = 3
 text = "GUARDAR"
 
 [connection signal="tab_clicked" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer" to="." method="_on_tab_container_tab_button_pressed"]
-[connection signal="item_clicked" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Personaje/MarginContainer/GridContainer/HBoxContainer2/ItemListPersonajes" to="." method="_on_item_list_personajes_item_clicked"]
-[connection signal="item_clicked" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/HBoxContainer2/ItemList" to="." method="_on_item_list_item_clicked"]
+[connection signal="item_selected" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Personaje/MarginContainer/GridContainer/HBoxContainer2/ItemListPersonajes" to="." method="_on_item_list_personajes_item_clicked"]
+[connection signal="item_selected" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/HBoxContainer2/ItemList" to="." method="_on_item_list_item_clicked"]
 [connection signal="color_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/PanelUserContainer/HBoxContainer/TabContainer/Cabello/MarginContainer/GridContainer/ColorPickerButton" to="." method="_on_play_select_pressed_click"]
 [connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridGeneralContainer/HBoxButtonContainer/backButton" to="." method="_on_play_botton_mouse_entered"]

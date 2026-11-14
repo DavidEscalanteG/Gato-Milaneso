@@ -16,6 +16,11 @@ func _ready() -> void:
 	_restablecer_apariencia()
 	if Global.borrador_personaje != null:
 		_aplicar_configuracion(Global.borrador_personaje)
+	personajes.find_parent("TabContainer").get_tab_bar().focus_mode = Control.FOCUS_ALL
+	if personajes.is_visible_in_tree():
+		personajes.grab_focus()
+	else:
+		cabellos.grab_focus()
 	var picker= color_picker.get_picker()
 	picker.picker_shape= ColorPicker.SHAPE_HSV_RECTANGLE #NO CAMBIAR LA FORMA IMPORTANTE
 	picker.color_modes_visible= false
@@ -33,13 +38,13 @@ func _on_color_picker_button_color_changed(color: Color) -> void:
 	cabello.material.set_shader_parameter("tint", Vector4(color.r, color.g, color.b, 1));
 
 ## Método para cambiar el personaje
-func _on_item_list_personajes_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+func _on_item_list_personajes_item_clicked(index: int, at_position: Vector2 = Vector2.ZERO, mouse_button_index: int = MOUSE_BUTTON_LEFT) -> void:
 	SoundManager.play_select_pressed()
 	var nuevo_personaje = personajes.get_item_icon(index)
 	personaje.set_texture(nuevo_personaje)
 
 ## Método para cambiar el estilo del pelo
-func _on_item_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+func _on_item_list_item_clicked(index: int, at_position: Vector2 = Vector2.ZERO, mouse_button_index: int = MOUSE_BUTTON_LEFT) -> void:
 	SoundManager.play_select_pressed()
 	var nuevo_cabello = cabellos.get_item_icon(index)
 	cabello.set_texture(nuevo_cabello)
