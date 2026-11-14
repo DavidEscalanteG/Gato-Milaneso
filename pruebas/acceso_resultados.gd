@@ -61,6 +61,8 @@ func _ready() -> void:
 	_comprobar(seguro.is_valid_filename() and seguro.get_file() == seguro, "Sanear separadores y caracteres inválidos.")
 	Global.registrar_nombre_completo("  María   Fernanda López Pérez  ")
 	_comprobar(Global.nombre_jugador == "María" and Global.nombre_completo_jugador == "María Fernanda López Pérez", "Separar nombre de diálogo y nombre completo.")
+	for numero in range(1, 11):
+		Global.set_respuesta(numero, 0)
 	_comprobar(Global.respuestas_a_pdf(), "Guardar un PDF en la carpeta predeterminada.")
 	var primera = Global.ultimo_pdf_path
 	_comprobar(primera.get_base_dir() == Archivo.carpeta_resultados(), "Usar la nueva carpeta de resultados.")

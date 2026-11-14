@@ -48,6 +48,9 @@ func exportar(pdf: Node, archivo: String) -> String:
 	var datos = leer(archivo)
 	if datos.is_empty() or DirAccess.make_dir_recursive_absolute(carpeta_resultados) != OK:
 		return ""
+	for valor in datos.respuestas.values():
+		if valor < 0:
+			return ""
 	var destino = Archivo.ruta_disponible(carpeta_resultados, Archivo.nombre_pdf(datos.nombre))
 	Reporte.new().generar(pdf, datos.nombre, datos.alias, datos.respuestas, int(datos.total), datos.clasificacion)
 	if not pdf.export(destino):

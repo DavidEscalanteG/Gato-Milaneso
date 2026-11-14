@@ -39,16 +39,16 @@ var severidad_depresion: String = "Sin clasificar"
 
 # Variables para las 10 preguntas
 var respuestas_test := {
-	"p1": 0,
-	"p2": 0,
-	"p3": 0,
-	"p4": 0,
-	"p5": 0,
-	"p6": 0,
-	"p7": 0,
-	"p8": 0,
-	"p9": 0,
-	"p10": -1, # Unanswered is different from "No ha sido difícil" (0).
+	"p1": -1,
+	"p2": -1,
+	"p3": -1,
+	"p4": -1,
+	"p5": -1,
+	"p6": -1,
+	"p7": -1,
+	"p8": -1,
+	"p9": -1,
+	"p10": -1, # Pendiente es distinto de una respuesta con valor cero.
 }
 
 # Total
@@ -63,10 +63,23 @@ func set_respuesta(num: int, valor: int) -> void:
 
 func _calcular_total() -> void:
 	total_test = 0
+	var completo = true
 	# Question 10 is recorded separately; the original score uses questions 1-9.
 	for numero in range(1, 10):
-		total_test += respuestas_test["p%d" % numero]
-	_determinar_severidad()
+		var valor = respuestas_test["p%d" % numero]
+		total_test += maxi(0, valor)
+		completo = completo and valor >= 0
+	if completo:
+		_determinar_severidad()
+	else:
+		severidad_depresion = "Sin clasificar"
+
+func respuestas_completas() -> bool:
+	for numero in range(1, 11):
+		var valor = respuestas_test.get("p%d" % numero, -1)
+		if not valor is int or valor < 0 or valor > 3:
+			return false
+	return true
 
 func _determinar_severidad() -> void:
 	if total_test >= 1 and total_test <= 4:
@@ -84,9 +97,11 @@ func _determinar_severidad() -> void:
 		
 func reiniciar_test() -> void:
 	for key in respuestas_test.keys():
-		respuestas_test[key] = -1 if key == "p10" else 0
+		respuestas_test[key] = -1
 	total_test = 0
 	severidad_depresion = "Sin clasificar"
+	_reporte_final_archivo = ""
+	_reporte_final_completo = false
 
 func reiniciar_partida() -> void:
 	ronda = 0
@@ -121,6 +136,8 @@ var contador = 0
 var ultimo_pdf_path: String = ""
 
 func guardar_reporte_final() -> bool:
+	if not respuestas_completas():
+		return false
 	if _reporte_final_completo:
 		return true
 	if _reporte_final_archivo.is_empty():
@@ -141,8 +158,10 @@ func registrar_nombre_completo(nombre: String) -> void:
 	nombre_completo_jugador = " ".join(limpio.split(" ", false))
 	nombre_jugador = nombre_completo_jugador.get_slice(" ", 0)
 
-func respuestas_a_pdf(prefix: String = "", destino: String = "") -> bool:
+func respuestas_a_pdf(prefix: String = "", destino: String = "", permitir_incompleto: bool = false) -> bool:
 	ultimo_pdf_path = ""
+	if not permitir_incompleto and not respuestas_completas():
+		return false
 	var nombre = nombre_completo_jugador if not nombre_completo_jugador.is_empty() else nombre_jugador
 	var path = destino
 	if path.is_empty():

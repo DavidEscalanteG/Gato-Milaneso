@@ -55,7 +55,8 @@ func _ready() -> void:
 	Global.registrar_nombre_completo("PRUEBA SIN RESPUESTA 10")
 	Global.reiniciar_test()
 	_comprobar(Global.respuestas_test["p10"] == -1, "Reiniciar debe dejar la pregunta 10 sin responder.")
-	_comprobar(Global.respuestas_a_pdf("", salida.path_join("exportacion-incompleta.pdf")), "Falló el reporte sin respuesta 10.")
+	_comprobar(not Global.respuestas_a_pdf("", salida.path_join("no-debe-existir.pdf")), "Un reporte definitivo debe requerir las diez respuestas.")
+	_comprobar(Global.respuestas_a_pdf("", salida.path_join("exportacion-incompleta.pdf"), true), "Falló la vista diagnóstica de respuestas pendientes.")
 	Global.nombre_jugador = anterior[0]
 	Global.username = anterior[1]
 	Global.respuestas_test = anterior[2]

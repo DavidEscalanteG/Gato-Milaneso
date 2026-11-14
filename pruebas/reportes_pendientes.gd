@@ -30,6 +30,9 @@ func _ready() -> void:
 	salida.store_string("{incompleto")
 	salida.close()
 	correcto = correcto and reabierta.leer(danado).is_empty() and reabierta.recuperar(PDF).fallidos == 1
+	datos.respuestas.p10 = -1
+	var incompleto = reabierta.guardar(datos)
+	correcto = correcto and not incompleto.is_empty() and reabierta.exportar(PDF, incompleto).is_empty() and FileAccess.file_exists(incompleto)
 	if correcto:
 		print("REPORTES PENDIENTES OK: fallo sin pérdida, reapertura, recuperación y JSON inválido.")
 	else:
