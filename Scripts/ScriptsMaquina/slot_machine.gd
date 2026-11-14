@@ -144,6 +144,7 @@ func actualizar_monedas_ui():
 
 func mostrar_mensaje_ganador() -> void:
 	SoundManager.play_win_sound()
+	$GanadoLabel.show()
 	label_ganador.text = "¡GANASTE! 🏆"
 	label_ganador.visible = true
 
@@ -188,6 +189,7 @@ func verificar_ganador() -> void:
 func reiniciar_juego() -> void:
 	monedas = 6
 	actualizar_monedas_ui()
+	$GanadoLabel.hide()
 
 
 	resultado_label.visible = false
