@@ -27,6 +27,8 @@ func _on_resset_button_pressed() -> void:
 	# Reiniciar los campos
 	nombre_completo.text = ""
 	edad_jugador.text = ""
+	genero_jugador.select(-1)
+	grado_jugador.select(-1)
 	genero_jugador.text = ""
 	grado_jugador.text = ""
 
