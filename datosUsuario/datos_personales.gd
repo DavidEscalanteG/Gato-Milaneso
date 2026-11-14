@@ -40,6 +40,9 @@ func _on_play_select_pressed_click():
 	
 func _on_save_button_pressed() -> void:
 	SoundManager.play_click()
+	if not _edad_valida():
+		mostrar_error("Escribe una edad entre 6 y 18 años.")
+		return
 	if not validar_campos():
 		mostrar_error("Favor de rellenar todos los campos correctamente.")
 		return
@@ -63,13 +66,20 @@ func _on_save_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Escenas/EscenasDialogos/dialogo_inicial.tscn")
 
 func validar_campos() -> bool:
-	if nombre_completo.text.strip_edges().is_empty() or edad_jugador.text.strip_edges().is_empty() or not edad_jugador.text.is_valid_int():
+	if nombre_completo.text.strip_edges().is_empty() or not _edad_valida():
 		return false
 	if genero_jugador.selected == -1:  # -1 indica que no se seleccionó ninguna opción
 		return false
 	if grado_jugador.selected == -1:
 		return false
 	return true
+
+func _edad_valida() -> bool:
+	var texto = edad_jugador.text.strip_edges()
+	if not texto.is_valid_int():
+		return false
+	var edad = texto.to_int()
+	return edad >= 6 and edad <= 18
 
 func mostrar_error(mensaje: String) -> void:
 	SoundManager.play_error()
