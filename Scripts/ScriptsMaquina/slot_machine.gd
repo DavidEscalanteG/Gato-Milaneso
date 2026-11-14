@@ -66,7 +66,7 @@ func _on_palanca_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		else:
 			if resultado_label:
 				SoundManager.play_error()
-				resultado_label.text = "(╥﹏╥)"
+				resultado_label.text = "Sin monedas.\nPulsa REINICIAR para\nintentarlo de nuevo."
 				resultado_label.visible = true
 				if is_inside_tree() and get_tree():
 					await get_tree().create_timer(2.0).timeout
