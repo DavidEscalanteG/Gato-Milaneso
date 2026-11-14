@@ -1,5 +1,7 @@
 extends Control
 
+const Espera = preload("res://Scripts/util/espera.gd")
+
 const AccesoEvaluador = preload("res://Scripts/reportes/acceso_evaluador.gd")
 const ArchivoResultados = preload("res://Scripts/reportes/archivo_resultados.gd")
 var acceso = AccesoEvaluador.new()
@@ -77,7 +79,8 @@ func _acceder() -> void:
 		acciones.get_node("Abrir").grab_focus()
 	elif _intentos >= 3:
 		mensaje.text = "Espera 15 segundos antes de intentarlo otra vez."
-		await get_tree().create_timer(15.0).timeout
+		if not await Espera.segundos(self, 15.0):
+			return
 		_intentos = 0
 		mensaje.text = "Ya puedes volver a intentarlo."
 	_ocupado = false

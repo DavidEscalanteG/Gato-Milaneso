@@ -30,7 +30,7 @@ func _input(event: InputEvent) -> void:
 			canvas.add_child(pantalla)
 			add_child(canvas)
 
-			var tween = get_tree().create_tween()
+			var tween = create_tween()
 			tween.tween_property(pantalla, "color", Color(1,1,1,1), 0.8)
 			tween.tween_callback(func(): 
 				# TODO: Transportar al jugador

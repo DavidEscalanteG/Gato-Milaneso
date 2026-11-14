@@ -1,5 +1,7 @@
 extends Node2D
 
+const Espera = preload("res://Scripts/util/espera.gd")
+
 @onready var fondo = $Fondo
 @onready var label_monedas = $Panel/Label
 @onready var label_timer = $Panel2/LabelTimer
@@ -44,7 +46,8 @@ func _ready():
 	actualizar_timer()
 
 	# Luego mostramos el mensaje inicial encima
-	await mostrar_mensaje_central("EMPIEZA LA RONDA", 2.0)
+	if not await mostrar_mensaje_central("EMPIEZA LA RONDA", 2.0):
+		return
 	timer_activo = true  # ← Ahora sí empieza el cronómetro
 
 	set_process(true)
@@ -83,13 +86,15 @@ func _sumar_punto():
 		if puntos >= total_monedas:
 			SoundManager.play_win_sound()
 			timer_activo = false
-			await mostrar_mensaje_central("¡COMPLETADO!", 2.0)
+			if not await mostrar_mensaje_central("¡COMPLETADO!", 2.0):
+				return
 			await terminar_juego()
 
 # Función para cambiar de escena al finalizar el juego
 func terminar_juego():
 	SoundManager.fade_out_ambiente_monedas()
-	await get_tree().create_timer(2).timeout
+	if not await Espera.segundos(self, 2):
+		return
 	Transicion.cambiar_escena("res://Escenas/EscenasDialogos/dialogo9.tscn")
 
 func actualizar_label():
@@ -113,7 +118,8 @@ func perder_juego():
 	SoundManager.play_lose_round()
 	print("¡Tiempo agotado! Has perdido.")
 	timer_activo = false
-	await mostrar_mensaje_central("¡TIEMPO AGOTADO!", 2.5)
+	if not await mostrar_mensaje_central("¡TIEMPO AGOTADO!", 2.5):
+		return
 	perder.mostrar()
 
 func _input(event):
@@ -145,7 +151,8 @@ func _input(event):
 
 func avisar_reduccion_tiempo():
 	label_timer.add_theme_color_override("font_color", Color.RED)
-	await get_tree().create_timer(0.5).timeout
+	if not await Espera.segundos(self, 0.5):
+		return
 	label_timer.add_theme_color_override("font_color", Color.WHITE)
 
 func mostrar_mensaje_central(texto: String, duracion := 2.0):
@@ -158,7 +165,7 @@ func mostrar_mensaje_central(texto: String, duracion := 2.0):
 
 	panel3.mouse_filter = Control.MOUSE_FILTER_STOP
 
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property(label_central, "self_modulate:a", 0.0, 1.0).set_delay(duracion)
 	tween.tween_callback(Callable(label_central, "hide"))
 	tween.tween_callback(func ():
@@ -167,4 +174,4 @@ func mostrar_mensaje_central(texto: String, duracion := 2.0):
 	)
 
 	label_central.show()
-	return await tween.finished
+	return await Espera.animacion(self, tween)

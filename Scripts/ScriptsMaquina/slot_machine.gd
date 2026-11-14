@@ -1,5 +1,7 @@
 extends Node2D
 
+const Espera = preload("res://Scripts/util/espera.gd")
+
 @onready var animacion_palanca : AnimatedSprite2D = $PalancaAnimada
 @onready var palanca: Area2D = $Palanca
 @onready var hilera_mask : ColorRect = $Mask
@@ -160,7 +162,7 @@ func actualizar_monedas_ui():
 	if monedas_label:
 		monedas_label.text = "MONEDAS: " + str(monedas)
 
-func mostrar_mensaje_ganador() -> void:
+func mostrar_mensaje_ganador() -> bool:
 	SoundManager.play_win_sound()
 	$GanadoLabel.show()
 	label_ganador.text = "¡GANASTE! 🏆"
@@ -174,17 +176,21 @@ func mostrar_mensaje_ganador() -> void:
 	for i in range(pasos):
 		label_ganador.modulate.a = float(i) / pasos
 		if is_inside_tree() and get_tree():
-			await get_tree().create_timer(espera).timeout
+			if not await Espera.segundos(self, espera):
+				return false
 
 
-	await get_tree().create_timer(1.0).timeout  # Mantener visible
+	if not await Espera.segundos(self, 1.0):
+		return false
 
 	# FADE OUT
 	for i in range(pasos, -1, -1):
 		label_ganador.modulate.a = float(i) / pasos
-		await get_tree().create_timer(espera).timeout
+		if not await Espera.segundos(self, espera):
+			return false
 
 	label_ganador.visible = false
+	return true
 
 
 func verificar_ganador() -> void:
@@ -193,11 +199,13 @@ func verificar_ganador() -> void:
 		Global.ronda = 3
 
 		# Mostrar mensaje de GANADOR y esperar que termine
-		await mostrar_mensaje_ganador()
+		if not await mostrar_mensaje_ganador():
+			return
 		SoundManager.fade_out_ambiente_slot_machine()
 
 		# Esperar 2 segundos adicionales antes de cambiar de escena
-		await get_tree().create_timer(2.0).timeout
+		if not await Espera.segundos(self, 2.0):
+			return
 
 		# Cambiar escena
 		Transicion.cambiar_escena("res://Escenas/EscenasDialogos/dialogo8.tscn")

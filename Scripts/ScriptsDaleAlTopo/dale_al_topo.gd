@@ -64,7 +64,7 @@ func _process(delta: float) -> void:
 			martillo.visible = false
 			pantalla.visible = true
 
-			var tween = get_tree().create_tween()
+			var tween = create_tween()
 			tween.tween_property(pantalla, "modulate", Color(1, 1, 1, 1), 3)
 
 			tween.tween_callback(func ():

@@ -1,9 +1,12 @@
 extends Node2D
 
+const Espera = preload("res://Scripts/util/espera.gd")
+
 @onready var label = $Timer/Label
 
 func _ready():
-	await get_tree().create_timer(5.0).timeout
+	if not await Espera.segundos(self, 5.0):
+		return
 	Transicion.cambiar_escena("res://menuPrincipal/menu.tscn")
 	
 

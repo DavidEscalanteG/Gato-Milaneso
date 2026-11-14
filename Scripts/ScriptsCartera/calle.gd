@@ -1,5 +1,7 @@
 extends Node2D
 
+const Espera = preload("res://Scripts/util/espera.gd")
+
 var perro_escena = preload("res://Escenas/EscenasCartera/perro_2.tscn")
 var cartera_escena = preload("res://Escenas/EscenasCartera/cartera.tscn")
 
@@ -32,7 +34,8 @@ func iniciar_juego():
 	if not is_inside_tree(): return
 	
 	# --- ESPERA 1 ---
-	await get_tree().create_timer(3.0).timeout
+	if not await Espera.segundos(self, 3.0):
+		return
 	if not is_inside_tree(): return # <--- AGREGA ESTO
 
 	if juego_terminado or ayuda_activada:
@@ -50,7 +53,8 @@ func iniciar_juego():
 	# --- ESPERA 2 ---
 	# Nota: Asegúrate que el tiempo no sea negativo
 	var tiempo_espera = max(0.1, tiempo_para_cartera - 3) 
-	await get_tree().create_timer(tiempo_espera).timeout
+	if not await Espera.segundos(self, tiempo_espera):
+		return
 	if not is_inside_tree(): return # <--- AGREGA ESTO
 
 	if juego_terminado or ayuda_activada:
@@ -59,7 +63,8 @@ func iniciar_juego():
 	desactivar_perros()
 
 	# --- ESPERA 3 ---
-	await get_tree().create_timer(3).timeout
+	if not await Espera.segundos(self, 3):
+		return
 	if not is_inside_tree(): return # <--- AGREGA ESTO
 
 	if juego_terminado or ayuda_activada:

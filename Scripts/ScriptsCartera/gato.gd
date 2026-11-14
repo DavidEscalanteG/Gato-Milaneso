@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const Espera = preload("res://Scripts/util/espera.gd")
+
 var vidas = 3  # Número de vidas del gato
 var inmune = false  # Variable para controlar inmunidad temporal
 @onready var apariencia = $Apariencia
@@ -54,7 +56,9 @@ func activar_inmunidad():
 		tween.tween_property(self, "modulate:a", 0.3, 0.2)
 		tween.tween_property(self, "modulate:a", 1.0, 0.2)
 
-	await get_tree().create_timer(2.0).timeout  # Esperar 2 segundos
+	if not await Espera.segundos(self, 2.0):
+
+		return
 	inmune = false  # Desactivar inmunidad
 	#print("Gato ya no es inmune")
 
