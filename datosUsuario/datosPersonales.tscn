@@ -179,8 +179,8 @@ size = Vector2i(125, 128)
 theme_override_styles/panel = SubResource("StyleBoxFlat_nphll")
 
 [connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_play_select_pressed_click"]
-[connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_name_complet_input_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_type_sound"]
+[connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_name_complet_input_text_changed"]
 [connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer3/ageInput" to="." method="_on_play_select_pressed_click"]
 [connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer3/ageInput" to="." method="_on_name_complet_input_text_changed"]
 [connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer4/genderOptionButton" to="." method="_on_play_select_pressed_click"]
