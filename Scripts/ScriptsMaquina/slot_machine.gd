@@ -140,7 +140,7 @@ func mostrar_resultado(texto: String):
 
 func actualizar_monedas_ui():
 	if monedas_label:
-		monedas_label.text = "PESOS: " + str(monedas)
+		monedas_label.text = "MONEDAS: " + str(monedas)
 
 func mostrar_mensaje_ganador() -> void:
 	SoundManager.play_win_sound()
