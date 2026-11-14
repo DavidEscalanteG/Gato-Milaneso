@@ -10,6 +10,7 @@ extends Area2D
 
 @onready var tip: Label = $Label2
 var dentro: bool = false
+var _entrando: bool = false
 
 func _ready() -> void:
 	if label: 
@@ -18,25 +19,29 @@ func _ready() -> void:
 		tip.set_visible(false)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if Input.is_action_just_pressed("interactuar") and dentro:
-			if not disponible: return
-			SoundManager.play_woosh_sound()
-			var canvas: CanvasLayer = CanvasLayer.new()
-			var pantalla: ColorRect = ColorRect.new()
-			pantalla.color = Color(1,1,1,0)
-			pantalla.set_anchors_preset(Control.PRESET_FULL_RECT)
-
-			canvas.add_child(pantalla)
-			add_child(canvas)
-
-			var tween = create_tween()
-			tween.tween_property(pantalla, "color", Color(1,1,1,1), 0.8)
-			tween.tween_callback(func(): 
-				# TODO: Transportar al jugador
-				get_tree().change_scene_to_file(escena)
-				)
-			tween.play()
+	if not event is InputEventKey or not event.is_action_pressed("interactuar"):
+		return
+	if _entrando or not dentro or not disponible or Transicion.en_transicion:
+		return
+	if not ResourceLoader.exists(escena, "PackedScene"):
+		push_warning("El destino del mapa no está disponible.")
+		return
+	_entrando = true
+	SoundManager.play_woosh_sound()
+	var canvas = CanvasLayer.new()
+	var pantalla = ColorRect.new()
+	pantalla.color = Color(1, 1, 1, 0)
+	pantalla.set_anchors_preset(Control.PRESET_FULL_RECT)
+	canvas.add_child(pantalla)
+	add_child(canvas)
+	var tween = create_tween()
+	tween.tween_property(pantalla, "color", Color(1, 1, 1, 1), 0.8)
+	tween.tween_callback(func():
+		if get_tree().change_scene_to_file(escena) != OK:
+			_entrando = false
+			canvas.queue_free()
+			push_warning("No se pudo entrar al destino del mapa.")
+	)
 
 func _on_body_entered(body: Node2D) -> void:
 	SoundManager.play_available()
