@@ -73,7 +73,7 @@ func _creador_y_apariencias() -> void:
 				comprobar(avatar.sprite.region_rect.position.y == cuerpo * 192, "Aspecto: cuerpo incorrecto.")
 				comprobar(avatar.cabello.visible == (pelo > 0), "Aspecto: Sin pelo debe conservarse.")
 				comprobar(avatar.cabello.region_rect.position.y == maxi(0, pelo - 1) * 192, "Aspecto: peinado incorrecto.")
-				comprobar(avatar.cabello.material.get_shader_parameter("tint") == Vector4(Color.CORAL.r, Color.CORAL.g, Color.CORAL.b, 1), "Aspecto: color incorrecto.")
+				comprobar(avatar.cabello.material.get_shader_parameter("tint").is_equal_approx(Vector4(Color.CORAL.r, Color.CORAL.g, Color.CORAL.b, 1)), "Aspecto: color incorrecto.")
 				for direccion in [Vector2.LEFT, Vector2.UP, Vector2.RIGHT, Vector2.DOWN]:
 					avatar.animar(direccion)
 					for fotograma in 4:
@@ -145,6 +145,8 @@ func _victoria(tecla: Key) -> void:
 	evento.keycode = tecla
 	evento.pressed = true
 	Input.parse_input_event(evento)
+	Input.flush_buffered_events()
+	await get_tree().process_frame
 	await get_tree().process_frame
 	comprobar(Transicion.en_transicion, "Victoria: Enter y Espacio deben iniciar la transición.")
 	Transicion.cambiar_escena("res://menuPrincipal/menu.tscn") # A duplicate must be ignored.
