@@ -7,6 +7,7 @@ var _configurando = false
 var _autorizado = false
 var _ocupado = false
 var _intentos = 0
+var recuperar: Button
 
 @onready var formulario = $CenterContainer/Panel/Margen/Contenido/Formulario
 @onready var instrucciones = $CenterContainer/Panel/Margen/Contenido/Instrucciones
@@ -17,6 +18,11 @@ var _intentos = 0
 @onready var acciones = $CenterContainer/Panel/Margen/Contenido/Acciones
 
 func _ready() -> void:
+	recuperar = Button.new()
+	recuperar.text = "Recuperar reportes pendientes"
+	recuperar.pressed.connect(_recuperar_reportes)
+	acciones.add_child(recuperar)
+	recuperar.visible = not Global.reportes_pendientes.listar().is_empty()
 	entrar.pressed.connect(_acceder)
 	clave.text_submitted.connect(func(_texto): _acceder())
 	confirmacion.text_submitted.connect(func(_texto): _acceder())
@@ -85,6 +91,17 @@ func _abrir_resultados() -> void:
 		mensaje.text = "No se pudo crear o acceder a la carpeta de resultados."
 		return
 	_abrir_carpeta(carpeta)
+
+func _recuperar_reportes() -> void:
+	if not _autorizado or _ocupado:
+		return
+	_ocupado = true
+	recuperar.disabled = true
+	var resultado = Global.reportes_pendientes.recuperar(PDF)
+	mensaje.text = "Reportes recuperados: %d. Pendientes: %d." % [resultado.correctos, resultado.fallidos]
+	recuperar.visible = not Global.reportes_pendientes.listar().is_empty()
+	recuperar.disabled = false
+	_ocupado = false
 
 func _abrir_carpeta(carpeta: String) -> void:
 	if OS.shell_open(carpeta) != OK:

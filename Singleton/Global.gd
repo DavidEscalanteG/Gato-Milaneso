@@ -2,6 +2,10 @@ extends Node
 
 const ReportePDF = preload("res://Scripts/reportes/resultados_pdf.gd")
 const ArchivoResultados = preload("res://Scripts/reportes/archivo_resultados.gd")
+const ColaReportes = preload("res://Scripts/reportes/reportes_pendientes.gd")
+var reportes_pendientes = ColaReportes.new()
+var _reporte_final_archivo: String = ""
+var _reporte_final_completo: bool = false
 
 var username = "username"
 var borrador_personaje: ConfigFile = null
@@ -94,6 +98,8 @@ func reiniciar_partida() -> void:
 	borrador_personaje = null
 	borrador_datos_personales.clear()
 	registro_datos_personales_id = 0
+	_reporte_final_archivo = ""
+	_reporte_final_completo = false
 	reiniciar_test()
 	
 	
@@ -118,6 +124,22 @@ func debug_print_respuestas() -> void:
 
 var contador = 0
 var ultimo_pdf_path: String = ""
+
+func guardar_reporte_final() -> bool:
+	if _reporte_final_completo:
+		return true
+	if _reporte_final_archivo.is_empty():
+		_reporte_final_archivo = reportes_pendientes.guardar({
+			"version": 1, "nombre": nombre_completo_jugador, "alias": username,
+			"respuestas": respuestas_test.duplicate(), "total": total_test,
+			"clasificacion": severidad_depresion,
+		})
+	if _reporte_final_archivo.is_empty():
+		_reporte_final_completo = respuestas_a_pdf()
+	else:
+		ultimo_pdf_path = reportes_pendientes.exportar(PDF, _reporte_final_archivo)
+		_reporte_final_completo = not ultimo_pdf_path.is_empty()
+	return _reporte_final_completo
 
 func registrar_nombre_completo(nombre: String) -> void:
 	var limpio = nombre.replace("\t", " ").replace("\n", " ").replace("\r", " ")
