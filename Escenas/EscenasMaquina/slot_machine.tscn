@@ -485,13 +485,13 @@ autowrap_mode = 2
 
 [node name="InstruccionesUI" parent="." instance=ExtResource("16_wqhrl")]
 texto_titulo = "El Gran Jackpot"
-texto_explicacion = "¡Prueba tu suerte! Tu objetivo es acumular 70 monedas. Cada tiro cuesta 1 moneda. Consulta la tabla de premios a la derecha y...¡Dale CLICK a la palanca para girar!
+texto_explicacion = "¡Prueba tu suerte! Tu objetivo es acumular 70 monedas. Cada tiro cuesta 1 moneda. Consulta la tabla de premios a la derecha y...¡Haz clic en la palanca o pulsa ENTER o ESPACIO para girar!
 
 Misión: 70 monedas
 
 Controles:"
 lista_teclas = Array[Texture2D]([ExtResource("17_0mg8j")])
-texto_controles = "CLICK IZQUIERDO"
+texto_controles = "CLIC IZQUIERDO, ENTER o ESPACIO"
 
 [connection signal="input_event" from="Palanca" to="." method="_on_palanca_input_event"]
 [connection signal="pressed" from="BotonReiniciar" to="." method="_on_boton_reiniciar_pressed"]

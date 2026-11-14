@@ -12,6 +12,7 @@ extends Node2D
 var count_cicles : int = 0
 var monedas : int = 6
 var juego_terminado : bool = false
+var _parpadeo_resultado: Tween
 
 
 @export var costo_jugada : int 
@@ -45,32 +46,37 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_palanca_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if juego_terminado:
+	if event.is_action_pressed("click"):
+		_intentar_girar()
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if boton_reiniciar.has_focus():
+		return
+	if event.is_action_pressed("ui_accept") and not event.is_echo():
+		get_viewport().set_input_as_handled()
+		_intentar_girar()
+
+func _intentar_girar() -> void:
+	if juego_terminado or get_tree().paused or palanca.get_child(0).disabled:
 		return
 
-	if event.is_action_pressed("click") and not palanca.get_child(0).disabled:
-		SoundManager.play_pull_lever()
+	SoundManager.play_pull_lever()
+	if monedas >= costo_jugada:
 		SoundManager.play_use_coin()
-		if monedas >= costo_jugada:
-			monedas -= costo_jugada
-			actualizar_monedas_ui()
+		monedas -= costo_jugada
+		actualizar_monedas_ui()
 
-			animacion_palanca.play("activo")
-			palanca.get_child(0).disabled = true
-			count_cicles = 0
+		animacion_palanca.play("activo")
+		palanca.get_child(0).disabled = true
+		boton_reiniciar.disabled = true
+		count_cicles = 0
 
-			if resultado_label:
-				resultado_label.visible = false
+		_ocultar_resultado()
 
-			start_cicle()
-		else:
-			if resultado_label:
-				SoundManager.play_error()
-				resultado_label.text = "Sin monedas.\nPulsa REINICIAR para\nintentarlo de nuevo."
-				resultado_label.visible = true
-				if is_inside_tree() and get_tree():
-					await get_tree().create_timer(2.0).timeout
-				resultado_label.visible = false
+		start_cicle()
+	else:
+		SoundManager.play_error()
+		_mostrar_sin_monedas()
 
 
 
@@ -84,6 +90,7 @@ func on_cicle_ended():
 		SoundManager.stop_slot_wheel()
 		verificar_combinaciones()
 		palanca.get_child(0).disabled = false
+		boton_reiniciar.disabled = juego_terminado
 
 func verificar_combinaciones():
 	var frutas_visibles = []
@@ -122,21 +129,32 @@ func calcular_premio(frutas: Array):
 		actualizar_monedas_ui()
 		verificar_ganador()
 		mostrar_resultado("PREMIO: " + str(premio_total))
+	elif monedas < costo_jugada:
+		_mostrar_sin_monedas()
 	else:
-		resultado_label.visible = false
+		_ocultar_resultado()
 
 func mostrar_resultado(texto: String):
+	_ocultar_resultado()
 	resultado_label.text = texto
 	resultado_label.visible = true
 
-	var parpadeos = 6
-	for i in range(parpadeos):
-		resultado_label.visible = not resultado_label.visible
-		if is_inside_tree() and get_tree():
-			await get_tree().create_timer(0.5).timeout
+	_parpadeo_resultado = create_tween()
+	for i in range(6):
+		_parpadeo_resultado.tween_callback(func(): resultado_label.visible = not resultado_label.visible)
+		_parpadeo_resultado.tween_interval(0.5)
+	_parpadeo_resultado.tween_callback(resultado_label.hide)
 
+func _ocultar_resultado() -> void:
+	if _parpadeo_resultado != null:
+		_parpadeo_resultado.kill()
+		_parpadeo_resultado = null
+	resultado_label.hide()
 
-	resultado_label.visible = false
+func _mostrar_sin_monedas() -> void:
+	_ocultar_resultado()
+	resultado_label.text = "Sin monedas.\nPulsa REINICIAR para\nintentarlo de nuevo."
+	resultado_label.show()
 
 func actualizar_monedas_ui():
 	if monedas_label:
@@ -187,12 +205,14 @@ func verificar_ganador() -> void:
 
 
 func reiniciar_juego() -> void:
+	if boton_reiniciar.disabled:
+		return
 	monedas = 6
 	actualizar_monedas_ui()
 	$GanadoLabel.hide()
 
 
-	resultado_label.visible = false
+	_ocultar_resultado()
 	label_ganador.visible = false
 	label_ganador.modulate.a = 0.0
 
@@ -204,6 +224,7 @@ func reiniciar_juego() -> void:
 	count_cicles = 0
 	juego_terminado = false
 	get_tree().paused = false 
+	boton_reiniciar.release_focus()
 
 
 
