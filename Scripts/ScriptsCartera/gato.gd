@@ -2,52 +2,19 @@ extends CharacterBody2D
 
 var vidas = 3  # Número de vidas del gato
 var inmune = false  # Variable para controlar inmunidad temporal
-@onready var animacion_player : AnimatedSprite2D = $GatoAnimado
-@onready var sprite = $GatoAnimado
+@onready var apariencia = $Apariencia
 
 var juego_ganado = false
 
 func _ready():
-	#$AnimationPlayer.play("movement_cat")
-	animacion_player.play("walk")
-	add_to_group("gato")  # Asegura que el gato está en el grupo correcto
+	add_to_group("gato")
 
-func _physics_process(delta):
-	# Obtener la dirección del movimiento según las teclas
-	var direction = Input.get_vector("izquierda", "derecha", "arriba", "abajo")
-	if direction.x != 0:
-		velocity = Vector2(direction.x * 400, 0)
-		
-		# Reproducir animación de caminar
-		animacion_player.play("walk")
-
-		# Orientación (la corrección que hicimos antes)
-		if direction.x > 0:
-			sprite.flip_h = true
-		else:
-			sprite.flip_h = false
-
-	# --- SI ESTÁ QUIETO ---
-	else:
-		velocity = Vector2.ZERO # Detener el movimiento inmediatamente
-		
-		# AQUÍ cambias a la animación de mirar al frente
-		# Asegúrate de que este nombre exista en tus SpriteFrames
-		animacion_player.play("idle_front")
-
-	# Calcular la velocidad del gato
-	velocity = Vector2(direction.x * 400, 0)
-
-	# Mover al gato
+func _physics_process(_delta):
+	var horizontal = Input.get_axis("izquierda", "derecha")
+	velocity = Vector2(horizontal * 400, 0)
+	apariencia.animar(Vector2(horizontal, 0))
 	move_and_slide()
 
-	# Cambiar la animación según la dirección del movimiento
-	#if direction.length() > 0:
-	#	$AnimationPlayer.play("movement_cat")
-	#else:
-	#	$AnimationPlayer.stop()
-		
-		
 func perder_vida():
 	if inmune or vidas <= 0 or juego_ganado:
 		return
@@ -92,6 +59,7 @@ func activar_inmunidad():
 	#print("Gato ya no es inmune")
 
 func game_over():
+	apariencia.animar(Vector2.ZERO)
 	Global.derrotas_perros += 1
 	SoundManager.play_lose_sound()
 	var calle = get_tree().current_scene
@@ -125,7 +93,7 @@ func win():
 	Global.derrotas_perros = 0
 	SoundManager.fade_out_ambiente_cartera()
 	
-	animacion_player.play("stand")
+	apariencia.mirar_al_frente()
 
 	# Detener gato
 	set_process(false)
@@ -153,12 +121,3 @@ func win():
 	if ganaste_ui:
 		ganaste_ui.mostrar()
 
-func _unhandled_input(event):
-	if not juego_ganado:
-		return
-	
-	if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
-		Global.ronda = 1
-		Transicion.cambiar_escena("res://Escenas/EscenasDialogos/dialogo3.tscn")
-	
-	

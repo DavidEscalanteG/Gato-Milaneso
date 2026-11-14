@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var anim = $AnimationPlayer
 @onready var cortina = $Cortina
+var en_transicion: bool = false
 
 func _ready():
 	# Al iniciar, ocultamos la cortina y la hacemos transparente por si acaso
@@ -10,6 +11,9 @@ func _ready():
 
 # Esta es la función que llamarás desde tus niveles
 func cambiar_escena(path_escena: String):
+	if en_transicion:
+		return
+	en_transicion = true
 	# 1. Aparecemos la cortina (transparente)
 	cortina.visible = true
 	
@@ -26,3 +30,4 @@ func cambiar_escena(path_escena: String):
 	
 	# 5. Ocultamos la cortina para que no estorbe a los clicks
 	cortina.visible = false
+	en_transicion = false

@@ -1,132 +1,21 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6mmfvskjofv6"]
+[gd_scene load_steps=4 format=3 uid="uid://b6mmfvskjofv6"]
 
-[ext_resource type="Script" path="res://Scripts/ScriptsCartera/gato.gd" id="1_s1jb3"]
-[ext_resource type="Texture2D" uid="uid://clowumq3hfu63" path="res://Assets/16x32 Run Cycle-Sheet.png" id="2_pexdv"]
+[ext_resource type="Script" path="res://Scripts/ScriptsCartera/gato.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Escenas/Player/Apariencia.tscn" id="2"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ttfbl"]
+[sub_resource type="CircleShape2D" id="Circle"]
 radius = 45.7056
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ibdk2"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(0, 128, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1b685"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(16, 128, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7vcqq"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(32, 128, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b3mmf"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(48, 128, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o34ai"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(64, 128, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_usnxh"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(80, 128, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o43rb"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(80, 128, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_elfnd"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(0, 64, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xloyx"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(16, 64, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j1xbw"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(32, 64, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nnicn"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(48, 64, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_de2aw"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(64, 64, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8omqx"]
-atlas = ExtResource("2_pexdv")
-region = Rect2(80, 64, 16, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0g1g4"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ibdk2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1b685")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7vcqq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b3mmf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o34ai")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_usnxh")
-}],
-"loop": true,
-"name": &"idle_front",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o43rb")
-}],
-"loop": true,
-"name": &"stand",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_elfnd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xloyx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j1xbw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nnicn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_de2aw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8omqx")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
 
 [node name="Gato" type="CharacterBody2D" groups=["gato"]]
 position = Vector2(-2, 0)
 collision_layer = 2
 collision_mask = 13
-script = ExtResource("1_s1jb3")
+script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -0.0872665
-shape = SubResource("CircleShape2D_ttfbl")
+shape = SubResource("Circle")
 
-[node name="GatoAnimado" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -16)
-scale = Vector2(3.2685, 2.82899)
-sprite_frames = SubResource("SpriteFrames_0g1g4")
-animation = &"stand"
+[node name="Apariencia" parent="." instance=ExtResource("2")]
+position = Vector2(0, 24)
+scale = Vector2(0.65, 0.65)

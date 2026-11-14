@@ -58,7 +58,7 @@ func _on_save_button_pressed() -> void:
 	db.query("SELECT * FROM DatosPersonales;")
 	
 	Global.registrar_nombre_completo(nombre_completo.text)
-	Global.reiniciar_test()
+	Global.reiniciar_partida()
 	
 	get_tree().change_scene_to_file("res://Escenas/EscenasDialogos/dialogo_inicial.tscn")
 

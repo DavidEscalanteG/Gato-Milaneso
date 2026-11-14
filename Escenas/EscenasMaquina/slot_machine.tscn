@@ -483,7 +483,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="InstruccionesUI" parent="." instance=ExtResource("16_wqhrl")]
-visible = false
 texto_titulo = "El Gran Jackpot"
 texto_explicacion = "¡Prueba tu suerte! Tu objetivo es acumular 70 monedas. Cada tiro cuesta 1 moneda. Consulta la tabla de premios a la derecha y...¡Dale CLICK a la palanca para girar!
 

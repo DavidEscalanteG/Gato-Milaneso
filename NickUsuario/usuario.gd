@@ -45,4 +45,5 @@ func _on_resset_button_pressed() -> void:
 
 
 func _on_back_button_pressed() -> void:
+	Global.borrador_personaje = preload("res://Escenas/Player/datos_apariencia.gd").cargar()
 	get_tree().change_scene_to_file("res://CreacionPersonaje/personaje.tscn")

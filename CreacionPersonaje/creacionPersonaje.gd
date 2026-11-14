@@ -1,5 +1,7 @@
 extends Node2D
 
+const Datos = preload("res://Escenas/Player/datos_apariencia.gd")
+
 # Referencias a los nodos relevantes
 @export var cabello : Sprite2D = null
 @export var cabellos : ItemList = null
@@ -10,9 +12,10 @@ extends Node2D
 
 # Método para inicializar las señales de los paneles de cabello
 func _ready() -> void:
-	personajes.select(0)
-	cabellos.select(0)
-	
+	cabello.material = cabello.material.duplicate()
+	_restablecer_apariencia()
+	if Global.borrador_personaje != null:
+		_aplicar_configuracion(Global.borrador_personaje)
 	var picker= color_picker.get_picker()
 	picker.picker_shape= ColorPicker.SHAPE_HSV_RECTANGLE #NO CAMBIAR LA FORMA IMPORTANTE
 	picker.color_modes_visible= false
@@ -44,6 +47,13 @@ func _on_item_list_item_clicked(index: int, at_position: Vector2, mouse_button_i
 ## Guardar información
 func _on_save_button_pressed() -> void:
 	SoundManager.play_click()
+	var config = crear_configuracion()
+	if config.save("user://player.cfg") != OK:
+		push_error("No se pudo guardar el personaje.")
+		return
+	get_tree().change_scene_to_file("res://NickUsuario/usuario.tscn")
+
+func crear_configuracion() -> ConfigFile:
 	var config = ConfigFile.new()
 	
 	# Llenar el archivo
@@ -51,42 +61,32 @@ func _on_save_button_pressed() -> void:
 	config.set_value("player", "id_cabello", cabellos.get_selected_items())
 	config.set_value("player", "color_cabello", cabello.material.get_shader_parameter("tint"))
 	
-	config.save("user://player.cfg")
-	
-	get_tree().change_scene_to_file("res://NickUsuario/usuario.tscn")
+	return config
 
 ## Limpiar personaje
 func _on_resset_button_pressed() -> void:
 	SoundManager.play_click()
-	personajes.select(0)
-	personaje.set_texture(personajes.get_item_icon(0))
-	cabellos.select(0)
-	cabello.set_texture(null)
-	color_picker.set_pick_color(
-		Color(0,0,0)
-	)
-	
-	#var config = ConfigFile.new() 
-	#
-	#var err = config.load("res://player.cfg")
-	#
-	#if err != OK:
-		#printerr(err)
-		#return
-	#
-	#var id_cabello: PackedInt32Array = config.get_value("player", "id_cabello", 0)
-	#var color_cabello: Vector4 = config.get_value("player", "color_cabello", Vector4(0., 0., 0., 1))
-	#
-	## Cargando estilo del pelo
-	#cabellos.select(id_cabello[0])
-	#cabello.set_texture(cabellos.get_item_icon(id_cabello[0]))
-	#
-	## Cargando color del pelod
-	#color.set_pick_color(Color(dg
-		#color_cabello[0], color_cgabello[1], color_cabello[2]
-	#))
-	#cabello.material.set_shader_parameter("tint", color_cabello);
+	_restablecer_apariencia()
 
+func _restablecer_apariencia() -> void:
+	personajes.select(0)
+	personaje.texture = personajes.get_item_icon(0)
+	cabellos.select(1)
+	cabello.texture = cabellos.get_item_icon(1)
+	cabello.position = personaje.position
+	color_picker.color = Color.BLACK
+	_on_color_picker_button_color_changed(Color.BLACK)
+
+func _aplicar_configuracion(config: ConfigFile) -> void:
+	var cuerpo = Datos.indice(config, "id_personaje", 0, 3)
+	var pelo = Datos.indice(config, "id_cabello", 1, 4)
+	personajes.select(cuerpo)
+	personaje.texture = personajes.get_item_icon(cuerpo)
+	cabellos.select(pelo)
+	cabello.texture = cabellos.get_item_icon(pelo)
+	var tinte = Datos.color(config)
+	color_picker.color = Color(tinte.x, tinte.y, tinte.z, 1)
+	_on_color_picker_button_color_changed(color_picker.color)
 
 ## Aquí debería borrarse el usuario recién creado... y que los datos en el formulario se mantengan.
 func _on_back_button_pressed() -> void:

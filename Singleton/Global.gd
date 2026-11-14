@@ -4,6 +4,7 @@ const ReportePDF = preload("res://Scripts/reportes/resultados_pdf.gd")
 const ArchivoResultados = preload("res://Scripts/reportes/archivo_resultados.gd")
 
 var username = "username"
+var borrador_personaje: ConfigFile = null
 ### Usado para controlar el nivel actual (base 0)
 ### En niveles, es el nivel que estará desbloqueados
 var ronda = 0
@@ -80,6 +81,16 @@ func reiniciar_test() -> void:
 		respuestas_test[key] = -1 if key == "p10" else 0
 	total_test = 0
 	severidad_depresion = "Sin clasificar"
+
+func reiniciar_partida() -> void:
+	ronda = 0
+	ronda_local = 0
+	derrotas_perros = 0
+	puntaje = 0
+	salud = 0
+	username = "Jugador"
+	borrador_personaje = null
+	reiniciar_test()
 	
 	
 	#Función para ver el puntaje, de manera de prueba.
