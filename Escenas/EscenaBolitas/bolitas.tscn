@@ -131,7 +131,7 @@ one_shot = true
 
 [node name="InstruccionesUI" parent="." instance=ExtResource("7_c0knf")]
 texto_titulo = "Canción de Cuna"
-texto_explicacion = "Sigue el ritmo para mantener el sueño profundo. Pulsa ESPACIO o haz clic en la franja amarilla inferior cuando una esfera cruce la línea brillante. ¡Que no pare la música!
+texto_explicacion = "Ayuda al bebé a dormir. Pulsa ESPACIO o haz clic en la franja amarilla inferior cuando una esfera cruce la línea brillante. Guíate por las esferas: aparecen en momentos distintos.
 
 Vidas: 3 fallos permitidos
 

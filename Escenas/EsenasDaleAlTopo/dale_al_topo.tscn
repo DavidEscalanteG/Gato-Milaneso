@@ -490,7 +490,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="InstruccionesUI" parent="." instance=ExtResource("9_sjrjr")]
 texto_titulo = "Dale al Topo"
-texto_explicacion = "¡Pon a prueba tus reflejos! Golpea a los topos para sumar 100 puntos. Debes superar la puntuación meta de cada ronda. ¡Cuidado! No toques a las zarigueyas o perderás una vida.
+texto_explicacion = "Cada topo suma 100 puntos. Alcanza 1000 en la primera ronda y 1100 en la segunda. Evita las zarigüeyas: ¡quitan una vida!
 
 Vidas: 3 fallos permitidos
 
