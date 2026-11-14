@@ -43,7 +43,7 @@ var dialogue_line: DialogueLine:
 		dialogue_line = next_dialogue_line
 
 		character_label.visible = not dialogue_line.character.is_empty()
-		character_label.text = tr(dialogue_line.character, "dialogue")
+		_actualizar_nombre()
 		var portrait_path:  String = "res://Assets/portraits/%s.png" % dialogue_line.character.to_lower()
 		if FileAccess.file_exists(portrait_path):
 			portrait.texture = load(portrait_path)
@@ -96,11 +96,36 @@ var dialogue_line: DialogueLine:
 
 func _ready() -> void:
 	balloon.hide()
+	character_label.bbcode_enabled = false
+	character_label.resized.connect(_actualizar_nombre)
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
+
+
+## Mantiene el nombre dentro de su línea sin modificar el valor guardado.
+func _actualizar_nombre() -> void:
+	if dialogue_line == null:
+		return
+	var nombre = tr(dialogue_line.character, "dialogue")
+	var fuente = character_label.get_theme_font("normal_font")
+	var tamano = character_label.get_theme_font_size("normal_font_size")
+	var ancho = character_label.size.x
+	if ancho <= 0:
+		return
+	if fuente.get_string_size(nombre, HORIZONTAL_ALIGNMENT_LEFT, -1, tamano).x > ancho:
+		var inicio = 0
+		var fin = nombre.length()
+		while inicio < fin:
+			var medio = (inicio + fin + 1) / 2
+			if fuente.get_string_size(nombre.left(medio) + "…", HORIZONTAL_ALIGNMENT_LEFT, -1, tamano).x <= ancho:
+				inicio = medio
+			else:
+				fin = medio - 1
+		nombre = nombre.left(inicio) + "…"
+	character_label.text = nombre
 
 
 func _unhandled_input(_event: InputEvent) -> void:

@@ -25,3 +25,4 @@ text = "Username "
 horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 3
+clip_text = true
