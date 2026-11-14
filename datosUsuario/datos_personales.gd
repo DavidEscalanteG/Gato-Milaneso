@@ -8,7 +8,7 @@ extends Node2D
 
 
 var db : SQLite = null
-const verbosity_level : int = SQLite.VERBOSE
+const verbosity_level : int = 0
 var db_name := "user://baseDatos"
 var table_name := "DatosPersonales"
 var tabla := "CREATE TABLE IF NOT EXISTS DatosPersonales (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, edad NUMERIC, genero TEXT, gradoAcademico NUMERIC);"

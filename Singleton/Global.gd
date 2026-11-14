@@ -108,14 +108,9 @@ func reiniciar_partida() -> void:
 	#var key = "p%d" % pregunta
 	#print("Valor ", key, ":", respuestas_test[key])
 
-# Imprime todas las respuestas y el total en consola
+# Se conserva la llamada del diálogo, sin registrar respuestas personales.
 func debug_print_respuestas() -> void:
-	print("=== Resultados del test ===")
-	for key in respuestas_test.keys():
-		print(key, ": ", respuestas_test[key])
-	print("Total del test: ", total_test)
-	print("Diagnóstico: ", severidad_depresion)
-	print("===========================")
+	pass
 
 
 #func obtenerDialogo(index: int):
