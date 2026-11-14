@@ -1,8 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://gk2ep3tvyb06"]
+[gd_scene load_steps=18 format=3 uid="uid://gk2ep3tvyb06"]
 
 [ext_resource type="Script" path="res://Scripts/ScriptsDaleAlTopo/hoyo.gd" id="1_qne81"]
 [ext_resource type="Texture2D" uid="uid://dtbgwsi6k0p8s" path="res://Assets/imagenesPrueba.png" id="2_c6qc1"]
-[ext_resource type="Texture2D" uid="uid://dy8goh2k2dvbf" path="res://Escenas/EsenasDaleAlTopo/hoyo.atlastex" id="2_rqmdt"]
+[ext_resource type="Texture2D" path="res://Escenas/EsenasDaleAlTopo/hoyo_textura.tres" id="2_rqmdt"]
 [ext_resource type="Shader" path="res://Assets/hit.gdshader" id="3_u1rqw"]
 [ext_resource type="AudioStream" uid="uid://dp6pyjkuy2wp2" path="res://Assets/sonidos/chop.ogg" id="4_78ksp"]
 [ext_resource type="Texture2D" uid="uid://bt3qtf223v6ng" path="res://Assets/recursosJuegoBolitas.png" id="4_kjevu"]
@@ -12,18 +12,12 @@ shader = ExtResource("3_u1rqw")
 shader_parameter/active = false
 shader_parameter/tint = Color(0.9, 0.9, 0.9, 1)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d2sw1"]
-load_path = "res://.godot/imported/imagenesPrueba.png-5212f1c2d9819bce283ab9d06fef1a38.ctex"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_tncyv"]
-atlas = SubResource("CompressedTexture2D_d2sw1")
+atlas = ExtResource("2_c6qc1")
 region = Rect2(723, 74, 43, 43)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynhys"]
-load_path = "res://.godot/imported/imagenesPrueba.png-5212f1c2d9819bce283ab9d06fef1a38.ctex"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_7yd17"]
-atlas = SubResource("CompressedTexture2D_ynhys")
+atlas = ExtResource("2_c6qc1")
 region = Rect2(620, 24, 38, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ri875"]
