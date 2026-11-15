@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://7ycehy7s7ghi"]
+[gd_scene load_steps=18 format=3 uid="uid://7ycehy7s7ghi"]
 
 [ext_resource type="Script" path="res://Scripts/ScriptsMonedas/tienda.gd" id="1_1i8h4"]
 [ext_resource type="Texture2D" uid="uid://ba202phahpe5w" path="res://Assets/MonedaV1.png" id="2_xxu0d"]
 [ext_resource type="Texture2D" uid="uid://bq25wd5fw7hgj" path="res://Assets/MonedaV2.png" id="3_xmeis"]
 [ext_resource type="Texture2D" uid="uid://dmt28a6s0shmx" path="res://Assets/MonedaV3.png" id="4_kewpu"]
 [ext_resource type="FontFile" uid="uid://d3yrjs7feckg7" path="res://Assets/fonts/PixelifySans-Bold.ttf" id="5_ycsqa"]
+[ext_resource type="FontFile" path="res://addons/godotpdf/Amplify.ttf" id="18_amplify"]
 [ext_resource type="PackedScene" uid="uid://bomdbtnyrxmfl" path="res://Escenas/perdiste.tscn" id="6_yl734"]
 [ext_resource type="PackedScene" uid="uid://trffkqweyvb7" path="res://Escenas/InstruccionesUI.tscn.tscn" id="7_iunhn"]
 [ext_resource type="Texture2D" uid="uid://dytuk5qgyy3sv" path="res://Assets/click_izquierdo.tres" id="8_3l310"]
@@ -30,7 +31,7 @@ modulate_color = Color(0.694118, 0.376471, 0.0941176, 0.803922)
 
 [sub_resource type="Theme" id="Theme_bny60"]
 Label/font_sizes/font_size = 32
-Label/fonts/font = ExtResource("5_ycsqa")
+Label/fonts/font = ExtResource("18_amplify")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8x5yg"]
 modulate_color = Color(0.0980392, 0.0980392, 0.0980392, 0.298039)

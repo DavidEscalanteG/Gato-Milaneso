@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=37 format=3 uid="uid://bu3qetif7kbpe"]
+[gd_resource type="Theme" load_steps=38 format=3 uid="uid://bu3qetif7kbpe"]
 
 [ext_resource type="FontFile" uid="uid://bpr8g2uwyrrx1" path="res://Assets/fonts/PixelifySans-Regular.ttf" id="1_8po1i"]
+[ext_resource type="FontFile" path="res://addons/godotpdf/Amplify.ttf" id="15_amplify"]
 [ext_resource type="Texture2D" uid="uid://hbadyw85j41u" path="res://Assets/sprites/bkg_menu.png" id="2_afr03"]
 [ext_resource type="Texture2D" uid="uid://bxkrtijajx0c3" path="res://Assets/sprites/BottonTexture.png" id="2_d384n"]
 [ext_resource type="Texture2D" uid="uid://becwkf1x4aqm4" path="res://Assets/sprites/BottonHover.png" id="2_djktp"]
@@ -218,5 +219,5 @@ smallLabel/colors/font_color = Color(1, 1, 1, 1)
 smallLabel/font_sizes/font_size = 15
 userLineEdit/base_type = &"LineEdit"
 userLineEdit/colors/font_placeholder_color = Color(0.481789, 0.481789, 0.481789, 1)
-userLineEdit/fonts/font = ExtResource("1_8po1i")
+userLineEdit/fonts/font = ExtResource("15_amplify")
 userLineEdit/styles/normal = SubResource("StyleBoxTexture_pm1nx")

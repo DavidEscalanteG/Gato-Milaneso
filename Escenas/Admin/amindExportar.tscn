@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwi1tfq4apsta"]
+[gd_scene load_steps=6 format=3 uid="uid://cwi1tfq4apsta"]
 
 [ext_resource type="Script" path="res://Escenas/Admin/amind_exportar.gd" id="1_mr8rl"]
+[ext_resource type="FontFile" path="res://addons/godotpdf/Amplify.ttf" id="2_amplify"]
 
 [sub_resource type="SystemFont" id="FuenteEvaluador"]
 font_names = PackedStringArray("Segoe UI", "Arial")
@@ -68,6 +69,7 @@ text = "Acceso del evaluador"
 
 [node name="Instrucciones" type="Label" parent="CenterContainer/Panel/Margen/Contenido"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_amplify")
 theme_override_colors/font_color = Color(0.08, 0.17, 0.19, 1)
 autowrap_mode = 3
 
@@ -110,6 +112,7 @@ text = "Abrir carpeta de resultados"
 
 [node name="Mensaje" type="Label" parent="CenterContainer/Panel/Margen/Contenido"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_amplify")
 theme_override_colors/font_color = Color(0.08, 0.17, 0.19, 1)
 autowrap_mode = 3
 

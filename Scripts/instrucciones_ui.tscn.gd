@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const FUENTE_NUMEROS = preload("res://addons/godotpdf/Amplify.ttf")
+
 
 @export_multiline var texto_titulo: String = "Titulo..."
 @export_multiline var texto_explicacion: String = "Instrucciones..."
@@ -17,6 +19,13 @@ func _ready():
 	label_texto.text = texto_explicacion
 	label_titulo.text = texto_titulo
 	label_controles.text = texto_controles
+	# Se cambia el label completo cuando el texto de esta instancia lleva cifras.
+	for etiqueta in [label_titulo, label_texto, label_controles]:
+		for digito in "0123456789":
+			if etiqueta.text.contains(digito):
+				etiqueta.label_settings = etiqueta.label_settings.duplicate()
+				etiqueta.label_settings.font = FUENTE_NUMEROS
+				break
 	
 	for hijo in contenedor_teclas.get_children():
 		hijo.queue_free()

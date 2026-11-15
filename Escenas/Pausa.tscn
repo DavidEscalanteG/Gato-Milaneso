@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://Scripts/pausa.gd" id="1"]
 [ext_resource type="Theme" path="res://resources/bottonsTheme.tres" id="2"]
 [ext_resource type="Texture2D" path="res://Assets/botones.png" id="3"]
+[ext_resource type="FontFile" path="res://addons/godotpdf/Amplify.ttf" id="4_amplify"]
 
 [sub_resource type="StyleBoxFlat" id="Carril"]
 bg_color = Color(0.29, 0.15, 0.05, 1)
@@ -121,6 +122,7 @@ custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100 %"
+theme_override_fonts/font = ExtResource("4_amplify")
 horizontal_alignment = 2
 
 [node name="Musica" type="HSlider" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido"]
@@ -146,6 +148,7 @@ custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "100 %"
+theme_override_fonts/font = ExtResource("4_amplify")
 horizontal_alignment = 2
 
 [node name="Efectos" type="HSlider" parent="Pantalla/Centrar/Panel/Margen/Columna/Contenido"]

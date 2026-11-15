@@ -15,6 +15,9 @@ var tabla := "CREATE TABLE IF NOT EXISTS DatosPersonales (id INTEGER PRIMARY KEY
 var _campo_por_corregir: Control
 
 func _ready() -> void:
+	var fuente_numeros = preload("res://addons/godotpdf/Amplify.ttf")
+	grado_jugador.get_popup().add_theme_font_override("font", fuente_numeros)
+	error_window.get_label().add_theme_font_override("font", fuente_numeros)
 	error_window.confirmed.connect(_enfocar_campo_por_corregir)
 	error_window.canceled.connect(_enfocar_campo_por_corregir)
 	var datos = Global.borrador_datos_personales

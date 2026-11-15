@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dx0j0rac1l4b5" path="res://Escenas/EsenasDaleAlTopo/Fondo2_Topo.jpg" id="3_w4yxy"]
 [ext_resource type="Script" path="res://Scripts/ScriptsDaleAlTopo/martillo.gd" id="4_oaofr"]
 [ext_resource type="AudioStream" uid="uid://bray8bb7rrtf2" path="res://Assets/sonidos/level-ii-236122.mp3" id="6_8csgu"]
-[ext_resource type="FontFile" uid="uid://bpr8g2uwyrrx1" path="res://Assets/fonts/PixelifySans-Regular.ttf" id="6_jt86f"]
+[ext_resource type="FontFile" uid="uid://btm7ogs0oimf6" path="res://addons/godotpdf/Amplify.ttf" id="6_jt86f"]
 [ext_resource type="PackedScene" uid="uid://bomdbtnyrxmfl" path="res://Escenas/perdiste.tscn" id="7_alxwa"]
 [ext_resource type="PackedScene" uid="uid://trffkqweyvb7" path="res://Escenas/InstruccionesUI.tscn.tscn" id="9_sjrjr"]
 [ext_resource type="Texture2D" uid="uid://dytuk5qgyy3sv" path="res://Assets/click_izquierdo.tres" id="10_uegd1"]

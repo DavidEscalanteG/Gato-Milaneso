@@ -140,9 +140,13 @@ func _build_cache() -> void:
 # Recursively find any dialogue files in a directory
 func _get_dialogue_files_in_filesystem(path: String = "res://") -> PackedStringArray:
 	var files: PackedStringArray = []
+	if FileAccess.file_exists(path.path_join(".gdignore")):
+		return files
 
 	if DirAccess.dir_exists_absolute(path):
 		var dir = DirAccess.open(path)
+		if dir == null:
+			return files
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":

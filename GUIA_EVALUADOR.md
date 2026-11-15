@@ -2,8 +2,10 @@
 
 ## Preparar el equipo
 
-1. Abre el proyecto con **Godot 4.3 stable**, espera la importación y ejecuta el
-   juego completo con F5. Esta revisión no genera un ejecutable de distribución nuevo.
+1. Si recibiste el ZIP de Windows, extrae todo su contenido y abre
+   **El Gato Milaneso.exe**, conservando el PCK y la DLL en la misma carpeta.
+   Si trabajas desde el proyecto, ábrelo con **Godot 4.3 stable**, espera la
+   importación y ejecuta el juego completo con F5.
 2. En el menú principal, presiona **Ctrl + Shift + E** para abrir el acceso del
    responsable. El menú del participante no muestra un botón de resultados.
 3. Crea y confirma una contraseña de al menos ocho caracteres. No hay una

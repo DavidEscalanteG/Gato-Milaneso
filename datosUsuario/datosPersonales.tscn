@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcl4ta8mabkf3"]
+[gd_scene load_steps=5 format=3 uid="uid://bcl4ta8mabkf3"]
 
 [ext_resource type="Script" path="res://datosUsuario/datos_personales.gd" id="1_sqljr"]
+[ext_resource type="FontFile" path="res://addons/godotpdf/Amplify.ttf" id="3_amplify"]
 [ext_resource type="Texture2D" uid="uid://bwlotstdvmyex" path="res://Assets/sprites/bkg.png" id="2_w3uc2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nphll"]
@@ -110,6 +111,7 @@ text = "Edad"
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Edad"
+theme_override_fonts/font = ExtResource("3_amplify")
 virtual_keyboard_type = 2
 clear_button_enabled = true
 
@@ -144,6 +146,7 @@ text = "Grado academico"
 
 [node name="gradeOptionButton" type="OptionButton" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer5"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_amplify")
 item_count = 3
 popup/item_0/text = "1er Grado"
 popup/item_1/text = "2do Grado"
@@ -179,8 +182,8 @@ size = Vector2i(125, 128)
 theme_override_styles/panel = SubResource("StyleBoxFlat_nphll")
 
 [connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_play_select_pressed_click"]
-[connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_type_sound"]
 [connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_name_complet_input_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer/nameCompletInput" to="." method="_on_type_sound"]
 [connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer3/ageInput" to="." method="_on_play_select_pressed_click"]
 [connection signal="text_changed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer3/ageInput" to="." method="_on_name_complet_input_text_changed"]
 [connection signal="focus_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer4/genderOptionButton" to="." method="_on_play_select_pressed_click"]

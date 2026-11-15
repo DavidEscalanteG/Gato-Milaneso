@@ -9,6 +9,10 @@ func _ready() -> void:
 	var config = Datos.cargar()
 	var username = str(config.get_value("player", "username", "Jugador"))
 	$Username.text = username
+	for digito in "0123456789":
+		if username.contains(digito):
+			$Username.add_theme_font_override("font", preload("res://addons/godotpdf/Amplify.ttf"))
+			break
 	Global.username = username
 
 func _physics_process(_delta: float) -> void:

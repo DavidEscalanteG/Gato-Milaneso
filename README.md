@@ -43,6 +43,8 @@ archivos van a subir.
 
 ## Pruebas y documentación
 
+Exportación para Windows y paquete para compartir: [Exportar Windows](EXPORTAR_WINDOWS.md).
+
 Cambios y pruebas: [Minijuegos](pruebas/MINIJUEGOS.md).
 
 Pausa, controles de audio y barra del reto de perros:
@@ -67,5 +69,5 @@ Para repetir las trece suites con datos ficticios aislados:
 
 Agrega `-Render` para probar también el renderizado y la selección real con el
 ratón. Las instrucciones completas y el alcance del recorrido asistido están en
-la revisión del juego. No se generó una distribución nueva ni se realizaron las
-pruebas con jugadores excluidas por el usuario.
+la revisión del juego. La exportación de Windows se documenta por separado en
+la guía de exportación; no se realizaron pruebas con jugadores.

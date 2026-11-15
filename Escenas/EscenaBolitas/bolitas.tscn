@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://8rlxqia6myrg" path="res://Escenas/EscenaBolitas/carril.tscn" id="2_0htvn"]
 [ext_resource type="Texture2D" uid="uid://0vkaxh5s843f" path="res://Escenas/EscenaBolitas/Fondo1_Glow.jpg" id="2_uyxo0"]
 [ext_resource type="AudioStream" uid="uid://cvt1iknrhxnba" path="res://Assets/sonidos/Happy walk.mp3" id="2_vds6v"]
-[ext_resource type="FontFile" uid="uid://d3yrjs7feckg7" path="res://Assets/fonts/PixelifySans-Bold.ttf" id="3_wfj4a"]
+[ext_resource type="FontFile" uid="uid://btm7ogs0oimf6" path="res://addons/godotpdf/Amplify.ttf" id="3_wfj4a"]
 [ext_resource type="PackedScene" uid="uid://bomdbtnyrxmfl" path="res://Escenas/perdiste.tscn" id="5_q1san"]
 [ext_resource type="PackedScene" uid="uid://trffkqweyvb7" path="res://Escenas/InstruccionesUI.tscn.tscn" id="7_c0knf"]
 [ext_resource type="Texture2D" uid="uid://x4rdor831q2k" path="res://Assets/buttons.png" id="8_1ecqh"]
