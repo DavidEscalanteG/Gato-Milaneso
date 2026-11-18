@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcl4ta8mabkf3"]
 
 [ext_resource type="Script" path="res://datosUsuario/datos_personales.gd" id="1_sqljr"]
-[ext_resource type="FontFile" path="res://addons/godotpdf/Amplify.ttf" id="3_amplify"]
 [ext_resource type="Texture2D" uid="uid://bwlotstdvmyex" path="res://Assets/sprites/bkg.png" id="2_w3uc2"]
+[ext_resource type="FontFile" uid="uid://btm7ogs0oimf6" path="res://addons/godotpdf/Amplify.ttf" id="3_amplify"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nphll"]
 bg_color = Color(1, 1, 1, 1)
@@ -110,8 +110,8 @@ text = "Edad"
 [node name="ageInput" type="LineEdit" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/PanelContainer/MarginContainer/GridContainer/VBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Edad"
 theme_override_fonts/font = ExtResource("3_amplify")
+placeholder_text = "Edad"
 virtual_keyboard_type = 2
 clear_button_enabled = true
 

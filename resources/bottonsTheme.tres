@@ -1,7 +1,6 @@
 [gd_resource type="Theme" load_steps=38 format=3 uid="uid://bu3qetif7kbpe"]
 
 [ext_resource type="FontFile" uid="uid://bpr8g2uwyrrx1" path="res://Assets/fonts/PixelifySans-Regular.ttf" id="1_8po1i"]
-[ext_resource type="FontFile" path="res://addons/godotpdf/Amplify.ttf" id="15_amplify"]
 [ext_resource type="Texture2D" uid="uid://hbadyw85j41u" path="res://Assets/sprites/bkg_menu.png" id="2_afr03"]
 [ext_resource type="Texture2D" uid="uid://bxkrtijajx0c3" path="res://Assets/sprites/BottonTexture.png" id="2_d384n"]
 [ext_resource type="Texture2D" uid="uid://becwkf1x4aqm4" path="res://Assets/sprites/BottonHover.png" id="2_djktp"]
@@ -16,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://if1fqmqvl0tj" path="res://Assets/sprites/BackPressedButton.png" id="10_ld2pj"]
 [ext_resource type="Texture2D" uid="uid://hh15ybqfiuny" path="res://Assets/sprites/ResetHoverButton.png" id="12_vx62c"]
 [ext_resource type="Texture2D" uid="uid://dhrd6eld77dsv" path="res://Assets/sprites/ResetPressedButton.png" id="14_ddqvk"]
+[ext_resource type="FontFile" uid="uid://btm7ogs0oimf6" path="res://addons/godotpdf/Amplify.ttf" id="15_amplify"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kblnj"]
 texture = ExtResource("2_djktp")

@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://bq25wd5fw7hgj" path="res://Assets/MonedaV2.png" id="3_xmeis"]
 [ext_resource type="Texture2D" uid="uid://dmt28a6s0shmx" path="res://Assets/MonedaV3.png" id="4_kewpu"]
 [ext_resource type="FontFile" uid="uid://d3yrjs7feckg7" path="res://Assets/fonts/PixelifySans-Bold.ttf" id="5_ycsqa"]
-[ext_resource type="FontFile" path="res://addons/godotpdf/Amplify.ttf" id="18_amplify"]
 [ext_resource type="PackedScene" uid="uid://bomdbtnyrxmfl" path="res://Escenas/perdiste.tscn" id="6_yl734"]
 [ext_resource type="PackedScene" uid="uid://trffkqweyvb7" path="res://Escenas/InstruccionesUI.tscn.tscn" id="7_iunhn"]
 [ext_resource type="Texture2D" uid="uid://dytuk5qgyy3sv" path="res://Assets/click_izquierdo.tres" id="8_3l310"]
+[ext_resource type="FontFile" uid="uid://btm7ogs0oimf6" path="res://addons/godotpdf/Amplify.ttf" id="18_amplify"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_n5fbv"]
 
