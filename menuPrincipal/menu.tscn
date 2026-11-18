@@ -85,6 +85,10 @@ text = "SOPORTE
 layout_mode = 2
 text = "AUDIO"
 
+[node name="exitBotton" type="Button" parent="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer"]
+layout_mode = 2
+text = "SALIR"
+
 [node name="PistaPausa" type="Label" parent="CanvasLayer"]
 anchors_preset = 12
 anchor_top = 1.0
@@ -108,3 +112,4 @@ horizontal_alignment = 1
 [connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/supportBotton" to="." method="_on_credits_botton_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/audioBotton" to="." method="_on_play_botton_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/audioBotton" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="CanvasLayer/panelMenuContainer/MarginContainer/GridContainer/VBottonContainer/exitBotton" to="." method="_on_exit_botton_pressed"]

@@ -45,3 +45,7 @@ func _on_credits_botton_mouse_entered() -> void:
 
 func _on_support_botton_mouse_entered() -> void:
 	pass # Replace with function body.
+
+
+func _on_exit_botton_pressed() -> void:
+	get_tree().quit()
